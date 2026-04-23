@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>thomas lakiewicz</title>
+  <link rel="icon" type="image/svg+xml" href="symbol-tl.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a class="nav-logo" href="#" onclick="showPage('home'); return false;">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+        <path d="M0 0V32H32V0H0ZM15.406 26.2735H12.1889V9.58717L12.9111 8.98396C13.006 8.90473 12.9501 8.7502 12.8265 8.74986L5.59795 8.7372L5.58717 5.52009H11.9745L15.4062 8.95179V26.2734L15.406 26.2735ZM21.0081 26.2735L17.5764 22.8418V5.52009H20.7935V22.2065L20.0714 22.8097C19.9764 22.8889 20.0323 23.0434 20.1559 23.0438L27.3845 23.0564L27.3953 26.2735H21.0079H21.0081Z" fill="#ECECE5"/>
+      </svg>
+      <span class="nav-logo-name">thomas lakiewicz</span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="#" onclick="showPage('profile'); return false;" data-page="profile">Profil</a>
+      <a class="nav-link" href="#" onclick="showPage('services'); return false;" data-page="services">Leistungen</a>
+      <a class="nav-link" href="mailto:hello@thomaslakiewicz.de" data-page="">E-Mail</a>
+    </div>
+  </nav>
+
+  <!-- HOME -->
+  <div class="page active entering" id="page-home">
+    <!--
+      SLIDER — MEDIEN VERWALTEN
+      Bilder/Videos in media/ legen, src="..." anpassen.
+      Slide hinzufügen  → Block kopieren & einfügen
+      Slide entfernen   → Block löschen
+      Reihenfolge       → Blöcke verschieben
+      Label (unten rechts) → data-label="..." ändern
+    -->
+    <div class="slider" id="slider">
+      <!-- SLIDE 01 · Bild -->
+      <div class="slide active" data-label="branding">
+        <img src="media/slide-01.jpg" alt="slide 01" />
+      </div>
+      <!-- SLIDE 02 · Bild -->
+      <div class="slide" data-label="architecture">
+        <img src="media/slide-02.jpg" alt="slide 02" />
+      </div>
+      <!-- SLIDE 03 · Bild -->
+      <div class="slide" data-label="editorial">
+        <img src="media/slide-03.jpg" alt="slide 03" />
+      </div>
+      <!-- SLIDE 04 · Bild -->
+      <div class="slide" data-label="identity">
+        <img src="media/slide-04.jpg" alt="slide 04" />
+      </div>
+      <!-- SLIDE 05 · Bild -->
+      <div class="slide" data-label="portrait">
+        <img src="media/slide-05.jpg" alt="slide 05" />
+      </div>
+      <!-- SLIDE 06 · Video -->
+      <div class="slide" data-label="motion">
+        <video src="media/slide-06.mp4" muted loop playsinline></video>
+      </div>
+      <!-- SLIDE 07 · Bild -->
+      <div class="slide" data-label="workspace">
+        <img src="media/slide-07.jpg" alt="slide 07" />
+      </div>
+      <!-- SLIDE 08 · Bild -->
+      <div class="slide" data-label="colour">
+        <img src="media/slide-08.jpg" alt="slide 08" />
+      </div>
+      <!-- SLIDE 09 · Video -->
+      <div class="slide" data-label="film">
+        <video src="media/slide-09.mp4" muted loop playsinline></video>
+      </div>
+      <!-- SLIDE 10 · Bild -->
+      <div class="slide" data-label="texture">
+        <img src="media/slide-10.jpg" alt="slide 10" />
+      </div>
+    </div>
+
+    <div class="slider-overlay"></div>
+    <div class="slide-label" id="slide-label"></div>
+
+    <div class="home-content">
+      <h1 class="home-headline" id="home-headline">
+        communication<br>design.
+      </h1>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="bottom-links">
+        <a class="bottom-link" href="#" onclick="showPage('impressum'); return false;">Impressum</a>
+        <a class="bottom-link" href="https://linkedin.com" target="_blank">LinkedIn</a>
+        <a class="bottom-link" href="https://instagram.com" target="_blank">Instagram</a>
+      </div>
+      <div class="home-pager">
+        <button class="pager-btn" id="btn-prev">&#8592;</button>
+        <div class="pager-count">
+          <div class="timer-ring">
+            <svg viewBox="0 0 26 26" width="26" height="26">
+              <circle class="timer-track" cx="13" cy="13" r="11"/>
+              <circle class="timer-fill" id="timer-fill" cx="13" cy="13" r="11"/>
+            </svg>
+          </div>
+          <span id="pager-label">01 / 10</span>
+        </div>
+        <button class="pager-btn" id="btn-next">&#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFIL -->
+  <div class="page" id="page-profile">
+    <div class="profile-inner">
+      <div class="profile-text" id="profile-text">
+        <p>hi &#8288;&#8202;&#8202;&#8202; thank you for visiting my page.</p>
+        <p>If you like to know, here is a little bit about me: i am a communication designer based near Hamburg.</p>
+        <p>I've been visualizing digital and print communication for more than 15 years now — and I still get excited every time a new project starts. I love good typography, clean layouts and excited by the unexpected.</p>
+        <p>I've worked in both classic advertising and on the corporate side, so I've seen brands from pretty much every angle. What I love most is helping companies find and shape their identity — turning ideas into something real and meaningful.</p>
+        <p>I'm a big believer in good teamwork and enjoy exploring new directions together with my clients (and even better, in interdisciplinary teams). I'm persistent when it comes to getting great results — and nothing makes me happier than seeing clients genuinely excited about the outcome.</p>
+        <p><span class="highlight">&#8202; Don't be shy and come in contact, I'm looking forward to get to know you.</span></p>
+      </div>
+      <div class="profile-stats" id="profile-stats">
+        <div class="stat">
+          <div class="stat-number">+15</div>
+          <div class="stat-label">years professional Experience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">+100</div>
+          <div class="stat-label">successful projects</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">+30</div>
+          <div class="stat-label">different industries i worked for</div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <div class="bottom-links">
+        <a class="bottom-link" href="#" onclick="showPage('impressum'); return false;">Impressum</a>
+        <a class="bottom-link" href="https://linkedin.com" target="_blank">LinkedIn</a>
+        <a class="bottom-link" href="https://instagram.com" target="_blank">Instagram</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEISTUNGEN -->
+  <div class="page" id="page-services">
+    <div class="services-inner">
+      <div class="services-intro" id="services-intro">
+        <p>Hier steht etwas zu meiner Arbeitsweise. Ich arbeite eng mit meinen Kunden zusammen, um Ideen in etwas Bedeutungsvolles zu verwandeln.</p>
+        <p>Jedes Projekt beginnt mit einem tiefen Verständnis der Marke und ihrer Ziele.</p>
+        <p>Gemeinsam finden wir die richtige Sprache — visuell und inhaltlich.</p>
+      </div>
+      <div class="services-list" id="services-list">
+        <div class="service-row">
+          <div class="service-name">strategy</div>
+          <ul class="service-items">
+            <li>branding analysis</li>
+            <li>brand strategy workshops</li>
+            <li>brand manuals</li>
+            <li>ai design enablement trainings</li>
+            <li>general design enablement trainings</li>
+          </ul>
+        </div>
+        <div class="service-row">
+          <div class="service-name">creation</div>
+          <ul class="service-items">
+            <li>interface design, UI Design</li>
+            <li>corporate design</li>
+            <li>logo creation</li>
+            <li>motion design</li>
+            <li>creative support</li>
+          </ul>
+        </div>
+        <div class="service-row">
+          <div class="service-name">execution</div>
+          <ul class="service-items">
+            <li>production ready prototypes</li>
+            <li>ready to use corporate design assets</li>
+            <li>ai brand picture libraries</li>
+            <li>creative-/ art-direction for interdisciplinary teams</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <div class="bottom-links">
+        <a class="bottom-link" href="#" onclick="showPage('impressum'); return false;">Impressum</a>
+        <a class="bottom-link" href="https://linkedin.com" target="_blank">LinkedIn</a>
+        <a class="bottom-link" href="https://instagram.com" target="_blank">Instagram</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMPRESSUM -->
+  <div class="page" id="page-impressum">
+    <div class="impressum-inner">
+      <h1 id="impressum-title">impressum.</h1>
+      <div class="impressum-section" id="imp-1">
+        <h2>Angaben gem&auml;&szlig; &sect; 5 TMG</h2>
+        <address>
+          Thomas Lakiewicz<br>
+          Duborgstrasse 3<br>
+          21521 Aum&uuml;hle<br>
+          Deutschland
+        </address>
+      </div>
+      <div class="impressum-section" id="imp-2">
+        <h2>Kontakt</h2>
+        <p>E-Mail: <a href="mailto:hello@thomaslakiewicz.de">hello@thomaslakiewicz.de</a></p>
+      </div>
+      <div class="impressum-section" id="imp-3">
+        <h2>Verantwortlich f&uuml;r den Inhalt gem&auml;&szlig; &sect; 55 Abs. 2 RStV</h2>
+        <address>
+          Thomas Lakiewicz<br>
+          Duborgstrasse 3<br>
+          21521 Aum&uuml;hle
+        </address>
+      </div>
+      <div class="impressum-section" id="imp-4">
+        <h2>Haftung f&uuml;r Inhalte</h2>
+        <p>Als Diensteanbieter bin ich gem&auml;&szlig; &sect; 7 Abs. 1 TMG f&uuml;r eigene Inhalte auf dieser Website nach den allgemeinen Gesetzen verantwortlich. Nach &sect;&sect; 8 bis 10 TMG bin ich als Diensteanbieter jedoch nicht verpflichtet, &uuml;bermittelte oder gespeicherte fremde Informationen zu &uuml;berwachen oder nach Umst&auml;nden zu forschen, die auf eine rechtswidrige T&auml;tigkeit hinweisen.</p>
+      </div>
+      <div class="impressum-section" id="imp-5">
+        <h2>Haftung f&uuml;r Links</h2>
+        <p>Diese Website enth&auml;lt Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann ich f&uuml;r diese fremden Inhalte auch keine Gew&auml;hr &uuml;bernehmen. F&uuml;r die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf m&ouml;gliche Rechtsverst&ouml;&szlig;e &uuml;berpr&uuml;ft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.</p>
+      </div>
+      <div class="impressum-section" id="imp-6">
+        <h2>Urheberrecht</h2>
+        <p>Die durch den Seitenbetreiber erstellten Inhalte und Werke auf dieser Website unterliegen dem deutschen Urheberrecht. Die Vervielf&auml;ltigung, Bearbeitung, Verbreitung und jede Art der Verwertung au&szlig;erhalb der Grenzen des Urheberrechts bed&uuml;rfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+      </div>
+      <div class="impressum-section" id="imp-7">
+        <h2>Datenschutz</h2>
+        <p>Die Nutzung dieser Website ist in der Regel ohne Angabe personenbezogener Daten m&ouml;glich. Soweit auf dieser Website personenbezogene Daten erhoben werden, erfolgt dies stets auf freiwilliger Basis. Diese Daten werden ohne ausdr&uuml;ckliche Zustimmung nicht an Dritte weitergegeben.</p>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <div class="bottom-links">
+        <a class="bottom-link" href="#" onclick="showPage('impressum'); return false;">Impressum</a>
+        <a class="bottom-link" href="https://linkedin.com" target="_blank">LinkedIn</a>
+        <a class="bottom-link" href="https://instagram.com" target="_blank">Instagram</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

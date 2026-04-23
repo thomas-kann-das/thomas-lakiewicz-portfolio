@@ -1,0 +1,64 @@
+╔══════════════════════════════════════════════════════════════╗
+║  MEDIEN-ORDNER — thomas lakiewicz Portfolio                  ║
+╚══════════════════════════════════════════════════════════════╝
+
+In diesem Ordner liegen alle Bilder und Videos des Sliders.
+
+
+BILDER AUSTAUSCHEN
+──────────────────
+1. Dein neues Bild in diesen Ordner kopieren
+2. Datei umbenennen auf den jeweiligen Slot:
+     slide-01.jpg   ← Slot 1
+     slide-02.jpg   ← Slot 2
+     slide-03.jpg   ← Slot 3
+     ... usw.
+3. Fertig — kein Code anfassen nötig!
+
+Erlaubte Formate: .jpg · .jpeg · .png · .webp
+
+
+VIDEOS AUSTAUSCHEN
+──────────────────
+Genau gleich wie Bilder, aber mit .mp4:
+     slide-06.mp4
+     slide-09.mp4
+
+Empfehlung: Videos vor dem Upload komprimieren (z. B. HandBrake).
+Ideal: max. 10 MB, H.264, keine Audio-Spur nötig.
+
+
+BESCHRIFTUNG (Label) ÄNDERN
+────────────────────────────
+Das Label erscheint unten rechts im Slider (z. B. "branding").
+Öffne index.html in VS Code und suche nach:
+
+     data-label="branding"
+
+Ändere den Text nach dem = Zeichen.
+
+
+SLIDE HINZUFÜGEN
+────────────────
+1. Neue Bilddatei hier ablegen (z. B. slide-11.jpg)
+2. In index.html diesen Block kopieren und einfügen:
+
+     <!-- SLIDE 11 · Bild -->
+     <div class="slide" data-label="mein-label">
+       <img src="media/slide-11.jpg" alt="slide 11" />
+     </div>
+
+
+SLIDE ENTFERNEN
+───────────────
+Den entsprechenden <div class="slide">...</div> Block
+in index.html löschen. Die Datei hier kann bleiben oder
+ebenfalls gelöscht werden.
+
+
+REIHENFOLGE ÄNDERN
+──────────────────
+Die <div class="slide">-Blöcke in index.html einfach
+in die gewünschte Reihenfolge verschieben.
+Die Dateinamen im media/-Ordner spielen dabei keine Rolle.
+
