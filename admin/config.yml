@@ -7,94 +7,119 @@ public_folder: /media
 
 locale: de
 
+slug:
+  encoding: ascii
+  clean_accents: true
+
 collections:
 
   # ── Slider ────────────────────────────────────────
   - name: slider
-    label: Slider
-    label_singular: Slide
+    label: "🖼️  Slider — Bilder & Videos"
+    label_singular: "Slide"
     folder: _slides
     create: true
     delete: true
-    slug: "{{slug}}"
+    slug: "slide-{{order}}"
     summary: "{{order}} — {{label}}"
+    sortable_fields: ['order']
     fields:
-      - label: Reihenfolge
+      - label: "Reihenfolge (1 = erster Slide)"
         name: order
         widget: number
-        hint: "Niedrigere Zahl = weiter vorne im Slider (1, 2, 3 ...)"
-      - label: Label (unten rechts)
+        value_type: int
+        min: 1
+        hint: "Niedrigere Zahl = weiter vorne im Slider"
+      - label: "Label (unten rechts im Bild)"
         name: label
         widget: string
-        hint: "Kurzer Begriff der unten rechts angezeigt wird, z.B. 'branding'"
-      - label: Medientyp
+        hint: "Kurzer Begriff, z.B. 'branding' oder 'editorial'"
+      - label: "Typ"
         name: type
         widget: select
         options:
-          - { label: "Bild", value: "image" }
-          - { label: "Video", value: "video" }
-        default: image
-      - label: Bild
+          - { label: "Bild (JPG, PNG, WebP)", value: "image" }
+          - { label: "Video (MP4)", value: "video" }
+        default: "image"
+      - label: "Bild hochladen"
         name: image
         widget: image
         required: false
-        hint: "Nur ausfüllen wenn Medientyp = Bild. Empfohlen: JPG, min. 1800px breit."
-      - label: Video
+        hint: "Nur ausfüllen wenn Typ = Bild. Empfohlen: JPG, mindestens 1800px breit, Querformat."
+        choose_url: false
+      - label: "Video hochladen"
         name: video
         widget: file
         required: false
-        hint: "Nur ausfüllen wenn Medientyp = Video. Empfohlen: MP4, max. 20MB."
+        hint: "Nur ausfüllen wenn Typ = Video. Empfohlen: MP4, max. 20MB, ohne Ton."
+        media_library:
+          config:
+            multiple: false
 
   # ── Profil ────────────────────────────────────────
   - name: profil
-    label: Profil
+    label: "👤  Profil — Über mich"
     files:
-      - label: Profil-Seite
+      - label: "Profil-Seite bearbeiten"
         name: profil
         file: _data/profil.json
         fields:
-          - label: Einleitungstext
+          - label: "Begrüßung (erste Zeile)"
             name: intro
-            widget: text
-            hint: "Erste Zeile auf der Profil-Seite"
-          - label: Absatz 1
+            widget: string
+            hint: "z.B. 'hi — thank you for visiting my page.'"
+          - label: "Absatz 1"
             name: absatz1
             widget: text
-          - label: Absatz 2
+            hint: "Kurze Vorstellung — wer bist du, wo bist du ansässig?"
+          - label: "Absatz 2"
             name: absatz2
             widget: text
-          - label: Absatz 3
+            hint: "Deine Erfahrung und was dich begeistert"
+          - label: "Absatz 3"
             name: absatz3
             widget: text
-          - label: Abschluss-Satz
-            name: abschluss
+            hint: "Dein Hintergrund und Schwerpunkt"
+          - label: "Absatz 4"
+            name: absatz4
             widget: text
-            hint: "Der hervorgehobene Satz am Ende"
-          - label: Statistiken
+            hint: "Deine Arbeitsweise und Werte"
+          - label: "Abschluss-Satz (hervorgehoben)"
+            name: abschluss
+            widget: string
+            hint: "Der Call-to-Action am Ende, z.B. 'Don't be shy and come in contact…'"
+          - label: "Statistiken"
             name: stats
             widget: list
+            hint: "Die drei Kennzahlen rechts (z.B. +15 Jahre Erfahrung)"
             fields:
-              - { label: Zahl, name: zahl, widget: string }
-              - { label: Beschreibung, name: beschreibung, widget: string }
+              - { label: "Zahl (z.B. +15)", name: zahl, widget: string }
+              - { label: "Beschreibung (z.B. years professional Experience)", name: beschreibung, widget: string }
 
   # ── Leistungen ────────────────────────────────────
   - name: leistungen
-    label: Leistungen
+    label: "⚡  Leistungen — Services"
     files:
-      - label: Leistungen-Seite
+      - label: "Leistungen-Seite bearbeiten"
         name: leistungen
         file: _data/leistungen.json
         fields:
-          - label: Einleitungstext
+          - label: "Einleitungstext (linke Spalte)"
             name: intro
             widget: list
-            field: { label: Absatz, name: text, widget: text }
-          - label: Leistungsbereiche
+            hint: "Kurze Absätze die deine Arbeitsweise beschreiben"
+            field: { label: "Absatz", name: text, widget: text }
+          - label: "Leistungsbereiche"
             name: bereiche
             widget: list
+            hint: "Die drei Hauptbereiche: strategy, creation, execution"
             fields:
-              - { label: Name (groß), name: name, widget: string, hint: "z.B. strategy" }
-              - label: Einzelne Leistungen
+              - label: "Name des Bereichs (groß dargestellt)"
+                name: name
+                widget: string
+                hint: "z.B. 'strategy' — wird sehr groß angezeigt"
+              - label: "Einzelne Leistungen"
                 name: items
                 widget: list
-                field: { label: Leistung, name: item, widget: string }
+                hint: "Die aufgelisteten Services in diesem Bereich"
+                field: { label: "Leistung", name: item, widget: string }

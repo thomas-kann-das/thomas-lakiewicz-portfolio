@@ -5,6 +5,37 @@
 
 
 /* ══════════════════════════════════════════════════
+   MOBILE NAVIGATION
+══════════════════════════════════════════════════ */
+
+function toggleMobileNav() {
+  const nav = document.getElementById('mobile-nav');
+  const btn = document.getElementById('hamburger-btn');
+  const isOpen = nav.classList.contains('open');
+
+  if (isOpen) {
+    nav.classList.remove('open');
+    btn.classList.remove('open');
+    btn.setAttribute('aria-label', 'Menü öffnen');
+    document.body.style.overflow = '';
+  } else {
+    nav.classList.add('open');
+    btn.classList.add('open');
+    btn.setAttribute('aria-label', 'Menü schließen');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+// Menü schließen bei Escape-Taste
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    const nav = document.getElementById('mobile-nav');
+    if (nav.classList.contains('open')) toggleMobileNav();
+  }
+});
+
+
+/* ══════════════════════════════════════════════════
    SLIDER
 ══════════════════════════════════════════════════ */
 

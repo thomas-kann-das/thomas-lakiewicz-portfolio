@@ -7,19 +7,6 @@
   <link rel="icon" type="image/svg+xml" href="symbol-tl.svg" />
   <link rel="stylesheet" href="style.css" />
 </head>
- <!-- Netlify Identity Widget (für CMS-Login) -->
- <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
- <script>
-   if (window.netlifyIdentity) {
-     window.netlifyIdentity.on("init", user => {
-       if (!user) {
-         window.netlifyIdentity.on("login", () => {
-           document.location.href = "/admin/";
-         });
-       }
-     });
-   }
- </script>
 <body>
 
   <!-- NAVIGATION -->
@@ -35,7 +22,27 @@
       <a class="nav-link" href="#" onclick="showPage('services'); return false;" data-page="services">Leistungen</a>
       <a class="nav-link" href="mailto:hello@thomaslakiewicz.de" data-page="">E-Mail</a>
     </div>
+
+    <!-- Hamburger Button (nur mobil) -->
+    <button class="hamburger-btn" id="hamburger-btn" aria-label="Menü öffnen" onclick="toggleMobileNav()">
+      <span></span>
+      <span></span>
+    </button>
   </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav" id="mobile-nav">
+    <div class="mobile-nav-main">
+      <a class="mobile-nav-link" href="#" onclick="showPage('profile'); toggleMobileNav(); return false;">Profil</a>
+      <a class="mobile-nav-link" href="#" onclick="showPage('services'); toggleMobileNav(); return false;">Leistungen</a>
+      <a class="mobile-nav-link" href="mailto:hello@thomaslakiewicz.de" onclick="toggleMobileNav()">E-Mail</a>
+    </div>
+    <div class="mobile-nav-sub">
+      <a href="#" onclick="showPage('impressum'); toggleMobileNav(); return false;">Impressum</a>
+      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+    </div>
+  </div>
 
   <!-- HOME -->
   <div class="page active entering" id="page-home">

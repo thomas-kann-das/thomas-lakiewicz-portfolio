@@ -596,15 +596,150 @@ nav::before {
 
 
 /* ══════════════════════════════════════════════════
+   HAMBURGER MENÜ (mobil)
+══════════════════════════════════════════════════ */
+
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  position: relative;
+  z-index: 200;
+  width: 28px;
+  height: 20px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.hamburger-btn span {
+  display: block;
+  height: 1.5px;
+  background: var(--warm);
+  border-radius: 1px;
+  transition: all 0.35s ease;
+  transform-origin: right center;
+}
+
+.hamburger-btn span:nth-child(1) { width: 100%; }
+.hamburger-btn span:nth-child(2) { width: 100%; }
+
+/* X-State */
+.hamburger-btn.open span:nth-child(1) {
+  transform: rotate(-45deg) translateY(0);
+  width: 100%;
+}
+.hamburger-btn.open span:nth-child(2) {
+  transform: rotate(45deg) translateY(0);
+  width: 100%;
+}
+
+/* Mobile Nav Overlay */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: rgba(36,33,33,0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 96px 24px 48px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.mobile-nav.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-nav-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  flex: 1;
+  justify-content: center;
+}
+
+.mobile-nav-link {
+  font-size: 32px;
+  font-weight: var(--font-light);
+  letter-spacing: 0.04em;
+  color: var(--warm);
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.mobile-nav.open .mobile-nav-link:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: none; }
+.mobile-nav.open .mobile-nav-link:nth-child(2) { transition-delay: 0.10s; opacity: 1; transform: none; }
+.mobile-nav.open .mobile-nav-link:nth-child(3) { transition-delay: 0.15s; opacity: 1; transform: none; }
+
+.mobile-nav-sub {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.mobile-nav-sub a {
+  font-size: 12px;
+  font-weight: var(--font-light);
+  letter-spacing: 0.04em;
+  color: rgba(236,236,229,0.6);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.mobile-nav-sub a:hover { color: var(--warm); }
+
+
+/* ══════════════════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════════════════ */
 
-@media (max-width: 900px) {
-  :root { --pad-x: 24px; }
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 24px;
+    --nav-h: 80px;
+  }
 
-  .profile-inner   { grid-template-columns: 1fr; gap: 48px; }
-  .services-inner  { grid-template-columns: 1fr; gap: 32px; }
+  /* Desktop nav links verstecken, Hamburger zeigen */
+  .nav-links { display: none; }
+  .hamburger-btn { display: flex; }
+
+  /* Home Seite */
+  .home-headline { font-size: clamp(40px, 10vw, 64px); }
+
+  /* Profil */
+  .profile-inner   { grid-template-columns: 1fr; gap: 48px; padding: 80px var(--pad-x) 40px; }
+  .stat            { grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+  .stat-number     { font-size: clamp(48px, 12vw, 80px); }
+  .stat-label      { font-size: 16px; }
+
+  /* Leistungen */
+  .services-inner  { grid-template-columns: 1fr; gap: 32px; padding: 80px var(--pad-x) 40px; }
   .services-intro  { display: none; }
-  .service-row     { grid-template-columns: 1fr; gap: 16px; }
-  .service-name    { text-align: left; font-size: 48px; }
+  .service-row     { grid-template-columns: 1fr; gap: 12px; margin-bottom: 40px; }
+  .service-name    { text-align: left; font-size: clamp(40px, 10vw, 56px); }
+  .service-items li { font-size: 15px; }
+
+  /* Bottom bar */
+  .bottom-bar { padding: 0 var(--pad-x); height: 72px; }
+  .bottom-links { gap: 20px; }
+  .bottom-link  { font-size: 12px; }
+
+  /* Pager */
+  .home-pager   { gap: 12px; font-size: 13px; }
+
+  /* Impressum */
+  .impressum-inner { padding: 80px var(--pad-x) 40px; }
 }
