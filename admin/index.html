@@ -9,13 +9,272 @@
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    // Vorschau-Panel für alle Collections deaktivieren
-    // damit das Layout einspaltig und sauber bleibt
-    document.addEventListener('DOMContentLoaded', function() {
-      if (window.CMS) {
-        CMS.registerPreviewTemplate = function() {};
+  // ═══════════════════════════════════════════════
+  // VORSCHAU-STYLES — dein echtes Design
+  // ═══════════════════════════════════════════════
+  const previewCSS = `
+    @font-face {
+      font-family: 'At Hauss';
+      src: url('/AtHauss-Light.woff2') format('woff2');
+      font-weight: 300;
+    }
+    @font-face {
+      font-family: 'At Hauss';
+      src: url('/AtHauss-Retina.woff2') format('woff2');
+      font-weight: 350;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #242121;
+      color: #ECECE5;
+      font-family: 'At Hauss', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    /* PROFIL */
+    .preview-profil {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      padding: 60px 42px 40px;
+      min-height: 100vh;
+    }
+    .preview-profil-text p {
+      font-size: 16px;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+      color: #ECECE5;
+    }
+    .preview-profil-text .highlight {
+      font-weight: 350;
+    }
+    .preview-stats { display: flex; flex-direction: column; gap: 0; }
+    .preview-stat {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding-top: 28px;
+      border-top: 1px solid rgba(236,236,229,0.4);
+      margin-bottom: 48px;
+    }
+    .preview-stat-number {
+      font-size: 80px;
+      font-weight: 350;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-align: right;
+    }
+    .preview-stat-label {
+      font-size: 20px;
+      font-weight: 350;
+      line-height: 1.5;
+    }
+
+    /* LEISTUNGEN */
+    .preview-leistungen {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 80px;
+      padding: 60px 42px 40px;
+      min-height: 100vh;
+    }
+    .preview-leistungen-intro p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(236,236,229,0.7);
+      margin-bottom: 24px;
+      letter-spacing: 0.04em;
+    }
+    .preview-service-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+      padding-top: 28px;
+      border-top: 1px solid rgba(236,236,229,0.3);
+      margin-bottom: 48px;
+    }
+    .preview-service-name {
+      font-size: 72px;
+      font-weight: 350;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      text-transform: lowercase;
+      text-align: right;
+    }
+    .preview-service-items {
+      list-style: disc;
+      padding-left: 20px;
+    }
+    .preview-service-items li {
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* SLIDER */
+    .preview-slide {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: #1a1a1a;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .preview-slide img,
+    .preview-slide video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .preview-slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(36,33,33,0.75) 0%, transparent 40%);
+    }
+    .preview-slide-label {
+      position: relative;
+      z-index: 2;
+      padding: 0 42px 32px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(236,236,229,0.5);
+      width: 100%;
+      text-align: right;
+    }
+    .preview-slide-empty {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(236,236,229,0.2);
+      font-size: 14px;
+      letter-spacing: 0.08em;
+    }
+  `;
+
+  CMS.registerPreviewStyle(previewCSS, { raw: true });
+
+  // ═══════════════════════════════════════════════
+  // PROFIL VORSCHAU
+  // ═══════════════════════════════════════════════
+  const ProfilPreview = createClass({
+    render: function() {
+      const entry = this.props.entry;
+      const intro     = entry.getIn(['data', 'intro']) || '';
+      const absatz1   = entry.getIn(['data', 'absatz1']) || '';
+      const absatz2   = entry.getIn(['data', 'absatz2']) || '';
+      const absatz3   = entry.getIn(['data', 'absatz3']) || '';
+      const absatz4   = entry.getIn(['data', 'absatz4']) || '';
+      const abschluss = entry.getIn(['data', 'abschluss']) || '';
+      const stats     = entry.getIn(['data', 'stats']);
+
+      return h('div', { className: 'preview-profil' },
+        // Linke Spalte — Texte
+        h('div', { className: 'preview-profil-text' },
+          intro     && h('p', {}, intro),
+          absatz1   && h('p', {}, absatz1),
+          absatz2   && h('p', {}, absatz2),
+          absatz3   && h('p', {}, absatz3),
+          absatz4   && h('p', {}, absatz4),
+          abschluss && h('p', {},
+            h('span', { className: 'highlight' }, '⸺ ' + abschluss)
+          )
+        ),
+        // Rechte Spalte — Statistiken
+        h('div', { className: 'preview-stats' },
+          stats ? stats.map(function(stat, i) {
+            return h('div', { className: 'preview-stat', key: i },
+              h('div', { className: 'preview-stat-number' }, stat.get('zahl')),
+              h('div', { className: 'preview-stat-label' }, stat.get('beschreibung'))
+            );
+          }).toArray() : null
+        )
+      );
+    }
+  });
+
+  // ═══════════════════════════════════════════════
+  // LEISTUNGEN VORSCHAU
+  // ═══════════════════════════════════════════════
+  const LeistungenPreview = createClass({
+    render: function() {
+      const entry   = this.props.entry;
+      const intro   = entry.getIn(['data', 'intro']);
+      const bereiche = entry.getIn(['data', 'bereiche']);
+
+      return h('div', { className: 'preview-leistungen' },
+        // Linke Spalte — Intro
+        h('div', { className: 'preview-leistungen-intro' },
+          intro ? intro.map(function(item, i) {
+            return h('p', { key: i }, item.get('text'));
+          }).toArray() : null
+        ),
+        // Rechte Spalte — Bereiche
+        h('div', {},
+          bereiche ? bereiche.map(function(bereich, i) {
+            const items = bereich.get('items');
+            return h('div', { className: 'preview-service-row', key: i },
+              h('div', { className: 'preview-service-name' }, bereich.get('name')),
+              h('ul', { className: 'preview-service-items' },
+                items ? items.map(function(item, j) {
+                  return h('li', { key: j }, item.get('item'));
+                }).toArray() : null
+              )
+            );
+          }).toArray() : null
+        )
+      );
+    }
+  });
+
+  // ═══════════════════════════════════════════════
+  // SLIDER VORSCHAU
+  // ═══════════════════════════════════════════════
+  const SliderPreview = createClass({
+    render: function() {
+      const entry  = this.props.entry;
+      const typ    = entry.getIn(['data', 'type']) || 'image';
+      const label  = entry.getIn(['data', 'label']) || '';
+      const image  = entry.getIn(['data', 'image']);
+      const video  = entry.getIn(['data', 'video']);
+      const getAsset = this.props.getAsset;
+
+      let media = null;
+      if (typ === 'image' && image) {
+        const src = getAsset(image);
+        media = h('img', { src: src.toString(), alt: label });
+      } else if (typ === 'video' && video) {
+        const src = getAsset(video);
+        media = h('video', { src: src.toString(), muted: true, autoPlay: true, loop: true, playsInline: true });
+      } else {
+        media = h('div', { className: 'preview-slide-empty' },
+          typ === 'image' ? '← Bild hochladen' : '← Video hochladen'
+        );
       }
-    });
+
+      return h('div', { className: 'preview-slide' },
+        media,
+        h('div', { className: 'preview-slide-overlay' }),
+        h('div', { className: 'preview-slide-label' }, label)
+      );
+    }
+  });
+
+  // ═══════════════════════════════════════════════
+  // VORSCHAUEN REGISTRIEREN
+  // ═══════════════════════════════════════════════
+  CMS.registerPreviewTemplate('profil', ProfilPreview);
+  CMS.registerPreviewTemplate('leistungen', LeistungenPreview);
+  CMS.registerPreviewTemplate('slider', SliderPreview);
+
   </script>
 </body>
 </html>
