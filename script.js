@@ -122,10 +122,97 @@ autoTimer = setTimeout(() => goTo(1), DURATION);
 
 async function loadCMSData() {
   try {
-    await Promise.all([loadProfil(), loadLeistungen()]);
+    await Promise.all([
+      loadHome(),
+      loadProfil(),
+      loadLeistungen(),
+      loadImpressum(),
+      loadEinstellungen()
+    ]);
   } catch(e) {
-    // Kein CMS-Daten vorhanden — statische Inhalte bleiben
     console.log('CMS-Daten nicht gefunden, statische Inhalte werden verwendet.');
+  }
+}
+
+async function loadHome() {
+  const res = await fetch('/_data/home.json');
+  if (!res.ok) return;
+  const d = await res.json();
+
+  const el = document.getElementById('home-headline');
+  if (!el || !d.headline) return;
+
+  if (d.headline_break) {
+    const parts = d.headline.split(' ');
+    const first = parts[0];
+    const rest  = parts.slice(1).join(' ');
+    el.innerHTML = rest ? `${first}<br>${rest}` : first;
+  } else {
+    el.textContent = d.headline;
+  }
+}
+
+async function loadImpressum() {
+  const res = await fetch('/_data/impressum.json');
+  if (!res.ok) return;
+  const d = await res.json();
+
+  const sec1 = document.getElementById('imp-1');
+  if (sec1) sec1.querySelector('address').innerHTML =
+    `${d.name}<br>${d.strasse}<br>${d.ort}<br>${d.land}`;
+
+  const sec2 = document.getElementById('imp-2');
+  if (sec2) sec2.querySelector('p').innerHTML =
+    `E-Mail: <a href="mailto:${d.email}">${d.email}</a>`;
+
+  const sec3 = document.getElementById('imp-3');
+  if (sec3) sec3.querySelector('address').innerHTML =
+    `${d.name}<br>${d.strasse}<br>${d.ort}`;
+
+  const sec4 = document.getElementById('imp-4');
+  if (sec4 && d.haftung_inhalte) sec4.querySelector('p').textContent = d.haftung_inhalte;
+
+  const sec5 = document.getElementById('imp-5');
+  if (sec5 && d.haftung_links) sec5.querySelector('p').textContent = d.haftung_links;
+
+  const sec6 = document.getElementById('imp-6');
+  if (sec6 && d.urheberrecht) sec6.querySelector('p').textContent = d.urheberrecht;
+
+  const sec7 = document.getElementById('imp-7');
+  if (sec7 && d.datenschutz) sec7.querySelector('p').textContent = d.datenschutz;
+}
+
+async function loadEinstellungen() {
+  const res = await fetch('/_data/einstellungen.json');
+  if (!res.ok) return;
+  const d = await res.json();
+
+  // Nav-Name
+  if (d.nav_name) {
+    document.querySelectorAll('.nav-logo-name').forEach(el => {
+      el.textContent = d.nav_name;
+    });
+  }
+
+  // E-Mail Links
+  if (d.email) {
+    document.querySelectorAll('a[href^="mailto:"]').forEach(el => {
+      el.href = `mailto:${d.email}`;
+    });
+  }
+
+  // LinkedIn Links
+  if (d.linkedin) {
+    document.querySelectorAll('a[href*="linkedin"]').forEach(el => {
+      el.href = d.linkedin;
+    });
+  }
+
+  // Instagram Links
+  if (d.instagram) {
+    document.querySelectorAll('a[href*="instagram"]').forEach(el => {
+      el.href = d.instagram;
+    });
   }
 }
 

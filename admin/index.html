@@ -269,11 +269,147 @@
   });
 
   // ═══════════════════════════════════════════════
+  // HOME VORSCHAU
+  // ═══════════════════════════════════════════════
+  const HomePreview = createClass({
+    render: function() {
+      const entry    = this.props.entry;
+      const headline = entry.getIn(['data', 'headline']) || 'communication design.';
+      const doBreak  = entry.getIn(['data', 'headline_break']);
+      const parts    = headline.split(' ');
+      const headlineEl = doBreak && parts.length > 1
+        ? h('span', {}, parts[0], h('br'), parts.slice(1).join(' '))
+        : headline;
+
+      return h('div', {
+        style: {
+          background: '#1a1a1a',
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'flex-end',
+          padding: '0 42px 96px',
+          position: 'relative'
+        }
+      },
+        h('div', {
+          style: {
+            position: 'absolute', inset: 0,
+            background: 'linear-gradient(to top, rgba(36,33,33,0.75) 0%, transparent 40%)'
+          }
+        }),
+        h('h1', {
+          style: {
+            fontFamily: "'At Hauss', sans-serif",
+            fontWeight: 350,
+            fontSize: 'clamp(52px, 7vw, 96px)',
+            lineHeight: 1,
+            letterSpacing: '-0.03em',
+            textTransform: 'lowercase',
+            color: '#ECECE5',
+            position: 'relative',
+            zIndex: 2
+          }
+        }, headlineEl)
+      );
+    }
+  });
+
+  // ═══════════════════════════════════════════════
+  // IMPRESSUM VORSCHAU
+  // ═══════════════════════════════════════════════
+  const ImpressumPreview = createClass({
+    render: function() {
+      const e = this.props.entry;
+      const sectionStyle = {
+        borderTop: '1px solid rgba(236,236,229,0.3)',
+        paddingTop: '28px',
+        marginBottom: '40px'
+      };
+      const h2Style = {
+        fontSize: '11px',
+        letterSpacing: '0.12em',
+        textTransform: 'uppercase',
+        color: 'rgba(236,236,229,0.45)',
+        marginBottom: '12px',
+        fontFamily: "'At Hauss', sans-serif"
+      };
+      const pStyle = {
+        fontSize: '15px',
+        lineHeight: 1.8,
+        letterSpacing: '0.04em',
+        color: '#ECECE5',
+        fontFamily: "'At Hauss', sans-serif",
+        fontWeight: 300
+      };
+
+      return h('div', { style: { padding: '60px 42px', background: '#242121', minHeight: '100vh' } },
+        h('h1', { style: { fontSize: '52px', fontWeight: 350, letterSpacing: '-0.03em', textTransform: 'lowercase', color: '#ECECE5', marginBottom: '56px', fontFamily: "'At Hauss', sans-serif" } }, 'impressum.'),
+        h('div', { style: sectionStyle },
+          h('h2', { style: h2Style }, 'Angaben gemäß § 5 TMG'),
+          h('p', { style: pStyle },
+            e.getIn(['data', 'name']), h('br'),
+            e.getIn(['data', 'strasse']), h('br'),
+            e.getIn(['data', 'ort']), h('br'),
+            e.getIn(['data', 'land'])
+          )
+        ),
+        h('div', { style: sectionStyle },
+          h('h2', { style: h2Style }, 'Kontakt'),
+          h('p', { style: pStyle }, 'E-Mail: ', e.getIn(['data', 'email']))
+        ),
+        h('div', { style: sectionStyle },
+          h('h2', { style: h2Style }, 'Haftung für Inhalte'),
+          h('p', { style: pStyle }, e.getIn(['data', 'haftung_inhalte']))
+        ),
+        h('div', { style: sectionStyle },
+          h('h2', { style: h2Style }, 'Urheberrecht'),
+          h('p', { style: pStyle }, e.getIn(['data', 'urheberrecht']))
+        )
+      );
+    }
+  });
+
+  // ═══════════════════════════════════════════════
+  // EINSTELLUNGEN VORSCHAU
+  // ═══════════════════════════════════════════════
+  const EinstellungenPreview = createClass({
+    render: function() {
+      const e = this.props.entry;
+      const rowStyle = { marginBottom: '24px' };
+      const labelStyle = { fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(236,236,229,0.45)', marginBottom: '6px', fontFamily: "'At Hauss', sans-serif" };
+      const valueStyle = { fontSize: '18px', color: '#ECECE5', fontFamily: "'At Hauss', sans-serif", fontWeight: 300 };
+
+      return h('div', { style: { padding: '60px 42px', background: '#242121', minHeight: '100vh' } },
+        h('h1', { style: { fontSize: '40px', fontWeight: 350, color: '#ECECE5', marginBottom: '48px', fontFamily: "'At Hauss', sans-serif", letterSpacing: '-0.02em' } }, 'Einstellungen'),
+        h('div', { style: rowStyle },
+          h('div', { style: labelStyle }, 'Name in Navigation'),
+          h('div', { style: valueStyle }, e.getIn(['data', 'nav_name']))
+        ),
+        h('div', { style: rowStyle },
+          h('div', { style: labelStyle }, 'E-Mail'),
+          h('div', { style: valueStyle }, e.getIn(['data', 'email']))
+        ),
+        h('div', { style: rowStyle },
+          h('div', { style: labelStyle }, 'LinkedIn'),
+          h('div', { style: valueStyle }, e.getIn(['data', 'linkedin']))
+        ),
+        h('div', { style: rowStyle },
+          h('div', { style: labelStyle }, 'Instagram'),
+          h('div', { style: valueStyle }, e.getIn(['data', 'instagram']))
+        )
+      );
+    }
+  });
+
+  // ═══════════════════════════════════════════════
   // VORSCHAUEN REGISTRIEREN
   // ═══════════════════════════════════════════════
   CMS.registerPreviewTemplate('profil', ProfilPreview);
   CMS.registerPreviewTemplate('leistungen', LeistungenPreview);
   CMS.registerPreviewTemplate('slider', SliderPreview);
+  CMS.registerPreviewTemplate('home', HomePreview);
+  CMS.registerPreviewTemplate('impressum', ImpressumPreview);
+  CMS.registerPreviewTemplate('einstellungen', EinstellungenPreview);
 
   </script>
 </body>

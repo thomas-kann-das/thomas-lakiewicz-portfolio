@@ -125,3 +125,90 @@ collections:
                 widget: list
                 hint: "Die aufgelisteten Services in diesem Bereich"
                 field: { label: "Leistung", name: item, widget: string }
+
+  # ── Home ──────────────────────────────────────────
+  - name: home
+    label: "🏠  Home — Startseite"
+    files:
+      - label: "Startseite bearbeiten"
+        name: home
+        file: _data/home.json
+        fields:
+          - label: "Headline (große Schrift auf der Startseite)"
+            name: headline
+            widget: string
+            hint: "z.B. 'communication design.' — erscheint groß unten links"
+          - label: "Zeilenumbruch nach dem ersten Wort?"
+            name: headline_break
+            widget: boolean
+            default: true
+            hint: "Ein = 'communication' und 'design.' stehen auf zwei Zeilen"
+
+  # ── Impressum ─────────────────────────────────────
+  - name: impressum
+    label: "📋  Impressum"
+    files:
+      - label: "Impressum bearbeiten"
+        name: impressum
+        file: _data/impressum.json
+        fields:
+          - label: "Name"
+            name: name
+            widget: string
+            hint: "z.B. Thomas Lakiewicz"
+          - label: "Straße und Hausnummer"
+            name: strasse
+            widget: string
+          - label: "PLZ und Ort"
+            name: ort
+            widget: string
+          - label: "Land"
+            name: land
+            widget: string
+            default: "Deutschland"
+          - label: "E-Mail-Adresse"
+            name: email
+            widget: string
+            hint: "Wird als klickbarer Link angezeigt"
+          - label: "Haftung für Inhalte"
+            name: haftung_inhalte
+            widget: text
+            hint: "Pflichttext — nur ändern wenn nötig"
+          - label: "Haftung für Links"
+            name: haftung_links
+            widget: text
+            hint: "Pflichttext — nur ändern wenn nötig"
+          - label: "Urheberrecht"
+            name: urheberrecht
+            widget: text
+            hint: "Pflichttext — nur ändern wenn nötig"
+          - label: "Datenschutz"
+            name: datenschutz
+            widget: text
+            hint: "Pflichttext — nur ändern wenn nötig"
+
+  # ── Social Media & Links ──────────────────────────
+  - name: einstellungen
+    label: "⚙️  Einstellungen — Links & Kontakt"
+    files:
+      - label: "Links & Kontakt bearbeiten"
+        name: einstellungen
+        file: _data/einstellungen.json
+        fields:
+          - label: "E-Mail-Adresse (Kontakt-Link in Navigation)"
+            name: email
+            widget: string
+            hint: "z.B. hello@thomaslakiewicz.de"
+          - label: "LinkedIn-URL"
+            name: linkedin
+            widget: string
+            hint: "z.B. https://linkedin.com/in/thomas-lakiewicz"
+          - label: "Instagram-URL"
+            name: instagram
+            widget: string
+            hint: "z.B. https://instagram.com/thomaslakiewicz"
+          - label: "Name in der Navigation (neben Logo)"
+            name: nav_name
+            widget: string
+            hint: "z.B. thomas lakiewicz"
+
