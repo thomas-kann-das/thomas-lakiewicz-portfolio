@@ -1,0 +1,13 @@
+{
+  "intro": "hi — thank you for visiting my page.",
+  "absatz1": "If you like to know, here is a little bit about me: i am a communication designer based near Hamburg.",
+  "absatz2": "I've been visualizing digital and print communication for more than 15 years now — and I still get excited every time a new project starts. I love good typography, clean layouts and excited by the unexpected.",
+  "absatz3": "I've worked in both classic advertising and on the corporate side, so I've seen brands from pretty much every angle. What I love most is helping companies find and shape their identity — turning ideas into something real and meaningful.",
+  "absatz4": "I'm a big believer in good teamwork and enjoy exploring new directions together with my clients (and even better, in interdisciplinary teams). I'm persistent when it comes to getting great results — and nothing makes me happier than seeing clients genuinely excited about the outcome.",
+  "abschluss": "Don't be shy and come in contact, I'm looking forward to get to know you.",
+  "stats": [
+    { "zahl": "+15", "beschreibung": "years professional Experience" },
+    { "zahl": "+100", "beschreibung": "successful projects" },
+    { "zahl": "+30", "beschreibung": "different industries i worked for" }
+  ]
+}

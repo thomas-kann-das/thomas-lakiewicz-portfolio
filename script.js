@@ -116,6 +116,78 @@ autoTimer = setTimeout(() => goTo(1), DURATION);
 
 
 /* ══════════════════════════════════════════════════
+   CMS DATEN LADEN
+   Liest JSON-Dateien aus _data/ und befüllt die Seite
+══════════════════════════════════════════════════ */
+
+async function loadCMSData() {
+  try {
+    await Promise.all([loadProfil(), loadLeistungen()]);
+  } catch(e) {
+    // Kein CMS-Daten vorhanden — statische Inhalte bleiben
+    console.log('CMS-Daten nicht gefunden, statische Inhalte werden verwendet.');
+  }
+}
+
+async function loadProfil() {
+  const res = await fetch('/_data/profil.json');
+  if (!res.ok) return;
+  const d = await res.json();
+
+  const textEl = document.getElementById('profile-text');
+  if (!textEl) return;
+
+  textEl.innerHTML = `
+    <p>${d.intro}</p>
+    ${d.absatz1 ? `<p>${d.absatz1}</p>` : ''}
+    ${d.absatz2 ? `<p>${d.absatz2}</p>` : ''}
+    ${d.absatz3 ? `<p>${d.absatz3}</p>` : ''}
+    ${d.absatz4 ? `<p>${d.absatz4}</p>` : ''}
+    ${d.abschluss ? `<p><span class="highlight">⸺ ${d.abschluss}</span></p>` : ''}
+  `;
+
+  if (d.stats && d.stats.length) {
+    const statsEl = document.getElementById('profile-stats');
+    if (statsEl) {
+      statsEl.innerHTML = d.stats.map(s => `
+        <div class="stat">
+          <div class="stat-number">${s.zahl}</div>
+          <div class="stat-label">${s.beschreibung}</div>
+        </div>
+      `).join('');
+    }
+  }
+}
+
+async function loadLeistungen() {
+  const res = await fetch('/_data/leistungen.json');
+  if (!res.ok) return;
+  const d = await res.json();
+
+  if (d.intro && d.intro.length) {
+    const introEl = document.getElementById('services-intro');
+    if (introEl) {
+      introEl.innerHTML = d.intro.map(i => `<p>${i.text}</p>`).join('');
+    }
+  }
+
+  if (d.bereiche && d.bereiche.length) {
+    const listEl = document.getElementById('services-list');
+    if (listEl) {
+      listEl.innerHTML = d.bereiche.map(b => `
+        <div class="service-row">
+          <div class="service-name">${b.name}</div>
+          <ul class="service-items">
+            ${b.items.map(i => `<li>${i.item}</li>`).join('')}
+          </ul>
+        </div>
+      `).join('');
+    }
+  }
+}
+
+
+/* ══════════════════════════════════════════════════
    SEITENNAVIGATION
 ══════════════════════════════════════════════════ */
 
@@ -183,6 +255,7 @@ function showPage(id) {
 ══════════════════════════════════════════════════ */
 
 window.addEventListener('DOMContentLoaded', () => {
+  loadCMSData();
   setTimeout(() => {
     document.getElementById('home-headline').classList.add('visible');
   }, 400);
