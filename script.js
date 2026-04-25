@@ -39,52 +39,41 @@ document.addEventListener('keydown', e => {
    SLIDER
 ══════════════════════════════════════════════════ */
 
-const DURATION      = 3000;             // Millisekunden pro Slide
-const CIRCUMFERENCE = 2 * Math.PI * 11; // Umfang des Timer-Rings (r = 11)
+const DURATION      = 6000;             // 6 Sekunden pro Slide
+const CIRCUMFERENCE = 2 * Math.PI * 11;
 
 const slides     = Array.from(document.querySelectorAll('.slide'));
 const timerFill  = document.getElementById('timer-fill');
 const pagerLabel = document.getElementById('pager-label');
 const slideLabel = document.getElementById('slide-label');
-const btnPrev    = document.getElementById('btn-prev');
-const btnNext    = document.getElementById('btn-next');
 
 const total = slides.length;
 let current   = 0;
 let autoTimer = null;
 
-/* Zweistellige Zahl erzeugen: 1 → "01" */
-function pad(n) {
-  return String(n).padStart(2, '0');
-}
+function pad(n) { return String(n).padStart(2, '0'); }
 
-/* Pager-Text und Slide-Label aktualisieren */
 function updatePager() {
   pagerLabel.textContent = `${pad(current + 1)} / ${pad(total)}`;
   slideLabel.textContent = slides[current].dataset.label || '';
 }
 
-/* Timer-Ring-Animation starten */
 function startTimerAnim() {
-  timerFill.style.transition    = 'none';
+  timerFill.style.transition       = 'none';
   timerFill.style.strokeDashoffset = '0';
-  timerFill.getBoundingClientRect(); // Reflow erzwingen
-  timerFill.style.transition    = `stroke-dashoffset ${DURATION}ms linear`;
+  timerFill.getBoundingClientRect();
+  timerFill.style.transition       = `stroke-dashoffset ${DURATION}ms linear`;
   timerFill.style.strokeDashoffset = String(CIRCUMFERENCE);
 }
 
-/* Zu einem bestimmten Slide springen */
 function goTo(index, resetTimer = true) {
-  // Video auf altem Slide pausieren
   const oldVideo = slides[current].querySelector('video');
   if (oldVideo) oldVideo.pause();
 
-  // Slide wechseln
   slides[current].classList.remove('active');
   current = ((index % total) + total) % total;
   slides[current].classList.add('active');
 
-  // Video auf neuem Slide abspielen
   const newVideo = slides[current].querySelector('video');
   if (newVideo) newVideo.play().catch(() => {});
 
@@ -100,10 +89,52 @@ function goTo(index, resetTimer = true) {
 function next() { goTo(current + 1); }
 function prev() { goTo(current - 1); }
 
-btnNext.addEventListener('click', next);
-btnPrev.addEventListener('click', prev);
+/* ── Cursor-Navigation (Desktop) ── */
+const sliderNav    = document.getElementById('slider-nav');
+const sliderCursor = document.getElementById('slider-cursor');
+const cursorArrow  = document.getElementById('cursor-arrow');
 
-/* Pfeiltasten auf der Tastatur */
+if (sliderNav && sliderCursor) {
+  sliderNav.addEventListener('mousemove', e => {
+    sliderCursor.style.left = e.clientX + 'px';
+    sliderCursor.style.top  = e.clientY + 'px';
+    sliderCursor.classList.add('visible');
+    const isRight = e.clientX > window.innerWidth / 2;
+    cursorArrow.setAttribute('d', isRight
+      ? 'M20 16l8 8-8 8'   // Pfeil →
+      : 'M28 16l-8 8 8 8'  // Pfeil ←
+    );
+  });
+
+  sliderNav.addEventListener('mouseleave', () => {
+    sliderCursor.classList.remove('visible');
+  });
+
+  document.getElementById('slider-nav-prev').addEventListener('click', prev);
+  document.getElementById('slider-nav-next').addEventListener('click', next);
+}
+
+/* ── Touch-Swipe (Mobil) ── */
+let touchStartX = 0;
+let touchStartY = 0;
+
+const sliderEl = document.getElementById('slider');
+if (sliderEl) {
+  sliderEl.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  sliderEl.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      dx < 0 ? next() : prev();
+    }
+  }, { passive: true });
+}
+
+/* Tastatur-Pfeile */
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') next();
   if (e.key === 'ArrowLeft')  prev();

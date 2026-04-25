@@ -284,28 +284,11 @@ nav::before {
 .home-pager {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   font-size: 15px;
   letter-spacing: var(--tracking-nav);
   color: rgba(236,236,229,0.6);
   font-variant-numeric: tabular-nums;
-}
-
-.pager-btn {
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: rgba(236,236,229,0.5);
-  font-size: 20px;
-  padding: 4px 6px;
-  transition: color 0.2s ease, transform 0.15s ease;
-  font-family: inherit;
-  line-height: 1;
-}
-
-.pager-btn:hover {
-  color: var(--warm);
-  transform: scale(1.15);
 }
 
 .pager-count {
@@ -313,6 +296,45 @@ nav::before {
   align-items: center;
   gap: 10px;
 }
+
+/* ── Cursor-Navigation (Desktop) ──────────────────── */
+
+.slider-nav {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+}
+
+.slider-nav-prev,
+.slider-nav-next {
+  flex: 1;
+  height: 100%;
+  cursor: none; /* eigener Cursor über JS */
+}
+
+/* Custom Cursor */
+.slider-cursor {
+  position: fixed;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-cursor svg {
+  width: 48px;
+  height: 48px;
+  filter: drop-shadow(0 0 4px rgba(0,0,0,0.4));
+}
+
+.slider-cursor.visible { opacity: 1; }
 
 
 /* ── Timer Ring ───────────────────────────────────── */
@@ -732,8 +754,13 @@ nav::before {
   .service-name    { text-align: left; font-size: clamp(40px, 10vw, 56px); }
   .service-items li { font-size: 15px; }
 
-  /* Bottom bar */
-  .bottom-bar { padding: 0 var(--pad-x); height: 72px; }
+  /* Bottom bar — über Safari URL-Leiste */
+  .bottom-bar {
+    padding: 0 var(--pad-x);
+    padding-bottom: env(safe-area-inset-bottom, 16px);
+    height: auto;
+    min-height: 64px;
+  }
   .bottom-links { gap: 20px; }
   .bottom-link  { font-size: 12px; }
 

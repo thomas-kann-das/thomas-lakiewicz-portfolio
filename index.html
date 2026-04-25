@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>thomas lakiewicz</title>
   <link rel="icon" type="image/svg+xml" href="symbol-tl.svg" />
   <link rel="stylesheet" href="style.css" />
@@ -97,6 +97,12 @@
       </div>
     </div>
 
+    <!-- Cursor-Navigation (Desktop): linke/rechte Hälfte klickbar -->
+    <div class="slider-nav" id="slider-nav">
+      <div class="slider-nav-prev" id="slider-nav-prev"></div>
+      <div class="slider-nav-next" id="slider-nav-next"></div>
+    </div>
+
     <div class="slider-overlay"></div>
     <div class="slide-label" id="slide-label"></div>
 
@@ -113,7 +119,6 @@
         <a class="bottom-link" href="https://instagram.com" target="_blank">Instagram</a>
       </div>
       <div class="home-pager">
-        <button class="pager-btn" id="btn-prev">&#8592;</button>
         <div class="pager-count">
           <div class="timer-ring">
             <svg viewBox="0 0 26 26" width="26" height="26">
@@ -123,9 +128,16 @@
           </div>
           <span id="pager-label">01 / 10</span>
         </div>
-        <button class="pager-btn" id="btn-next">&#8594;</button>
       </div>
     </div>
+  </div>
+
+  <!-- Custom Cursor für Slider -->
+  <div class="slider-cursor" id="slider-cursor">
+    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="24" r="23" fill="rgba(36,33,33,0.5)" stroke="rgba(236,236,229,0.3)" stroke-width="1"/>
+      <path id="cursor-arrow" d="M20 16l8 8-8 8" stroke="#ECECE5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
   </div>
 
   <!-- PROFIL -->
