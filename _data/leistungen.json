@@ -1,37 +1,69 @@
 {
   "intro": [
-    { "text": "Hier steht etwas zu meiner Arbeitsweise. Ich arbeite eng mit meinen Kunden zusammen, um Ideen in etwas Bedeutungsvolles zu verwandeln." },
-    { "text": "Jedes Projekt beginnt mit einem tiefen Verständnis der Marke und ihrer Ziele." },
-    { "text": "Gemeinsam finden wir die richtige Sprache — visuell und inhaltlich." }
+    {
+      "text": "Hier steht etwas zu meiner Arbeitsweise. Ich arbeite eng mit meinen Kunden zusammen, um Ideen in etwas Bedeutungsvolles zu verwandeln."
+    },
+    {
+      "text": "Jedes Projekt beginnt mit einem tiefen Verständnis der Marke und ihrer Ziele."
+    },
+    {
+      "text": "Gemeinsam finden wir die richtige Sprache — visuell und inhaltlich."
+    }
   ],
   "bereiche": [
     {
       "name": "strategy",
       "items": [
-        { "item": "branding analysis" },
-        { "item": "brand strategy workshops" },
-        { "item": "brand manuals" },
-        { "item": "ai design enablement trainings" },
-        { "item": "general design enablement trainings" }
+        {
+          "item": "branding analysis"
+        },
+        {
+          "item": "brand strategy workshops"
+        },
+        {
+          "item": "brand manuals"
+        },
+        {
+          "item": "ai design enablement trainings"
+        },
+        {
+          "item": "general design enablement trainings"
+        }
+      ]
+    },
+    {
+      "name": "direction",
+      "items": [
+        {
+          "item": "interface design, UI Design"
+        },
+        {
+          "item": "corporate design"
+        },
+        "campaign",
+        {
+          "item": "motion design"
+        },
+        {
+          "item": "creative support"
+        }
       ]
     },
     {
       "name": "creation",
       "items": [
-        { "item": "interface design, UI Design" },
-        { "item": "corporate design" },
-        { "item": "logo creation" },
-        { "item": "motion design" },
-        { "item": "creative support" }
-      ]
-    },
-    {
-      "name": "execution",
-      "items": [
-        { "item": "production ready prototypes" },
-        { "item": "ready to use corporate design assets" },
-        { "item": "ai brand picture libraries" },
-        { "item": "creative-/ art-direction for interdisciplinary teams" }
+        {
+          "item": "production ready prototypes"
+        },
+        {
+          "item": "ready to use corporate design assets"
+        },
+        {
+          "item": "ai brand picture libraries"
+        },
+        {
+          "item": "creative-/ art-direction for interdisciplinary teams"
+        }
       ]
     }
   ]
