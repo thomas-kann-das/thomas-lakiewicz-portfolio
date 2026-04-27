@@ -1,9 +1,9 @@
 {
   "headline": {
-    "size": 80,
+    "size": 96,
     "weight": "350",
     "align": "left",
-    "line_height": 1.1,
+    "line_height": 1.0,
     "letter_spacing": -0.03
   },
   "navigation": {
@@ -12,16 +12,16 @@
     "nav_link_size": 16
   },
   "profil": {
-    "size": 16,
+    "size": 17,
     "weight": "300",
     "align": "left",
     "line_height": 1.8,
     "letter_spacing": 0.04
   },
   "stats": {
-    "number_size": 80,
+    "number_size": 96,
     "number_weight": "350",
-    "label_size": 20
+    "label_size": 22
   },
   "service_name": {
     "size": 80,
@@ -29,8 +29,13 @@
     "align": "right"
   },
   "service_items": {
-    "size": 16,
+    "size": 18,
     "weight": "300",
     "line_height": 1.7
+  },
+  "animation": {
+    "type": "mask",
+    "speed": "normal",
+    "delay": 0.3
   }
 }

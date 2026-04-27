@@ -296,16 +296,11 @@ nav::before {
   letter-spacing: var(--typo-home-letter-spacing);
   text-align: var(--typo-home-align);
   text-transform: lowercase;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.9s ease 0.3s, transform 0.9s ease 0.3s;
+  opacity: 0; /* GSAP übernimmt die Animation */
   max-width: 700px;
 }
 
-.home-headline.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.home-headline.visible { opacity: 1; } /* Fallback ohne GSAP */
 
 
 /* ── Pager ────────────────────────────────────────── */
@@ -416,11 +411,16 @@ nav::before {
 
 .profile-text {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s;
 }
+.profile-text.visible { opacity: 1; }
 
-.profile-text.visible { opacity: 1; transform: translateY(0); }
+.profile-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  opacity: 0;
+}
+.profile-stats.visible { opacity: 1; }
 
 .profile-text p {
   font-size: var(--typo-profil-size);
@@ -435,14 +435,6 @@ nav::before {
 .profile-text p:last-child { margin-bottom: 0; }
 
 .profile-text .highlight { font-weight: var(--font-medium); }
-
-.profile-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s ease 0.25s, transform 0.8s ease 0.25s;
 }
 
 .profile-stats.visible { opacity: 1; transform: translateY(0); }
@@ -495,11 +487,16 @@ nav::before {
 
 .services-intro {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s;
 }
+.services-intro.visible { opacity: 1; }
 
-.services-intro.visible { opacity: 1; transform: translateY(0); }
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  opacity: 0;
+}
+.services-list.visible { opacity: 1; }
 
 .services-intro p {
   font-size: 16px;
@@ -509,17 +506,6 @@ nav::before {
   color: rgba(236,236,229,0.7);
   margin-bottom: 28px;
 }
-
-.services-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
-}
-
-.services-list.visible { opacity: 1; transform: translateY(0); }
 
 .service-row {
   display: grid;

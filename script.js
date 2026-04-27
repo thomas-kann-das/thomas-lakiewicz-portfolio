@@ -211,7 +211,15 @@ async function loadTypografie() {
   if (si.size)        root.style.setProperty('--typo-service-items-size',        si.size + 'px');
   if (si.weight)      root.style.setProperty('--typo-service-items-weight',      si.weight);
   if (si.line_height) root.style.setProperty('--typo-service-items-line-height', si.line_height);
+
+  // Animations-Einstellungen
+  if (t.animation) {
+    animConfig.type  = t.animation.type  || 'mask';
+    animConfig.speed = t.animation.speed || 'normal';
+    animConfig.delay = t.animation.delay ?? 0.3;
+  }
 }
+
 
 async function loadHome() {
   const res = await fetch('/_data/home.json');
@@ -354,58 +362,200 @@ async function loadLeistungen() {
 
 
 /* ══════════════════════════════════════════════════
+   GSAP — ANIMATIONEN
+   Mask Reveal für alle Textelemente
+══════════════════════════════════════════════════ */
+
+gsap.registerPlugin(SplitText);
+
+// Animations-Einstellungen (werden per CMS überschrieben)
+let animConfig = {
+  type:     'mask',   // 'mask' | 'words' | 'chars' | 'fade' | 'none'
+  speed:    'normal', // 'slow' | 'normal' | 'fast'
+  delay:    0.3       // Sekunden bis Animation startet
+};
+
+// Geschwindigkeit → Dauer in Sekunden
+const speedMap = { slow: 1.0, normal: 0.65, fast: 0.35 };
+
+function getDuration() {
+  return speedMap[animConfig.speed] || 0.65;
+}
+
+/* ── Mask Reveal für ein einzelnes Element ── */
+function maskReveal(el, opts = {}) {
+  if (!el || animConfig.type === 'none') {
+    gsap.set(el, { opacity: 1, y: 0 });
+    return;
+  }
+
+  const dur     = getDuration();
+  const delay   = opts.delay ?? animConfig.delay;
+  const stagger = opts.stagger ?? 0.04;
+  const type    = animConfig.type;
+
+  if (type === 'fade') {
+    gsap.fromTo(el,
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: dur, delay, ease: 'power3.out' }
+    );
+    return;
+  }
+
+  const splitType = type === 'mask'  ? 'lines'
+                  : type === 'words' ? 'words'
+                  : type === 'chars' ? 'chars'
+                  : 'lines';
+
+  const maskProp = type === 'mask' ? splitType : undefined;
+
+  const split = SplitText.create(el, {
+    type: splitType,
+    ...(maskProp ? { mask: maskProp } : {})
+  });
+
+  const targets = split[splitType] || split.lines;
+
+  gsap.fromTo(targets,
+    { y: '110%', opacity: type === 'mask' ? 1 : 0 },
+    {
+      y: '0%',
+      opacity: 1,
+      duration: dur,
+      delay,
+      stagger,
+      ease: 'power4.out',
+      onComplete: () => {
+        // Originalstruktur nach Animation wiederherstellen
+        if (type !== 'mask') split.revert();
+      }
+    }
+  );
+}
+
+/* ── Headline Startseite ── */
+function animateHeadline() {
+  const el = document.getElementById('home-headline');
+  if (!el) return;
+  gsap.set(el, { opacity: 1, transform: 'none' }); // CSS-Klasse überschreiben
+  maskReveal(el, { delay: animConfig.delay, stagger: 0.08 });
+}
+
+/* ── Profil-Texte ── */
+function animateProfil() {
+  const textEl  = document.getElementById('profile-text');
+  const statsEl = document.getElementById('profile-stats');
+
+  if (textEl) {
+    textEl.classList.add('visible');
+    const paras = textEl.querySelectorAll('p');
+    paras.forEach((p, i) => {
+      maskReveal(p, { delay: animConfig.delay + i * 0.08, stagger: 0.05 });
+    });
+  }
+
+  if (statsEl) {
+    statsEl.classList.add('visible');
+    const numbers = statsEl.querySelectorAll('.stat-number');
+    const labels  = statsEl.querySelectorAll('.stat-label');
+    numbers.forEach((n, i) => {
+      maskReveal(n, { delay: animConfig.delay + 0.1 + i * 0.1, stagger: 0 });
+    });
+    labels.forEach((l, i) => {
+      maskReveal(l, { delay: animConfig.delay + 0.15 + i * 0.1, stagger: 0 });
+    });
+  }
+}
+
+/* ── Leistungen ── */
+function animateLeistungen() {
+  const introEl = document.getElementById('services-intro');
+  const listEl  = document.getElementById('services-list');
+
+  if (introEl) {
+    introEl.classList.add('visible');
+    introEl.querySelectorAll('p').forEach((p, i) => {
+      maskReveal(p, { delay: animConfig.delay + i * 0.1, stagger: 0.05 });
+    });
+  }
+
+  if (listEl) {
+    listEl.classList.add('visible');
+    const names = listEl.querySelectorAll('.service-name');
+    const items = listEl.querySelectorAll('.service-items li');
+
+    names.forEach((n, i) => {
+      maskReveal(n, { delay: animConfig.delay + i * 0.15, stagger: 0.06 });
+    });
+    items.forEach((item, i) => {
+      maskReveal(item, { delay: animConfig.delay + 0.1 + i * 0.03, stagger: 0 });
+    });
+  }
+}
+
+/* ── Seitenübergang ── */
+function animatePageIn(id) {
+  const page = document.getElementById('page-' + id);
+  if (!page) return;
+
+  gsap.fromTo(page,
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: getDuration() * 0.8, ease: 'power3.out' }
+  );
+}
+
+
+/* ══════════════════════════════════════════════════
    SEITENNAVIGATION
 ══════════════════════════════════════════════════ */
 
 function showPage(id) {
-
-  /* Alle Seiten ausblenden */
   document.querySelectorAll('.page').forEach(p => {
     p.classList.remove('active', 'entering');
     p.style.display = 'none';
   });
 
-  /* Zielseite einblenden */
   const target = document.getElementById('page-' + id);
   target.style.display = 'flex';
   requestAnimationFrame(() => {
-    target.classList.add('active', 'entering');
+    target.classList.add('active');
   });
 
-  /* Aktiven Nav-Link markieren */
   document.querySelectorAll('.nav-link').forEach(link => {
     link.classList.toggle('active', link.dataset.page === id);
   });
 
-  /* Seitenspezifische Animationen auslösen */
   setTimeout(() => {
+    animatePageIn(id);
 
     if (id === 'home') {
-      document.getElementById('home-headline').classList.add('visible');
+      animateHeadline();
       clearTimeout(autoTimer);
       startTimerAnim();
       autoTimer = setTimeout(() => goTo(current + 1), DURATION);
     }
 
     if (id === 'profile') {
-      document.getElementById('profile-text').classList.add('visible');
-      document.getElementById('profile-stats').classList.add('visible');
+      animateProfil();
       clearTimeout(autoTimer);
     }
 
     if (id === 'services') {
-      document.getElementById('services-intro').classList.add('visible');
-      document.getElementById('services-list').classList.add('visible');
+      animateLeistungen();
       clearTimeout(autoTimer);
     }
 
     if (id === 'impressum') {
-      document.getElementById('impressum-title').classList.add('visible');
-      ['imp-1', 'imp-2', 'imp-3', 'imp-4', 'imp-5', 'imp-6', 'imp-7'].forEach((sid, i) => {
+      const title = document.getElementById('impressum-title');
+      if (title) maskReveal(title, { delay: 0.1 });
+      ['imp-1','imp-2','imp-3','imp-4','imp-5','imp-6','imp-7'].forEach((sid, i) => {
         setTimeout(() => {
           const el = document.getElementById(sid);
-          if (el) el.classList.add('visible');
-        }, i * 60);
+          if (el) {
+            el.classList.add('visible');
+            maskReveal(el.querySelector('p, address'), { delay: 0.05 });
+          }
+        }, i * 80);
       });
       clearTimeout(autoTimer);
     }
@@ -420,9 +570,10 @@ function showPage(id) {
    INITIALER SEITENAUFRUF
 ══════════════════════════════════════════════════ */
 
-window.addEventListener('DOMContentLoaded', () => {
-  loadCMSData();
+window.addEventListener('DOMContentLoaded', async () => {
+  await loadCMSData();
+  // Kurze Pause damit Schriften geladen sind
   setTimeout(() => {
-    document.getElementById('home-headline').classList.add('visible');
-  }, 400);
+    animateHeadline();
+  }, 300);
 });
