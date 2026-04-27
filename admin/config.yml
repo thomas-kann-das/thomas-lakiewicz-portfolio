@@ -212,6 +212,7 @@ collections:
             widget: string
             hint: "z.B. thomas lakiewicz"
 
+
   # ── Typografie ────────────────────────────────────
   - name: typografie
     label: "🔤  Typografie — Schrift & Layout"
@@ -221,218 +222,118 @@ collections:
         file: _data/typografie.json
         fields:
 
-          - label: "── Headline (Startseite) ──────────────"
-            name: divider_home
-            widget: hidden
-            default: ""
+          - label: "🏠 Headline (Startseite)"
+            name: headline
+            widget: object
+            collapsed: false
+            summary: "Größe: {{fields.size}}px · {{fields.weight}} · {{fields.align}}"
+            fields:
+              - { label: "Schriftgröße (px)", name: size, widget: number, default: 96, value_type: int, min: 32, max: 200, hint: "Auf kleinen Bildschirmen wird sie automatisch kleiner" }
+              - label: "Schriftschnitt"
+                name: weight
+                widget: select
+                options:
+                  - { label: "Light (dünn)", value: "300" }
+                  - { label: "Retina (normal)", value: "350" }
+                default: "350"
+              - label: "Textausrichtung"
+                name: align
+                widget: select
+                options:
+                  - { label: "Links", value: "left" }
+                  - { label: "Zentriert", value: "center" }
+                  - { label: "Rechts", value: "right" }
+                default: "left"
+              - { label: "Zeilenabstand", name: line_height, widget: number, default: 1.0, value_type: float, min: 0.8, max: 2.0, step: 0.05, hint: "1.0 = eng · 1.5 = normal · 2.0 = weit" }
+              - { label: "Buchstabenabstand (em)", name: letter_spacing, widget: number, default: -0.03, value_type: float, min: -0.1, max: 0.2, step: 0.01 }
 
-          - label: "Headline — Schriftgröße (px)"
-            name: home_size
-            widget: number
-            default: 96
-            value_type: int
-            min: 32
-            max: 200
-            hint: "Auf kleinen Bildschirmen wird sie automatisch kleiner"
+          - label: "🧭 Navigation"
+            name: navigation
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Nav-Name Schriftgröße (px)", name: nav_size, widget: number, default: 22, value_type: int, min: 12, max: 48 }
+              - label: "Nav-Name Schriftschnitt"
+                name: nav_weight
+                widget: select
+                options:
+                  - { label: "Light (dünn)", value: "300" }
+                  - { label: "Retina (normal)", value: "350" }
+                default: "350"
+              - { label: "Nav-Links Schriftgröße (px)", name: nav_link_size, widget: number, default: 16, value_type: int, min: 10, max: 32 }
 
-          - label: "Headline — Schriftschnitt"
-            name: home_weight
-            widget: select
-            options:
-              - { label: "Light (dünn)", value: "300" }
-              - { label: "Retina (normal)", value: "350" }
-            default: "350"
+          - label: "👤 Profil — Texte"
+            name: profil
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Schriftgröße (px)", name: size, widget: number, default: 17, value_type: int, min: 12, max: 32 }
+              - label: "Schriftschnitt"
+                name: weight
+                widget: select
+                options:
+                  - { label: "Light (dünn)", value: "300" }
+                  - { label: "Retina (normal)", value: "350" }
+                default: "300"
+              - label: "Textausrichtung"
+                name: align
+                widget: select
+                options:
+                  - { label: "Links", value: "left" }
+                  - { label: "Zentriert", value: "center" }
+                  - { label: "Rechts", value: "right" }
+                default: "left"
+              - { label: "Zeilenabstand", name: line_height, widget: number, default: 1.8, value_type: float, min: 1.0, max: 3.0, step: 0.05 }
+              - { label: "Buchstabenabstand (em)", name: letter_spacing, widget: number, default: 0.04, value_type: float, min: -0.05, max: 0.2, step: 0.01 }
 
-          - label: "Headline — Textausrichtung"
-            name: home_align
-            widget: select
-            options:
-              - { label: "Links", value: "left" }
-              - { label: "Zentriert", value: "center" }
-              - { label: "Rechts", value: "right" }
-            default: "left"
+          - label: "📊 Profil — Statistiken"
+            name: stats
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Zahlen Schriftgröße (px)", name: number_size, widget: number, default: 96, value_type: int, min: 32, max: 160 }
+              - label: "Zahlen Schriftschnitt"
+                name: number_weight
+                widget: select
+                options:
+                  - { label: "Light (dünn)", value: "300" }
+                  - { label: "Retina (normal)", value: "350" }
+                default: "350"
+              - { label: "Label Schriftgröße (px)", name: label_size, widget: number, default: 22, value_type: int, min: 12, max: 48 }
 
-          - label: "Headline — Zeilenabstand"
-            name: home_line_height
-            widget: number
-            default: 1.0
-            value_type: float
-            min: 0.8
-            max: 2.0
-            step: 0.05
-            hint: "1.0 = eng, 1.5 = normal, 2.0 = weit"
+          - label: "⚡ Leistungen — Service-Namen"
+            name: service_name
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Schriftgröße (px)", name: size, widget: number, default: 80, value_type: int, min: 32, max: 160 }
+              - label: "Schriftschnitt"
+                name: weight
+                widget: select
+                options:
+                  - { label: "Light (dünn)", value: "300" }
+                  - { label: "Retina (normal)", value: "350" }
+                default: "350"
+              - label: "Textausrichtung"
+                name: align
+                widget: select
+                options:
+                  - { label: "Links", value: "left" }
+                  - { label: "Zentriert", value: "center" }
+                  - { label: "Rechts", value: "right" }
+                default: "right"
 
-          - label: "Headline — Buchstabenabstand (em)"
-            name: home_letter_spacing
-            widget: number
-            default: -0.03
-            value_type: float
-            min: -0.1
-            max: 0.2
-            step: 0.01
-
-          - label: "── Navigation ────────────────────────"
-            name: divider_nav
-            widget: hidden
-            default: ""
-
-          - label: "Nav-Name — Schriftgröße (px)"
-            name: nav_size
-            widget: number
-            default: 22
-            value_type: int
-            min: 12
-            max: 48
-
-          - label: "Nav-Name — Schriftschnitt"
-            name: nav_weight
-            widget: select
-            options:
-              - { label: "Light (dünn)", value: "300" }
-              - { label: "Retina (normal)", value: "350" }
-            default: "350"
-
-          - label: "Nav-Links — Schriftgröße (px)"
-            name: nav_link_size
-            widget: number
-            default: 16
-            value_type: int
-            min: 10
-            max: 32
-
-          - label: "── Profil-Texte ──────────────────────"
-            name: divider_profil
-            widget: hidden
-            default: ""
-
-          - label: "Profil-Text — Schriftgröße (px)"
-            name: profil_text_size
-            widget: number
-            default: 17
-            value_type: int
-            min: 12
-            max: 32
-
-          - label: "Profil-Text — Schriftschnitt"
-            name: profil_text_weight
-            widget: select
-            options:
-              - { label: "Light (dünn)", value: "300" }
-              - { label: "Retina (normal)", value: "350" }
-            default: "300"
-
-          - label: "Profil-Text — Textausrichtung"
-            name: profil_text_align
-            widget: select
-            options:
-              - { label: "Links", value: "left" }
-              - { label: "Zentriert", value: "center" }
-              - { label: "Rechts", value: "right" }
-            default: "left"
-
-          - label: "Profil-Text — Zeilenabstand"
-            name: profil_text_line_height
-            widget: number
-            default: 1.8
-            value_type: float
-            min: 1.0
-            max: 3.0
-            step: 0.05
-
-          - label: "Profil-Text — Buchstabenabstand (em)"
-            name: profil_text_letter_spacing
-            widget: number
-            default: 0.04
-            value_type: float
-            min: -0.05
-            max: 0.2
-            step: 0.01
-
-          - label: "── Profil-Statistiken ────────────────"
-            name: divider_stats
-            widget: hidden
-            default: ""
-
-          - label: "Statistik-Zahlen — Schriftgröße (px)"
-            name: stats_number_size
-            widget: number
-            default: 96
-            value_type: int
-            min: 32
-            max: 160
-
-          - label: "Statistik-Zahlen — Schriftschnitt"
-            name: stats_number_weight
-            widget: select
-            options:
-              - { label: "Light (dünn)", value: "300" }
-              - { label: "Retina (normal)", value: "350" }
-            default: "350"
-
-          - label: "Statistik-Label — Schriftgröße (px)"
-            name: stats_label_size
-            widget: number
-            default: 22
-            value_type: int
-            min: 12
-            max: 48
-
-          - label: "── Leistungen-Namen ──────────────────"
-            name: divider_leistungen
-            widget: hidden
-            default: ""
-
-          - label: "Service-Name — Schriftgröße (px)"
-            name: service_name_size
-            widget: number
-            default: 80
-            value_type: int
-            min: 32
-            max: 160
-
-          - label: "Service-Name — Schriftschnitt"
-            name: service_name_weight
-            widget: select
-            options:
-              - { label: "Light (dünn)", value: "300" }
-              - { label: "Retina (normal)", value: "350" }
-            default: "350"
-
-          - label: "Service-Name — Textausrichtung"
-            name: service_name_align
-            widget: select
-            options:
-              - { label: "Links", value: "left" }
-              - { label: "Zentriert", value: "center" }
-              - { label: "Rechts", value: "right" }
-            default: "right"
-
-          - label: "── Leistungen-Items ──────────────────"
-            name: divider_items
-            widget: hidden
-            default: ""
-
-          - label: "Service-Items — Schriftgröße (px)"
-            name: service_items_size
-            widget: number
-            default: 18
-            value_type: int
-            min: 10
-            max: 32
-
-          - label: "Service-Items — Schriftschnitt"
-            name: service_items_weight
-            widget: select
-            options:
-              - { label: "Light (dünn)", value: "300" }
-              - { label: "Retina (normal)", value: "350" }
-            default: "300"
-
-          - label: "Service-Items — Zeilenabstand"
-            name: service_items_line_height
-            widget: number
-            default: 1.7
-            value_type: float
-            min: 1.0
-            max: 3.0
-            step: 0.05
+          - label: "⚡ Leistungen — Items"
+            name: service_items
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Schriftgröße (px)", name: size, widget: number, default: 18, value_type: int, min: 10, max: 32 }
+              - label: "Schriftschnitt"
+                name: weight
+                widget: select
+                options:
+                  - { label: "Light (dünn)", value: "300" }
+                  - { label: "Retina (normal)", value: "350" }
+                default: "300"
+              - { label: "Zeilenabstand", name: line_height, widget: number, default: 1.7, value_type: float, min: 1.0, max: 3.0, step: 0.05 }
