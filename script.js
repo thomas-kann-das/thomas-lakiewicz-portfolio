@@ -407,14 +407,29 @@ function maskReveal(el, opts = {}) {
                   : type === 'chars' ? 'chars'
                   : 'lines';
 
-  const maskProp = type === 'mask' ? splitType : undefined;
-
   const split = SplitText.create(el, {
     type: splitType,
-    ...(maskProp ? { mask: maskProp } : {})
+    // Extra Padding für Unterlängen (g, p, y, q...)
+    linesClass:  'split-line',
+    wordsClass:  'split-word',
+    charsClass:  'split-char',
+    ...(type === 'mask' ? { mask: splitType } : {})
   });
 
   const targets = split[splitType] || split.lines;
+
+  // Masken-Elemente: Unterlängen nicht abschneiden
+  if (type === 'mask') {
+    targets.forEach(t => {
+      const parent = t.parentElement;
+      if (parent) {
+        parent.style.overflow = 'hidden';
+        parent.style.paddingBottom = '0.15em';
+        parent.style.marginBottom  = '-0.15em';
+      }
+      t.style.display = 'block';
+    });
+  }
 
   gsap.fromTo(targets,
     { y: '110%', opacity: type === 'mask' ? 1 : 0 },

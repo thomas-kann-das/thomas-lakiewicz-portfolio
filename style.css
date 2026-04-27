@@ -624,6 +624,27 @@ nav::before {
 
 
 /* ══════════════════════════════════════════════════
+   GSAP SPLITTEXT — Unterlängen-Fix
+══════════════════════════════════════════════════ */
+
+/* Masken-Wrapper: genug Platz für g, p, y, q... */
+.split-line,
+.split-word,
+.split-char {
+  overflow: visible !important;
+  padding-bottom: 0.15em;
+  margin-bottom:  -0.15em;
+  display: block;
+}
+
+/* Speziell für die Headline: mehr Spielraum */
+.home-headline .split-line {
+  padding-bottom: 0.2em;
+  margin-bottom:  -0.2em;
+}
+
+
+/* ══════════════════════════════════════════════════
    ANIMATIONEN
 ══════════════════════════════════════════════════ */
 
