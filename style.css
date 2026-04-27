@@ -176,7 +176,7 @@ nav::before {
   height: 96px;
   flex-shrink: 0;
   position: relative;
-  z-index: 3;
+  z-index: 11;
 }
 
 .bottom-links {
@@ -238,7 +238,8 @@ nav::before {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(236,236,229,0.4);
-  z-index: 2;
+  z-index: 11;
+  pointer-events: none;
 }
 
 .slider-overlay {
@@ -253,12 +254,13 @@ nav::before {
 
 .home-content {
   position: relative;
-  z-index: 2;
+  z-index: 11;
   flex: 1;
   display: flex;
   align-items: flex-end;
   padding: 0 var(--pad-x);
   margin-top: var(--nav-h);
+  pointer-events: none;
 }
 
 .home-headline {
@@ -302,7 +304,7 @@ nav::before {
 .slider-nav {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 10;
   display: flex;
 }
 
