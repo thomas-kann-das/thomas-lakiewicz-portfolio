@@ -158,11 +158,55 @@ async function loadCMSData() {
       loadProfil(),
       loadLeistungen(),
       loadImpressum(),
-      loadEinstellungen()
+      loadEinstellungen(),
+      loadTypografie()
     ]);
   } catch(e) {
     console.log('CMS-Daten nicht gefunden, statische Inhalte werden verwendet.');
   }
+}
+
+async function loadTypografie() {
+  const res = await fetch('/_data/typografie.json');
+  if (!res.ok) return;
+  const t = await res.json();
+
+  // CSS Custom Properties auf :root setzen
+  const root = document.documentElement;
+
+  // Headline
+  if (t.home_size)           root.style.setProperty('--typo-home-size',           t.home_size + 'px');
+  if (t.home_weight)         root.style.setProperty('--typo-home-weight',          t.home_weight);
+  if (t.home_align)          root.style.setProperty('--typo-home-align',           t.home_align);
+  if (t.home_line_height)    root.style.setProperty('--typo-home-line-height',     t.home_line_height);
+  if (t.home_letter_spacing !== undefined) root.style.setProperty('--typo-home-letter-spacing', t.home_letter_spacing + 'em');
+
+  // Navigation
+  if (t.nav_size)            root.style.setProperty('--typo-nav-size',             t.nav_size + 'px');
+  if (t.nav_weight)          root.style.setProperty('--typo-nav-weight',           t.nav_weight);
+  if (t.nav_link_size)       root.style.setProperty('--typo-nav-link-size',        t.nav_link_size + 'px');
+
+  // Profil-Text
+  if (t.profil_text_size)    root.style.setProperty('--typo-profil-size',          t.profil_text_size + 'px');
+  if (t.profil_text_weight)  root.style.setProperty('--typo-profil-weight',        t.profil_text_weight);
+  if (t.profil_text_align)   root.style.setProperty('--typo-profil-align',         t.profil_text_align);
+  if (t.profil_text_line_height) root.style.setProperty('--typo-profil-line-height', t.profil_text_line_height);
+  if (t.profil_text_letter_spacing !== undefined) root.style.setProperty('--typo-profil-letter-spacing', t.profil_text_letter_spacing + 'em');
+
+  // Statistiken
+  if (t.stats_number_size)   root.style.setProperty('--typo-stats-number-size',   t.stats_number_size + 'px');
+  if (t.stats_number_weight) root.style.setProperty('--typo-stats-number-weight', t.stats_number_weight);
+  if (t.stats_label_size)    root.style.setProperty('--typo-stats-label-size',    t.stats_label_size + 'px');
+
+  // Service-Namen
+  if (t.service_name_size)   root.style.setProperty('--typo-service-name-size',   t.service_name_size + 'px');
+  if (t.service_name_weight) root.style.setProperty('--typo-service-name-weight', t.service_name_weight);
+  if (t.service_name_align)  root.style.setProperty('--typo-service-name-align',  t.service_name_align);
+
+  // Service-Items
+  if (t.service_items_size)        root.style.setProperty('--typo-service-items-size',        t.service_items_size + 'px');
+  if (t.service_items_weight)      root.style.setProperty('--typo-service-items-weight',      t.service_items_weight);
+  if (t.service_items_line_height) root.style.setProperty('--typo-service-items-line-height', t.service_items_line_height);
 }
 
 async function loadHome() {

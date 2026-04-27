@@ -1,0 +1,29 @@
+{
+  "home_size": 96,
+  "home_weight": "350",
+  "home_align": "left",
+  "home_line_height": 1.0,
+  "home_letter_spacing": -0.03,
+
+  "nav_size": 22,
+  "nav_weight": "350",
+  "nav_link_size": 16,
+
+  "profil_text_size": 17,
+  "profil_text_weight": "300",
+  "profil_text_align": "left",
+  "profil_text_line_height": 1.8,
+  "profil_text_letter_spacing": 0.04,
+
+  "stats_number_size": 96,
+  "stats_number_weight": "350",
+  "stats_label_size": 22,
+
+  "service_name_size": 80,
+  "service_name_weight": "350",
+  "service_name_align": "right",
+
+  "service_items_size": 18,
+  "service_items_weight": "300",
+  "service_items_line_height": 1.7
+}

@@ -35,8 +35,34 @@
   --font-light:    300;
   --font-retina:   350;
   --font-medium:   350;
-  --tracking-body: 0.04em;
-  --tracking-nav:  0.04em;
+    /* ── Typografie Custom Properties (werden per JS überschrieben) ── */
+  --typo-home-size:                 96px;
+  --typo-home-weight:               350;
+  --typo-home-align:                left;
+  --typo-home-line-height:          1.0;
+  --typo-home-letter-spacing:       -0.03em;
+
+  --typo-nav-size:                  22px;
+  --typo-nav-weight:                350;
+  --typo-nav-link-size:             16px;
+
+  --typo-profil-size:               17px;
+  --typo-profil-weight:             300;
+  --typo-profil-align:              left;
+  --typo-profil-line-height:        1.8;
+  --typo-profil-letter-spacing:     0.04em;
+
+  --typo-stats-number-size:         96px;
+  --typo-stats-number-weight:       350;
+  --typo-stats-label-size:          22px;
+
+  --typo-service-name-size:         80px;
+  --typo-service-name-weight:       350;
+  --typo-service-name-align:        right;
+
+  --typo-service-items-size:        18px;
+  --typo-service-items-weight:      300;
+  --typo-service-items-line-height: 1.7;
 }
 
 
@@ -104,8 +130,8 @@ nav::before {
 }
 
 .nav-logo-name {
-  font-size: 22px;
-  font-weight: var(--font-retina);
+  font-size: var(--typo-nav-size);
+  font-weight: var(--typo-nav-weight);
   letter-spacing: 0.02em;
   white-space: nowrap;
 }
@@ -123,7 +149,7 @@ nav::before {
   align-items: center;
   justify-content: center;
   padding: 6px 16px;
-  font-size: 16px;
+  font-size: var(--typo-nav-link-size);
   font-weight: var(--font-light);
   letter-spacing: var(--tracking-nav);
   color: var(--warm);
@@ -264,10 +290,11 @@ nav::before {
 }
 
 .home-headline {
-  font-size: clamp(52px, 7vw, 96px);
-  font-weight: var(--font-retina);
-  line-height: 1.0;
-  letter-spacing: -0.03em;
+  font-size: clamp(32px, calc(var(--typo-home-size) * 0.08vw + 10px), var(--typo-home-size));
+  font-weight: var(--typo-home-weight);
+  line-height: var(--typo-home-line-height);
+  letter-spacing: var(--typo-home-letter-spacing);
+  text-align: var(--typo-home-align);
   text-transform: lowercase;
   opacity: 0;
   transform: translateY(30px);
@@ -396,10 +423,11 @@ nav::before {
 .profile-text.visible { opacity: 1; transform: translateY(0); }
 
 .profile-text p {
-  font-size: 17px;
-  font-weight: var(--font-light);
-  line-height: 1.8;
-  letter-spacing: var(--tracking-body);
+  font-size: var(--typo-profil-size);
+  font-weight: var(--typo-profil-weight);
+  line-height: var(--typo-profil-line-height);
+  letter-spacing: var(--typo-profil-letter-spacing);
+  text-align: var(--typo-profil-align);
   color: var(--warm);
   margin-bottom: 24px;
 }
@@ -432,8 +460,8 @@ nav::before {
 .stat:last-child { margin-bottom: 0; }
 
 .stat-number {
-  font-size: clamp(64px, 7vw, 96px);
-  font-weight: var(--font-retina);
+  font-size: var(--typo-stats-number-size);
+  font-weight: var(--typo-stats-number-weight);
   line-height: 1.0;
   letter-spacing: -0.03em;
   text-align: right;
@@ -443,7 +471,7 @@ nav::before {
 .stat:hover .stat-number { letter-spacing: -0.01em; }
 
 .stat-label {
-  font-size: 22px;
+  font-size: var(--typo-stats-label-size);
   font-weight: var(--font-medium);
   line-height: 1.5;
 }
@@ -506,12 +534,12 @@ nav::before {
 .service-row:last-child { margin-bottom: 0; }
 
 .service-name {
-  font-size: clamp(52px, 5.5vw, 80px);
-  font-weight: var(--font-retina);
+  font-size: var(--typo-service-name-size);
+  font-weight: var(--typo-service-name-weight);
   line-height: 1.05;
   letter-spacing: -0.03em;
   text-transform: lowercase;
-  text-align: right;
+  text-align: var(--typo-service-name-align);
   transition: opacity 0.3s ease;
 }
 
@@ -526,9 +554,9 @@ nav::before {
 }
 
 .service-items li {
-  font-size: 18px;
-  font-weight: var(--font-light);
-  line-height: 1.7;
+  font-size: var(--typo-service-items-size);
+  font-weight: var(--typo-service-items-weight);
+  line-height: var(--typo-service-items-line-height);
   letter-spacing: 0.01em;
 }
 
