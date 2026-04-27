@@ -290,7 +290,7 @@ nav::before {
 }
 
 .home-headline {
-  font-size: clamp(32px, calc(var(--typo-home-size) * 0.08vw + 10px), var(--typo-home-size));
+  font-size: var(--typo-home-size);
   font-weight: var(--typo-home-weight);
   line-height: var(--typo-home-line-height);
   letter-spacing: var(--typo-home-letter-spacing);
@@ -769,7 +769,7 @@ nav::before {
   .hamburger-btn { display: flex; }
 
   /* Home Seite */
-  .home-headline { font-size: clamp(40px, 10vw, 64px); }
+  .home-headline { font-size: clamp(40px, 10vw, var(--typo-home-size)); }
 
   /* Profil */
   .profile-inner   { grid-template-columns: 1fr; gap: 48px; padding: 80px var(--pad-x) 40px; }
