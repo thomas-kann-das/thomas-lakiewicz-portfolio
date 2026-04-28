@@ -22,15 +22,13 @@
       <a class="nav-link" href="#" onclick="showPage('services'); return false;" data-page="services">Leistungen</a>
       <a class="nav-link" href="mailto:hello@thomaslakiewicz.de" data-page="">E-Mail</a>
     </div>
-
-    <!-- Hamburger Button (nur mobil) -->
     <button class="hamburger-btn" id="hamburger-btn" aria-label="Menü öffnen" onclick="toggleMobileNav()">
       <span></span>
       <span></span>
     </button>
   </nav>
 
-  <!-- Mobile Nav Overlay -->
+  <!-- MOBILE NAV OVERLAY -->
   <div class="mobile-nav" id="mobile-nav">
     <div class="mobile-nav-main">
       <a class="mobile-nav-link" href="#" onclick="showPage('profile'); toggleMobileNav(); return false;">Profil</a>
@@ -97,7 +95,7 @@
       </div>
     </div>
 
-    <!-- Cursor-Navigation (Desktop): linke/rechte Hälfte klickbar -->
+    <!-- Cursor-Navigation Desktop -->
     <div class="slider-nav" id="slider-nav">
       <div class="slider-nav-prev" id="slider-nav-prev"></div>
       <div class="slider-nav-next" id="slider-nav-next"></div>
@@ -111,40 +109,13 @@
         communication<br>design.
       </h1>
     </div>
-
-    <div class="bottom-bar">
-      <div class="bottom-links">
-        <a class="bottom-link" href="#" onclick="showPage('impressum'); return false;">Impressum</a>
-        <a class="bottom-link" href="https://linkedin.com" target="_blank">LinkedIn</a>
-        <a class="bottom-link" href="https://instagram.com" target="_blank">Instagram</a>
-      </div>
-      <div class="home-pager">
-        <div class="pager-count">
-          <div class="timer-ring">
-            <svg viewBox="0 0 26 26" width="26" height="26">
-              <circle class="timer-track" cx="13" cy="13" r="11"/>
-              <circle class="timer-fill" id="timer-fill" cx="13" cy="13" r="11"/>
-            </svg>
-          </div>
-          <span id="pager-label">01 / 10</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Custom Cursor für Slider -->
-  <div class="slider-cursor" id="slider-cursor">
-    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="24" cy="24" r="23" fill="rgba(36,33,33,0.5)" stroke="rgba(236,236,229,0.3)" stroke-width="1"/>
-      <path id="cursor-arrow" d="M20 16l8 8-8 8" stroke="#ECECE5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
   </div>
 
   <!-- PROFIL -->
   <div class="page" id="page-profile">
     <div class="profile-inner">
       <div class="profile-text" id="profile-text">
-        <p>hi &#8288;&#8202;&#8202;&#8202; thank you for visiting my page.</p>
+        <p>hi — thank you for visiting my page.</p>
         <p>If you like to know, here is a little bit about me: i am a communication designer based near Hamburg.</p>
         <p>I've been visualizing digital and print communication for more than 15 years now — and I still get excited every time a new project starts. I love good typography, clean layouts and excited by the unexpected.</p>
         <p>I've worked in both classic advertising and on the corporate side, so I've seen brands from pretty much every angle. What I love most is helping companies find and shape their identity — turning ideas into something real and meaningful.</p>
@@ -164,13 +135,6 @@
           <div class="stat-number">+30</div>
           <div class="stat-label">different industries i worked for</div>
         </div>
-      </div>
-    </div>
-    <div class="bottom-bar">
-      <div class="bottom-links">
-        <a class="bottom-link" href="#" onclick="showPage('impressum'); return false;">Impressum</a>
-        <a class="bottom-link" href="https://linkedin.com" target="_blank">LinkedIn</a>
-        <a class="bottom-link" href="https://instagram.com" target="_blank">Instagram</a>
       </div>
     </div>
   </div>
@@ -215,13 +179,6 @@
         </div>
       </div>
     </div>
-    <div class="bottom-bar">
-      <div class="bottom-links">
-        <a class="bottom-link" href="#" onclick="showPage('impressum'); return false;">Impressum</a>
-        <a class="bottom-link" href="https://linkedin.com" target="_blank">LinkedIn</a>
-        <a class="bottom-link" href="https://instagram.com" target="_blank">Instagram</a>
-      </div>
-    </div>
   </div>
 
   <!-- IMPRESSUM -->
@@ -255,7 +212,7 @@
       </div>
       <div class="impressum-section" id="imp-5">
         <h2>Haftung f&uuml;r Links</h2>
-        <p>Diese Website enth&auml;lt Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann ich f&uuml;r diese fremden Inhalte auch keine Gew&auml;hr &uuml;bernehmen. F&uuml;r die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf m&ouml;gliche Rechtsverst&ouml;&szlig;e &uuml;berpr&uuml;ft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.</p>
+        <p>Diese Website enth&auml;lt Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann ich f&uuml;r diese fremden Inhalte auch keine Gew&auml;hr &uuml;bernehmen. F&uuml;r die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
       </div>
       <div class="impressum-section" id="imp-6">
         <h2>Urheberrecht</h2>
@@ -266,11 +223,32 @@
         <p>Die Nutzung dieser Website ist in der Regel ohne Angabe personenbezogener Daten m&ouml;glich. Soweit auf dieser Website personenbezogene Daten erhoben werden, erfolgt dies stets auf freiwilliger Basis. Diese Daten werden ohne ausdr&uuml;ckliche Zustimmung nicht an Dritte weitergegeben.</p>
       </div>
     </div>
-    <div class="bottom-bar">
-      <div class="bottom-links">
-        <a class="bottom-link" href="#" onclick="showPage('impressum'); return false;">Impressum</a>
-        <a class="bottom-link" href="https://linkedin.com" target="_blank">LinkedIn</a>
-        <a class="bottom-link" href="https://instagram.com" target="_blank">Instagram</a>
+  </div>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="slider-cursor" id="slider-cursor">
+    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="24" r="23" fill="rgba(36,33,33,0.5)" stroke="rgba(236,236,229,0.3)" stroke-width="1"/>
+      <path id="cursor-arrow" d="M20 16l8 8-8 8" stroke="#ECECE5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <!-- GLOBALE BOTTOM BAR — fixiert, immer sichtbar -->
+  <div class="global-bottom-bar" id="global-bottom-bar">
+    <div class="bottom-links">
+      <a class="bottom-link" href="#" onclick="showPage('impressum'); return false;">Impressum</a>
+      <a class="bottom-link" id="bottom-linkedin" href="https://linkedin.com" target="_blank">LinkedIn</a>
+      <a class="bottom-link" id="bottom-instagram" href="https://instagram.com" target="_blank">Instagram</a>
+    </div>
+    <div class="home-pager" id="home-pager">
+      <div class="pager-count">
+        <div class="timer-ring">
+          <svg viewBox="0 0 26 26" width="26" height="26">
+            <circle class="timer-track" cx="13" cy="13" r="11"/>
+            <circle class="timer-fill" id="timer-fill" cx="13" cy="13" r="11"/>
+          </svg>
+        </div>
+        <span id="pager-label">01 / 10</span>
       </div>
     </div>
   </div>

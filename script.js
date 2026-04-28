@@ -540,14 +540,21 @@ function showPage(id) {
     link.classList.toggle('active', link.dataset.page === id);
   });
 
+  // Pager nur auf Startseite zeigen
+  const pager = document.getElementById('home-pager');
+  if (pager) pager.classList.toggle('visible', id === 'home');
+
   setTimeout(() => {
     animatePageIn(id);
 
     if (id === 'home') {
+      document.getElementById('home-pager').style.display = 'flex';
       animateHeadline();
       clearTimeout(autoTimer);
       startTimerAnim();
       autoTimer = setTimeout(() => goTo(current + 1), DURATION);
+    } else {
+      document.getElementById('home-pager').style.display = 'none';
     }
 
     if (id === 'profile') {
@@ -587,7 +594,9 @@ function showPage(id) {
 
 window.addEventListener('DOMContentLoaded', async () => {
   await loadCMSData();
-  // Kurze Pause damit Schriften geladen sind
+  // Pager initial anzeigen (Startseite)
+  const pager = document.getElementById('home-pager');
+  if (pager) pager.classList.add('visible');
   setTimeout(() => {
     animateHeadline();
   }, 300);
