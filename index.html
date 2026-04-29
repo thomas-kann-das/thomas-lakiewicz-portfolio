@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
   <title>thomas lakiewicz</title>
   <link rel="icon" type="image/svg+xml" href="symbol-tl.svg" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body role="application">
 
   <!-- NAVIGATION -->
   <nav>
@@ -44,71 +46,70 @@
 
   <!-- HOME -->
   <div class="page active entering" id="page-home">
-    <!--
-      SLIDER — MEDIEN VERWALTEN
-      Bilder/Videos in media/ legen, src="..." anpassen.
-      Slide hinzufügen  → Block kopieren & einfügen
-      Slide entfernen   → Block löschen
-      Reihenfolge       → Blöcke verschieben
-      Label (unten rechts) → data-label="..." ändern
-    -->
-    <div class="slider" id="slider">
-      <!-- SLIDE 01 · Bild -->
-      <div class="slide active" data-label="branding">
-        <img src="media/slide-01.jpg" alt="slide 01" />
-      </div>
-      <!-- SLIDE 02 · Bild -->
-      <div class="slide" data-label="architecture">
-        <img src="media/slide-02.jpg" alt="slide 02" />
-      </div>
-      <!-- SLIDE 03 · Bild -->
-      <div class="slide" data-label="editorial">
-        <img src="media/slide-03.jpg" alt="slide 03" />
-      </div>
-      <!-- SLIDE 04 · Bild -->
-      <div class="slide" data-label="identity">
-        <img src="media/slide-04.jpg" alt="slide 04" />
-      </div>
-      <!-- SLIDE 05 · Bild -->
-      <div class="slide" data-label="portrait">
-        <img src="media/slide-05.jpg" alt="slide 05" />
-      </div>
-      <!-- SLIDE 06 · Video -->
-      <div class="slide" data-label="motion">
-        <video src="media/slide-06.mp4" muted loop playsinline></video>
-      </div>
-      <!-- SLIDE 07 · Bild -->
-      <div class="slide" data-label="workspace">
-        <img src="media/slide-07.jpg" alt="slide 07" />
-      </div>
-      <!-- SLIDE 08 · Bild -->
-      <div class="slide" data-label="colour">
-        <img src="media/slide-08.jpg" alt="slide 08" />
-      </div>
-      <!-- SLIDE 09 · Video -->
-      <div class="slide" data-label="film">
-        <video src="media/slide-09.mp4" muted loop playsinline></video>
-      </div>
-      <!-- SLIDE 10 · Bild -->
-      <div class="slide" data-label="texture">
-        <img src="media/slide-10.jpg" alt="slide 10" />
-      </div>
-    </div>
 
-    <!-- Cursor-Navigation Desktop -->
-    <div class="slider-nav" id="slider-nav">
-      <div class="slider-nav-prev" id="slider-nav-prev"></div>
-      <div class="slider-nav-next" id="slider-nav-next"></div>
-    </div>
+    <!-- 4:3 Rahmen -->
+    <div class="slider-frame">
 
-    <div class="slider-overlay"></div>
-    <div class="slide-label" id="slide-label"></div>
+      <div class="slider" id="slider">
+        <!-- SLIDE 01 · Bild -->
+        <div class="slide active" data-label="branding">
+          <img src="media/slide-01.jpg" alt="slide 01" />
+        </div>
+        <!-- SLIDE 02 · Bild -->
+        <div class="slide" data-label="architecture">
+          <img src="media/slide-02.jpg" alt="slide 02" />
+        </div>
+        <!-- SLIDE 03 · Bild -->
+        <div class="slide" data-label="editorial">
+          <img src="media/slide-03.jpg" alt="slide 03" />
+        </div>
+        <!-- SLIDE 04 · Bild -->
+        <div class="slide" data-label="identity">
+          <img src="media/slide-04.jpg" alt="slide 04" />
+        </div>
+        <!-- SLIDE 05 · Bild -->
+        <div class="slide" data-label="portrait">
+          <img src="media/slide-05.jpg" alt="slide 05" />
+        </div>
+        <!-- SLIDE 06 · Video -->
+        <div class="slide" data-label="motion">
+          <video src="media/slide-06.mp4" muted loop playsinline></video>
+        </div>
+        <!-- SLIDE 07 · Bild -->
+        <div class="slide" data-label="workspace">
+          <img src="media/slide-07.jpg" alt="slide 07" />
+        </div>
+        <!-- SLIDE 08 · Bild -->
+        <div class="slide" data-label="colour">
+          <img src="media/slide-08.jpg" alt="slide 08" />
+        </div>
+        <!-- SLIDE 09 · Video -->
+        <div class="slide" data-label="film">
+          <video src="media/slide-09.mp4" muted loop playsinline></video>
+        </div>
+        <!-- SLIDE 10 · Bild -->
+        <div class="slide" data-label="texture">
+          <img src="media/slide-10.jpg" alt="slide 10" />
+        </div>
+      </div>
 
-    <div class="home-content">
-      <h1 class="home-headline" id="home-headline">
-        communication<br>design.
-      </h1>
-    </div>
+      <!-- Cursor-Navigation Desktop -->
+      <div class="slider-nav" id="slider-nav">
+        <div class="slider-nav-prev" id="slider-nav-prev"></div>
+        <div class="slider-nav-next" id="slider-nav-next"></div>
+      </div>
+
+      <div class="slider-overlay"></div>
+      <div class="slide-label" id="slide-label"></div>
+
+      <div class="home-content">
+        <h1 class="home-headline" id="home-headline">
+          communication<br>design.
+        </h1>
+      </div>
+
+    </div><!-- /slider-frame -->
+
   </div>
 
   <!-- PROFIL -->
