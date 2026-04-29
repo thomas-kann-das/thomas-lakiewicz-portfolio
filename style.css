@@ -264,23 +264,17 @@ body.page-impressum .global-bottom-bar {
   position: relative;
   overflow: hidden;
   padding-top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: var(--black);
 }
 
-/* 4:3 Container — zentriert, begrenzte Breite */
+/* Frame füllt den ganzen Viewport */
 .slider-frame {
-  position: relative;
-  width: 100%;
-  /* Maximalbreite so dass 4:3 nicht den ganzen Screen füllt */
-  max-width: min(100vw, calc((100vh - 72px) * 4 / 3));
-  /* Höhe: voller Viewport minus Bottom-Bar */
-  height: calc(100vh - 72px);
-  margin-top: var(--nav-h);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  flex-shrink: 0;
 }
 
 .slider {
@@ -294,23 +288,35 @@ body.page-impressum .global-bottom-bar {
   inset: 0;
   opacity: 0;
   transition: opacity 1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .slide.active { opacity: 1; }
 
+/* Bild: immer 4:3, cover innerhalb des Viewports */
 .slide img,
 .slide video {
-  width: 100%;
-  height: 100%;
-  /* Cover: füllt den 4:3 Rahmen, Ränder laufen raus */
+  /* Mindestens so breit wie der Container */
+  min-width: 100%;
+  /* Mindestens so hoch wie der Container */
+  min-height: 100%;
+  /* 4:3 Seitenverhältnis erzwingen:
+     Wenn Bildschirm breiter als 4:3 → Bild oben/unten beschneiden
+     Wenn Bildschirm schmaler als 4:3 → Bild links/rechts beschneiden */
+  width: max(100%, calc(100vh * 4 / 3));
+  height: max(100%, calc(100vw * 3 / 4));
   object-fit: cover;
   object-position: center center;
   display: block;
+  flex-shrink: 0;
 }
 
 .slide-label {
   position: absolute;
-  bottom: 16px;
+  bottom: 88px;
   right: var(--pad-x);
   font-size: 11px;
   font-weight: 300;
@@ -333,7 +339,7 @@ body.page-impressum .global-bottom-bar {
 
 .home-content {
   position: absolute;
-  bottom: 72px;
+  bottom: 88px;
   left: 0;
   right: 0;
   z-index: 11;
@@ -341,7 +347,6 @@ body.page-impressum .global-bottom-bar {
   pointer-events: none;
 }
 
-/* Slider-Nav liegt über dem Frame */
 .slider-nav {
   position: absolute;
   inset: 0;
