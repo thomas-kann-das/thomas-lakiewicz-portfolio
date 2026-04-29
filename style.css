@@ -78,6 +78,11 @@ html {
   scroll-behavior: smooth;
 }
 
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   background:   var(--black);
   color:        var(--warm);
@@ -181,28 +186,57 @@ nav::before {
 ══════════════════════════════════════════════════ */
 
 .page {
-  min-height: 100vh;
+  position: fixed;
+  inset: 0;
   display: none;
   flex-direction: column;
   padding-top: var(--nav-h);
-  animation: none;
+  padding-bottom: 72px; /* Platz für globale Bottom-Bar */
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .page.active   { display: flex; }
 .page.entering { animation: fadeUp 0.5s ease forwards; }
 
+/* Home braucht kein padding-bottom da Slider fullscreen */
+#page-home {
+  padding-bottom: 0;
+}
 
-/* ── Bottom Bar ───────────────────────────────────── */
+
+/* ── Bottom Bar — global fixiert ─────────────────── */
 
 .bottom-bar {
+  display: none; /* Einzelne Bottom-Bars in Seiten ausblenden */
+}
+
+.global-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--pad-x);
-  height: 96px;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 11;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  z-index: 50;
+  background: linear-gradient(to top, rgba(36,33,33,0.95) 0%, rgba(36,33,33,0.7) 60%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Auf nicht-Home-Seiten: solider Hintergrund */
+body.page-profile .global-bottom-bar,
+body.page-services .global-bottom-bar,
+body.page-impressum .global-bottom-bar {
+  background: rgba(36,33,33,0.98);
+  border-top: 1px solid rgba(236,236,229,0.08);
+}
+
+.global-bottom-bar > * {
+  pointer-events: all; /* Links bleiben klickbar */
 }
 
 .bottom-links {
@@ -306,13 +340,17 @@ nav::before {
 /* ── Pager ────────────────────────────────────────── */
 
 .home-pager {
-  display: flex;
+  display: none; /* wird per JS ein/ausgeblendet je nach aktiver Seite */
   align-items: center;
   gap: 12px;
   font-size: 15px;
   letter-spacing: var(--tracking-nav);
   color: rgba(236,236,229,0.6);
   font-variant-numeric: tabular-nums;
+}
+
+.home-pager.visible {
+  display: flex;
 }
 
 .pager-count {
@@ -792,11 +830,11 @@ nav::before {
   .service-items li { font-size: 15px; }
 
   /* Bottom bar — über Safari URL-Leiste */
-  .bottom-bar {
+  .global-bottom-bar {
     padding: 0 var(--pad-x);
     padding-bottom: env(safe-area-inset-bottom, 16px);
     height: auto;
-    min-height: 64px;
+    min-height: 56px;
   }
   .bottom-links { gap: 20px; }
   .bottom-link  { font-size: 12px; }

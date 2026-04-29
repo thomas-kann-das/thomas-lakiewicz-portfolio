@@ -536,6 +536,8 @@ function showPage(id) {
     target.classList.add('active');
   });
 
+  document.body.className = 'page-' + id;
+
   document.querySelectorAll('.nav-link').forEach(link => {
     link.classList.toggle('active', link.dataset.page === id);
   });
