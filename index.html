@@ -34,6 +34,12 @@
 
   <!-- MOBILE NAV OVERLAY -->
   <div class="mobile-nav" id="mobile-nav">
+    <button class="mobile-nav-close" onclick="toggleMobileNav()" aria-label="Menü schließen">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
     <div class="mobile-nav-main">
       <a class="mobile-nav-link" href="#" onclick="showPage('profile'); toggleMobileNav(); return false;">Profile</a>
       <a class="mobile-nav-link" href="#" onclick="showPage('work'); toggleMobileNav(); return false;">Work</a>
@@ -142,6 +148,7 @@
   <!-- LEISTUNGEN -->
   <div class="page" id="page-services">
     <h2 class="page-title">services.</h2>
+    <p class="page-subtitle">From the first question to the final pixel — I cover the full distance.</p>
     <div class="services-inner">
       <div class="services-intro" id="services-intro">
         <p>Hier steht etwas zu meiner Arbeitsweise. Ich arbeite eng mit meinen Kunden zusammen, um Ideen in etwas Bedeutungsvolles zu verwandeln.</p>
@@ -185,6 +192,7 @@
   <!-- WORK -->
   <div class="page" id="page-work">
     <h2 class="page-title">selected work.</h2>
+    <p class="page-subtitle">Five projects that needed a clear idea before they needed a logo.</p>
     <div class="work-inner">
 
       <div class="work-item" id="work-1">

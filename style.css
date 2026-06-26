@@ -122,7 +122,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--pad-x);
-  z-index: 100;
+  z-index: 200;
 }
 
 nav::before {
@@ -248,8 +248,10 @@ nav::before {
 /* Auf nicht-Home-Seiten: solider Hintergrund */
 body.page-profile .global-bottom-bar,
 body.page-services .global-bottom-bar,
+body.page-work .global-bottom-bar,
+body.page-cv .global-bottom-bar,
 body.page-impressum .global-bottom-bar {
-  background: rgba(36,33,33,0.98);
+  background: rgba(36,33,33,1);
   border-top: 1px solid rgba(236,236,229,0.08);
 }
 
@@ -488,11 +490,28 @@ body.page-impressum .global-bottom-bar {
   text-transform: lowercase;
   color: rgba(236,236,229,0.45);
   /* Top padding carries the space from nav to content — same on every page */
-  padding: 48px var(--pad-x) 0;
-  margin-bottom: 48px;
+  padding: 72px var(--pad-x) 0;
+  margin-bottom: 56px;
   display: block;
   flex-shrink: 0;
   line-height: 1;
+}
+
+
+/* ══════════════════════════════════════════════════
+   PAGE SUBTITLE
+══════════════════════════════════════════════════ */
+
+.page-subtitle {
+  font-size: clamp(15px, 1.4vw, 18px);
+  font-weight: var(--font-light);
+  line-height: 1.65;
+  color: rgba(236,236,229,0.5);
+  padding: 0 var(--pad-x);
+  margin-top: -28px;         /* näher an page-title */
+  margin-bottom: 56px;
+  flex-shrink: 0;
+  max-width: 600px;
 }
 
 
@@ -509,7 +528,7 @@ body.page-impressum .global-bottom-bar {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 120px;
-  padding: 0 var(--pad-x) 60px;
+  padding: 0 var(--pad-x) 120px;
 }
 
 .profile-text {
@@ -584,7 +603,7 @@ body.page-impressum .global-bottom-bar {
   display: grid;
   grid-template-columns: 1fr 3fr;
   gap: 80px;
-  padding: 0 var(--pad-x) 60px;
+  padding: 0 var(--pad-x) 120px;
 }
 
 .services-intro {
@@ -614,9 +633,9 @@ body.page-impressum .global-bottom-bar {
   grid-template-columns: 1fr 2fr;
   gap: 40px;
   align-items: start;
-  padding-top: 40px;
+  padding-top: 48px;
   border-top: 1px solid rgba(236,236,229,0.3);
-  margin-bottom: 72px;
+  margin-bottom: 88px;
 }
 
 .service-row:last-child { margin-bottom: 0; }
@@ -655,19 +674,19 @@ body.page-impressum .global-bottom-bar {
 
 @media (max-width: 1024px) and (min-width: 769px) {
   .page-title {
-    padding-top: 40px;
-    margin-bottom: 40px;
+    padding-top: 56px;
+    margin-bottom: 48px;
   }
 
   .services-inner {
     grid-template-columns: 1fr;
     gap: 48px;
-    padding: 0 var(--pad-x) 60px;
+    padding: 0 var(--pad-x) 100px;
   }
 
   .service-row {
     grid-template-columns: 1fr 2fr;
-    margin-bottom: 56px;
+    margin-bottom: 64px;
   }
 
   .service-name {
@@ -677,13 +696,13 @@ body.page-impressum .global-bottom-bar {
   .profile-inner {
     grid-template-columns: 1fr;
     gap: 64px;
-    padding: 0 var(--pad-x) 60px;
+    padding: 0 var(--pad-x) 100px;
   }
 
   .cv-inner {
     grid-template-columns: 1fr;
     gap: 56px;
-    padding: 0 var(--pad-x) 60px;
+    padding: 0 var(--pad-x) 100px;
   }
 
   .work-item {
@@ -707,15 +726,11 @@ body.page-impressum .global-bottom-bar {
 #page-work { padding-bottom: 0; }
 #page-cv   { padding-bottom: 0; }
 
-body.page-work .global-bottom-bar,
-body.page-cv   .global-bottom-bar {
-  background: rgba(36,33,33,0.98);
-  border-top: 1px solid rgba(236,236,229,0.08);
-}
+/* bottom-bar solid background handled in shared rule above */
 
 .work-inner {
   flex: 1;
-  padding: 0 var(--pad-x) 80px;
+  padding: 0 var(--pad-x) 120px;
 }
 
 .work-item {
@@ -723,9 +738,9 @@ body.page-cv   .global-bottom-bar {
   grid-template-columns: 1fr 2fr;
   gap: 60px;
   align-items: start;
-  padding-top: 40px;
+  padding-top: 48px;
   border-top: 1px solid rgba(236,236,229,0.3);
-  margin-bottom: 80px;
+  margin-bottom: 96px;
   opacity: 0;
 }
 
@@ -792,7 +807,7 @@ body.page-cv   .global-bottom-bar {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 120px;
-  padding: 0 var(--pad-x) 80px;
+  padding: 0 var(--pad-x) 120px;
 }
 
 .cv-timeline {
@@ -801,9 +816,9 @@ body.page-cv   .global-bottom-bar {
 }
 
 .cv-entry {
-  padding-top: 40px;
+  padding-top: 48px;
   border-top: 1px solid rgba(236,236,229,0.3);
-  margin-bottom: 60px;
+  margin-bottom: 64px;
   opacity: 0;
 }
 
@@ -1103,6 +1118,23 @@ body.page-cv   .global-bottom-bar {
   pointer-events: all;
 }
 
+.mobile-nav-close {
+  position: absolute;
+  top: 28px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: rgba(236,236,229,0.7);
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.mobile-nav-close:hover { color: var(--warm); }
+
 .mobile-nav-main {
   display: flex;
   flex-direction: column;
@@ -1163,20 +1195,32 @@ body.page-cv   .global-bottom-bar {
   .home-headline { font-size: clamp(40px, 10vw, var(--typo-home-size)); }
 
   /* Titles */
-  .page-title { padding-top: 32px; margin-bottom: 32px; }
+  .page-title { padding-top: 48px; margin-bottom: 40px; }
+  .page-subtitle { font-size: 14px; margin-top: -20px; margin-bottom: 40px; }
 
   /* Profil */
-  .profile-inner   { grid-template-columns: 1fr; gap: 56px; padding: 0 var(--pad-x) 40px; }
-  .stat            { grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 48px; }
+  .profile-inner   { grid-template-columns: 1fr; gap: 56px; padding: 0 var(--pad-x) 96px; }
+  .profile-text p  { margin-bottom: 28px; }
+  .stat            { grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 56px; padding-top: 32px; }
   .stat-number     { font-size: clamp(48px, 12vw, 80px); }
   .stat-label      { font-size: var(--size-s); }
 
   /* Leistungen */
-  .services-inner  { grid-template-columns: 1fr; gap: 32px; padding: 0 var(--pad-x) 40px; }
-  .services-intro  { display: none; }
-  .service-row     { grid-template-columns: 1fr; gap: 12px; margin-bottom: 40px; }
+  .services-inner  { grid-template-columns: 1fr; gap: 40px; padding: 0 var(--pad-x) 96px; }
+  .services-intro  { opacity: 1; margin-bottom: 8px; }
+  .services-intro p { font-size: 15px; line-height: 1.75; margin-bottom: 20px; }
+  .service-row     { grid-template-columns: 1fr; gap: 16px; margin-bottom: 52px; padding-top: 32px; }
   .service-name    { text-align: left; font-size: clamp(40px, 10vw, 56px); }
   .service-items li { font-size: var(--size-s); }
+
+  /* Work */
+  .work-inner { padding: 0 var(--pad-x) 96px; }
+  .work-item  { grid-template-columns: 1fr; gap: 24px; margin-bottom: 64px; padding-top: 32px; }
+  .work-desc  { max-width: 100%; }
+
+  /* CV */
+  .cv-inner   { grid-template-columns: 1fr; gap: 56px; padding: 0 var(--pad-x) 96px; }
+  .cv-entry   { margin-bottom: 52px; padding-top: 32px; }
 
   /* Bottom bar — über Safari URL-Leiste */
   .global-bottom-bar {
@@ -1192,5 +1236,5 @@ body.page-cv   .global-bottom-bar {
   .home-pager   { gap: 12px; font-size: 13px; }
 
   /* Impressum */
-  .impressum-inner { padding: 80px var(--pad-x) 40px; }
+  .impressum-inner { padding: 80px var(--pad-x) 96px; }
 }

@@ -663,7 +663,7 @@ function navigateByScroll(dir) {
   scrollDir     = dir;
   scrollBlocked = true;
   showPage(scrollPageOrder[next]);
-  setTimeout(() => { scrollBlocked = false; }, 900);
+  setTimeout(() => { scrollBlocked = false; }, 1400);
 }
 
 // Wheel / Trackpad
