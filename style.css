@@ -478,6 +478,27 @@ body.page-impressum .global-bottom-bar {
 
 
 /* ══════════════════════════════════════════════════
+   PAGE TITLES
+══════════════════════════════════════════════════ */
+
+.page-title {
+  font-size: var(--size-2xs);
+  font-weight: var(--font-retina);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(236,236,229,0.35);
+  margin-bottom: 48px;
+  display: block;
+}
+
+/* Spans full grid width on 2-column pages (profile, cv) */
+.page-title--span {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
+
+/* ══════════════════════════════════════════════════
    PROFIL
 ══════════════════════════════════════════════════ */
 
@@ -564,8 +585,8 @@ body.page-impressum .global-bottom-bar {
 .services-inner {
   flex: 1;
   display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 120px;
+  grid-template-columns: 1fr 3fr;
+  gap: 80px;
   padding: 120px var(--pad-x) 60px;
 }
 
@@ -593,7 +614,7 @@ body.page-impressum .global-bottom-bar {
 
 .service-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 2fr;
   gap: 40px;
   align-items: start;
   padding-top: 40px;
@@ -628,6 +649,45 @@ body.page-impressum .global-bottom-bar {
   font-weight: var(--typo-service-items-weight);
   line-height: var(--typo-service-items-line-height);
   letter-spacing: 0.01em;
+}
+
+
+/* ══════════════════════════════════════════════════
+   MEDIUM BREAKPOINT — Tablet (769–1024px)
+══════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .services-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 100px var(--pad-x) 60px;
+  }
+
+  .service-row {
+    grid-template-columns: 1fr 2fr;
+    margin-bottom: 56px;
+  }
+
+  .service-name {
+    text-align: left;
+  }
+
+  .profile-inner {
+    grid-template-columns: 1fr;
+    gap: 64px;
+    padding: 100px var(--pad-x) 60px;
+  }
+
+  .cv-inner {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding: 100px var(--pad-x) 60px;
+  }
+
+  .work-item {
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+  }
 }
 
 
@@ -1107,9 +1167,9 @@ body.page-cv   .global-bottom-bar {
   .stat-label      { font-size: var(--size-s); }
 
   /* Leistungen */
-  .services-inner  { grid-template-columns: 1fr; gap: 40px; padding: 80px var(--pad-x) 40px; }
+  .services-inner  { grid-template-columns: 1fr; gap: 32px; padding: 80px var(--pad-x) 40px; }
   .services-intro  { display: none; }
-  .service-row     { grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
+  .service-row     { grid-template-columns: 1fr; gap: 12px; margin-bottom: 40px; }
   .service-name    { text-align: left; font-size: clamp(40px, 10vw, 56px); }
   .service-items li { font-size: var(--size-s); }
 

@@ -524,6 +524,15 @@ function animatePageIn(id) {
    SEITENNAVIGATION
 ══════════════════════════════════════════════════ */
 
+const pageTitles = {
+  home:      'thomas lakiewicz',
+  profile:   'Profile — thomas lakiewicz',
+  work:      'Selected Work — thomas lakiewicz',
+  services:  'Services — thomas lakiewicz',
+  cv:        'Experience — thomas lakiewicz',
+  impressum: 'Impressum — thomas lakiewicz',
+};
+
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => {
     p.classList.remove('active', 'entering');
@@ -536,6 +545,7 @@ function showPage(id) {
     target.classList.add('active');
   });
 
+  document.title = pageTitles[id] || 'thomas lakiewicz';
   document.body.className = 'page-' + id;
 
   document.querySelectorAll('.nav-link').forEach(link => {
