@@ -569,6 +569,43 @@ function showPage(id) {
       clearTimeout(autoTimer);
     }
 
+    if (id === 'work') {
+      clearTimeout(autoTimer);
+      const items = document.querySelectorAll('.work-item');
+      items.forEach((item, i) => {
+        setTimeout(() => {
+          item.classList.add('visible');
+          const title = item.querySelector('.work-title');
+          const desc  = item.querySelector('.work-desc');
+          if (title) maskReveal(title, { delay: 0.05, stagger: 0.06 });
+          if (desc)  maskReveal(desc,  { delay: 0.12, stagger: 0.03 });
+        }, i * 60);
+      });
+    }
+
+    if (id === 'cv') {
+      clearTimeout(autoTimer);
+      const entries = document.querySelectorAll('.cv-entry');
+      entries.forEach((entry, i) => {
+        setTimeout(() => {
+          entry.classList.add('visible');
+          const role    = entry.querySelector('.cv-role');
+          const company = entry.querySelector('.cv-company');
+          if (role)    maskReveal(role,    { delay: 0.05, stagger: 0 });
+          if (company) maskReveal(company, { delay: 0.1,  stagger: 0 });
+        }, i * 70);
+      });
+      // Skills + awards fade in
+      const skillsBlock  = document.getElementById('cv-skills');
+      const awardsBlock  = document.getElementById('cv-awards');
+      if (skillsBlock) {
+        gsap.fromTo(skillsBlock, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, delay: animConfig.delay, ease: 'power3.out' });
+      }
+      if (awardsBlock) {
+        gsap.fromTo(awardsBlock, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, delay: animConfig.delay + 0.15, ease: 'power3.out' });
+      }
+    }
+
     if (id === 'impressum') {
       const title = document.getElementById('impressum-title');
       if (title) maskReveal(title, { delay: 0.1 });

@@ -1,68 +1,43 @@
 {
   "intro": [
     {
-      "text": "Hier steht etwas zu meiner Arbeitsweise. Ich arbeite eng mit meinen Kunden zusammen, um Ideen in etwas Bedeutungsvolles zu verwandeln."
+      "text": "I work closely with my clients — from the first strategic conversation to the finished asset. Every project starts with a deep understanding of the brand, its goals and the people behind it."
     },
     {
-      "text": "Jedes Projekt beginnt mit einem tiefen Verständnis der Marke und ihrer Ziele."
+      "text": "Good design is never decoration. It's a precise answer to a real question."
     },
     {
-      "text": "Gemeinsam finden wir die richtige Sprache — visuell und inhaltlich."
+      "text": "Together we find the right language — visually and in content."
     }
   ],
   "bereiche": [
     {
       "name": "strategy",
       "items": [
-        {
-          "item": "branding analysis"
-        },
-        {
-          "item": "brand strategy workshops"
-        },
-        {
-          "item": "brand manuals"
-        },
-        {
-          "item": "ai design enablement trainings"
-        },
-        {
-          "item": "general design enablement trainings"
-        }
-      ]
-    },
-    {
-      "name": "direction",
-      "items": [
-        {
-          "item": "interface design, UI Design"
-        },
-        {
-          "item": "corporate design"
-        },
-        {
-          "item": "motion design"
-        },
-        {
-          "item": "creative support"
-        }
+        { "item": "branding analysis" },
+        { "item": "brand strategy workshops" },
+        { "item": "brand manuals" },
+        { "item": "AI design enablement trainings" },
+        { "item": "general design enablement trainings" }
       ]
     },
     {
       "name": "creation",
       "items": [
-        {
-          "item": "production ready prototypes"
-        },
-        {
-          "item": "ready to use corporate design assets"
-        },
-        {
-          "item": "ai brand picture libraries"
-        },
-        {
-          "item": "creative-/ art-direction for interdisciplinary teams"
-        }
+        { "item": "interface design, UI design" },
+        { "item": "corporate design" },
+        { "item": "logo creation" },
+        { "item": "motion design" },
+        { "item": "creative support" }
+      ]
+    },
+    {
+      "name": "execution",
+      "items": [
+        { "item": "production-ready prototypes" },
+        { "item": "ready-to-use corporate design assets" },
+        { "item": "AI brand picture libraries" },
+        { "item": "creative- / art-direction for interdisciplinary teams" }
       ]
     }
   ]
