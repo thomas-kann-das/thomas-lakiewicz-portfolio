@@ -509,12 +509,17 @@ function animateLeistungen() {
 }
 
 /* ── Seitenübergang ── */
+let scrollDir = 0; // 0 = Nav-Click, 1 = runter, -1 = rauf
+
 function animatePageIn(id) {
   const page = document.getElementById('page-' + id);
   if (!page) return;
 
+  const yFrom = scrollDir !== 0 ? scrollDir * 56 : 20;
+  scrollDir   = 0; // reset nach Verwendung
+
   gsap.fromTo(page,
-    { opacity: 0, y: 20 },
+    { opacity: 0, y: yFrom },
     { opacity: 1, y: 0, duration: getDuration() * 0.8, ease: 'power3.out' }
   );
 }
@@ -541,6 +546,7 @@ function showPage(id) {
 
   const target = document.getElementById('page-' + id);
   target.style.display = 'flex';
+  target.scrollTop = 0;
   requestAnimationFrame(() => {
     target.classList.add('active');
   });
@@ -635,6 +641,78 @@ function showPage(id) {
 
   window.scrollTo(0, 0);
 }
+
+
+/* ══════════════════════════════════════════════════
+   SCROLL-NAVIGATION — seitenweise navigieren
+══════════════════════════════════════════════════ */
+
+const scrollPageOrder = ['home', 'profile', 'work', 'services', 'cv'];
+let   scrollBlocked   = false;
+
+function navigateByScroll(dir) {
+  if (scrollBlocked) return;
+  const currentId = (document.body.className || '').replace('page-', '');
+  const idx       = scrollPageOrder.indexOf(currentId);
+  if (idx === -1) return;
+
+  let next = idx + dir;
+  if (next >= scrollPageOrder.length) next = 0;          // wraps: CV → Home
+  if (next < 0) next = scrollPageOrder.length - 1;       // wraps: Home → CV
+
+  scrollDir     = dir;
+  scrollBlocked = true;
+  showPage(scrollPageOrder[next]);
+  setTimeout(() => { scrollBlocked = false; }, 900);
+}
+
+// Wheel / Trackpad
+document.addEventListener('wheel', (e) => {
+  if (scrollBlocked) return;
+  const id = (document.body.className || '').replace('page-', '');
+  if (!scrollPageOrder.includes(id)) return;
+
+  const page = document.getElementById('page-' + id);
+  if (!page) return;
+
+  const isHome   = id === 'home';
+  const atBottom = page.scrollTop + page.clientHeight >= page.scrollHeight - 4;
+  const atTop    = page.scrollTop <= 4;
+
+  if (e.deltaY > 0 && (atBottom || isHome)) {
+    e.preventDefault();
+    navigateByScroll(1);
+  } else if (e.deltaY < 0 && (atTop || isHome)) {
+    e.preventDefault();
+    navigateByScroll(-1);
+  }
+}, { passive: false });
+
+// Touch (Mobile)
+let _touchStartY   = 0;
+
+document.addEventListener('touchstart', (e) => {
+  _touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+document.addEventListener('touchend', (e) => {
+  if (scrollBlocked) return;
+  const id = (document.body.className || '').replace('page-', '');
+  if (!scrollPageOrder.includes(id)) return;
+
+  const page  = document.getElementById('page-' + id);
+  if (!page) return;
+
+  const delta    = _touchStartY - e.changedTouches[0].clientY;
+  if (Math.abs(delta) < 60) return;   // Mindest-Swipe-Distanz
+
+  const isHome   = id === 'home';
+  const atBottom = page.scrollTop + page.clientHeight >= page.scrollHeight - 4;
+  const atTop    = page.scrollTop <= 4;
+
+  if (delta > 0 && (atBottom || isHome)) navigateByScroll(1);
+  else if (delta < 0 && (atTop || isHome)) navigateByScroll(-1);
+}, { passive: true });
 
 
 /* ══════════════════════════════════════════════════
