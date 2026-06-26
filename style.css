@@ -482,16 +482,17 @@ body.page-impressum .global-bottom-bar {
 ══════════════════════════════════════════════════ */
 
 .page-title {
-  font-size: var(--size-2xs);
+  font-size: clamp(28px, 3vw, 40px);
   font-weight: var(--font-retina);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(236,236,229,0.35);
+  letter-spacing: -0.02em;
+  text-transform: lowercase;
+  color: rgba(236,236,229,0.45);
   /* Top padding carries the space from nav to content — same on every page */
-  padding: 56px var(--pad-x) 0;
-  margin-bottom: 40px;
+  padding: 48px var(--pad-x) 0;
+  margin-bottom: 48px;
   display: block;
   flex-shrink: 0;
+  line-height: 1;
 }
 
 
@@ -537,7 +538,6 @@ body.page-impressum .global-bottom-bar {
 .profile-text p:last-child { margin-bottom: 0; }
 
 .profile-text .highlight { font-weight: var(--font-medium); }
-}
 
 .profile-stats.visible { opacity: 1; transform: translateY(0); }
 
@@ -655,8 +655,8 @@ body.page-impressum .global-bottom-bar {
 
 @media (max-width: 1024px) and (min-width: 769px) {
   .page-title {
-    padding-top: 48px;
-    margin-bottom: 32px;
+    padding-top: 40px;
+    margin-bottom: 40px;
   }
 
   .services-inner {
@@ -1163,7 +1163,7 @@ body.page-cv   .global-bottom-bar {
   .home-headline { font-size: clamp(40px, 10vw, var(--typo-home-size)); }
 
   /* Titles */
-  .page-title { padding-top: 40px; margin-bottom: 32px; }
+  .page-title { padding-top: 32px; margin-bottom: 32px; }
 
   /* Profil */
   .profile-inner   { grid-template-columns: 1fr; gap: 56px; padding: 0 var(--pad-x) 40px; }
