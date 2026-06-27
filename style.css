@@ -528,7 +528,7 @@ body.page-impressum .global-bottom-bar {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 120px;
-  padding: 0 var(--pad-x) 120px;
+  padding: 0 var(--pad-x) 420px;
 }
 
 .profile-text {
@@ -550,7 +550,7 @@ body.page-impressum .global-bottom-bar {
   line-height: var(--typo-profil-line-height);
   letter-spacing: var(--typo-profil-letter-spacing);
   text-align: var(--typo-profil-align);
-  color: var(--warm);
+  color: rgba(255, 255, 255, 0.88);
   margin-bottom: 24px;
 }
 
@@ -603,7 +603,7 @@ body.page-impressum .global-bottom-bar {
   display: grid;
   grid-template-columns: 1fr 3fr;
   gap: 80px;
-  padding: 0 var(--pad-x) 120px;
+  padding: 0 var(--pad-x) 420px;
 }
 
 .services-intro {
@@ -681,7 +681,7 @@ body.page-impressum .global-bottom-bar {
   .services-inner {
     grid-template-columns: 1fr;
     gap: 48px;
-    padding: 0 var(--pad-x) 100px;
+    padding: 0 var(--pad-x) 400px;
   }
 
   .service-row {
@@ -696,13 +696,13 @@ body.page-impressum .global-bottom-bar {
   .profile-inner {
     grid-template-columns: 1fr;
     gap: 64px;
-    padding: 0 var(--pad-x) 100px;
+    padding: 0 var(--pad-x) 400px;
   }
 
   .cv-inner {
     grid-template-columns: 1fr;
     gap: 56px;
-    padding: 0 var(--pad-x) 100px;
+    padding: 0 var(--pad-x) 400px;
   }
 
   .work-item {
@@ -730,7 +730,7 @@ body.page-impressum .global-bottom-bar {
 
 .work-inner {
   flex: 1;
-  padding: 0 var(--pad-x) 120px;
+  padding: 0 var(--pad-x) 420px;
 }
 
 .work-item {
@@ -807,7 +807,7 @@ body.page-impressum .global-bottom-bar {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 120px;
-  padding: 0 var(--pad-x) 120px;
+  padding: 0 var(--pad-x) 420px;
 }
 
 .cv-timeline {
@@ -1118,23 +1118,6 @@ body.page-impressum .global-bottom-bar {
   pointer-events: all;
 }
 
-.mobile-nav-close {
-  position: absolute;
-  top: 28px;
-  right: 24px;
-  background: none;
-  border: none;
-  color: rgba(236,236,229,0.7);
-  cursor: pointer;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s ease;
-}
-
-.mobile-nav-close:hover { color: var(--warm); }
-
 .mobile-nav-main {
   display: flex;
   flex-direction: column;
@@ -1199,14 +1182,14 @@ body.page-impressum .global-bottom-bar {
   .page-subtitle { font-size: 14px; margin-top: -20px; margin-bottom: 40px; }
 
   /* Profil */
-  .profile-inner   { grid-template-columns: 1fr; gap: 56px; padding: 0 var(--pad-x) 96px; }
+  .profile-inner   { grid-template-columns: 1fr; gap: 56px; padding: 0 var(--pad-x) 396px; }
   .profile-text p  { margin-bottom: 28px; }
   .stat            { grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 56px; padding-top: 32px; }
   .stat-number     { font-size: clamp(48px, 12vw, 80px); }
   .stat-label      { font-size: var(--size-s); }
 
   /* Leistungen */
-  .services-inner  { grid-template-columns: 1fr; gap: 40px; padding: 0 var(--pad-x) 96px; }
+  .services-inner  { grid-template-columns: 1fr; gap: 40px; padding: 0 var(--pad-x) 396px; }
   .services-intro  { opacity: 1; margin-bottom: 8px; }
   .services-intro p { font-size: 15px; line-height: 1.75; margin-bottom: 20px; }
   .service-row     { grid-template-columns: 1fr; gap: 16px; margin-bottom: 52px; padding-top: 32px; }
@@ -1214,12 +1197,12 @@ body.page-impressum .global-bottom-bar {
   .service-items li { font-size: var(--size-s); }
 
   /* Work */
-  .work-inner { padding: 0 var(--pad-x) 96px; }
+  .work-inner { padding: 0 var(--pad-x) 396px; }
   .work-item  { grid-template-columns: 1fr; gap: 24px; margin-bottom: 64px; padding-top: 32px; }
   .work-desc  { max-width: 100%; }
 
   /* CV */
-  .cv-inner   { grid-template-columns: 1fr; gap: 56px; padding: 0 var(--pad-x) 96px; }
+  .cv-inner   { grid-template-columns: 1fr; gap: 56px; padding: 0 var(--pad-x) 396px; }
   .cv-entry   { margin-bottom: 52px; padding-top: 32px; }
 
   /* Bottom bar — über Safari URL-Leiste */
