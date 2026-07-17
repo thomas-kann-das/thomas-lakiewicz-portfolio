@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>KONKAV Agency — thomas lakiewicz</title>
+  <link rel="icon" type="image/svg+xml" href="/symbol-tl.svg" />
+  <style>
+
+@font-face {
+  font-family: 'At Hauss';
+  src: url('/AtHauss-Light.woff2') format('woff2'), url('/AtHauss-Light.woff') format('woff');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'At Hauss';
+  src: url('/AtHauss-Retina.woff2') format('woff2'), url('/AtHauss-Retina.woff') format('woff');
+  font-weight: 350; font-style: normal; font-display: swap;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: #242121; color: #ECECE5;
+  font-family: 'At Hauss', sans-serif;
+  font-weight: 300; overflow-x: hidden;
+}
+:root {
+  --black: #242121; --warm: #ECECE5;
+  --pad-x: 42px; --nav-h: 80px;
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: rgba(236,236,229,0.2); border-radius: 2px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; width: 100%;
+  height: var(--nav-h); display: flex; align-items: center;
+  justify-content: space-between; padding: 0 var(--pad-x);
+  z-index: 100; background: rgba(36,33,33,0.92);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(236,236,229,0.06);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 14px;
+  text-decoration: none; color: var(--warm);
+}
+.nav-logo-name { font-size: 20px; font-weight: 350; letter-spacing: 0.02em; }
+.nav-links { display: flex; align-items: center; gap: 6px; }
+.nav-link {
+  padding: 6px 14px; font-size: 15px; font-weight: 300;
+  letter-spacing: 0.04em; color: rgba(236,236,229,0.6);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-link:hover, .nav-link.active { color: var(--warm); }
+
+/* ── BOTTOM BAR ── */
+.bottom-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--pad-x); z-index: 100;
+  background: rgba(36,33,33,0.92);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(236,236,229,0.06);
+}
+.bottom-links { display: flex; gap: 28px; }
+.bottom-link {
+  font-size: 13px; font-weight: 300; letter-spacing: 0.04em;
+  color: rgba(236,236,229,0.5); text-decoration: none; transition: color 0.2s;
+}
+.bottom-link:hover { color: var(--warm); }
+
+@media (max-width: 768px) {
+  :root { --pad-x: 24px; --nav-h: 64px; }
+  .nav-links { display: none; }
+}
+
+
+/* ── DETAIL PAGE ── */
+.case-hero {
+  width: 100%; height: 100vh;
+  overflow: hidden; position: relative;
+  background: #1a1a1a;
+}
+.case-hero img, .case-hero video {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.case-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(36,33,33,0.8) 0%, rgba(36,33,33,0.1) 50%, transparent 100%);
+}
+.case-hero-title {
+  position: absolute; bottom: 80px; left: var(--pad-x); right: var(--pad-x);
+}
+.case-hero-title h1 {
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 350; letter-spacing: -0.03em;
+  text-transform: lowercase; color: var(--warm);
+  line-height: 1;
+}
+.case-hero-title p {
+  font-size: 18px; font-weight: 300;
+  color: rgba(236,236,229,0.6); letter-spacing: 0.04em;
+  margin-top: 8px;
+}
+
+/* ── INFO PANEL ── */
+.case-info {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  padding: 80px var(--pad-x);
+  border-bottom: 1px solid rgba(236,236,229,0.1);
+}
+.case-meta { display: flex; flex-direction: column; gap: 28px; }
+.case-meta-label {
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(236,236,229,0.35); margin-bottom: 8px;
+}
+.detail-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.detail-tag {
+  font-size: 11px; font-weight: 300; letter-spacing: 0.08em;
+  color: rgba(236,236,229,0.5);
+  border: 1px solid rgba(236,236,229,0.2);
+  padding: 3px 10px; border-radius: 20px; text-transform: uppercase;
+}
+.detail-award {
+  font-size: 12px; font-weight: 300;
+  color: rgba(236,236,229,0.45); line-height: 1.7;
+}
+.case-texts { display: flex; flex-direction: column; gap: 40px; }
+.case-text-block h3 {
+  font-size: 11px; font-weight: 300;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(236,236,229,0.35); margin-bottom: 16px;
+}
+.case-text-block p {
+  font-size: 17px; font-weight: 300;
+  line-height: 1.8; letter-spacing: 0.03em;
+  color: rgba(236,236,229,0.8);
+}
+
+/* ── MEDIA FLOW ── */
+.case-media {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2px;
+  padding: 2px 0 120px;
+}
+.media-item { overflow: hidden; background: #1a1a1a; }
+.media-item img, .media-item video {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+.media-full  { grid-column: span 12; aspect-ratio: 16/9; }
+.media-wide  { grid-column: span 8;  aspect-ratio: 4/3; }
+.media-half  { grid-column: span 4;  aspect-ratio: 3/4; }
+
+/* ── NEXT PROJECT ── */
+.case-next {
+  display: block; text-decoration: none; color: var(--warm);
+  padding: 60px var(--pad-x); border-top: 1px solid rgba(236,236,229,0.1);
+  display: flex; justify-content: space-between; align-items: center;
+  transition: opacity 0.3s;
+}
+.case-next:hover { opacity: 0.7; }
+.case-next-label {
+  font-size: 11px; font-weight: 300;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(236,236,229,0.35); margin-bottom: 8px;
+}
+.case-next-title {
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 350; letter-spacing: -0.02em;
+  text-transform: lowercase;
+}
+.case-next-arrow { font-size: 32px; opacity: 0.4; }
+
+@media (max-width: 900px) {
+  .case-info { grid-template-columns: 1fr; gap: 40px; }
+  .media-wide { grid-column: span 12; aspect-ratio: 4/3; }
+  .media-half { grid-column: span 12; aspect-ratio: 4/3; }
+}
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="/">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0V32H32V0H0ZM15.406 26.2735H12.1889V9.58717L12.9111 8.98396C13.006 8.90473 12.9501 8.7502 12.8265 8.74986L5.59795 8.7372L5.58717 5.52009H11.9745L15.4062 8.95179V26.2734L15.406 26.2735ZM21.0081 26.2735L17.5764 22.8418V5.52009H20.7935V22.2065L20.0714 22.8097C19.9764 22.8889 20.0323 23.0434 20.1559 23.0438L27.3845 23.0564L27.3953 26.2735H21.0079H21.0081Z" fill="#ECECE5"/>
+      </svg>
+      <span class="nav-logo-name">thomas lakiewicz</span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="/#profile">Profile</a>
+      <a class="nav-link active" href="/work/">Work</a>
+      <a class="nav-link" href="/#services">Services</a>
+      <a class="nav-link" href="/#cv">CV</a>
+      <a class="nav-link" href="mailto:hello@thomaslakiewicz.de">E-Mail</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="case-hero">
+    <img src="/projects/work-01-konkav/KONKAV_01.jpg" alt="" />
+    <div class="case-hero-overlay"></div>
+    <div class="case-hero-title">
+      <h1>KONKAV Agency</h1>
+      <p>Turning B2B bold</p>
+    </div>
+  </div>
+
+  <!-- INFO -->
+  <div class="case-info">
+    <div class="case-meta">
+      <div>
+        <div class="case-meta-label">Services</div>
+        <div class="detail-tags"><span class="detail-tag">Naming</span><span class="detail-tag">Brand Design</span><span class="detail-tag">UX / UI</span><span class="detail-tag">Presentation</span></div>
+      </div>
+      <div><div class="case-meta-label">Awards</div><div class="detail-award">★ Deutscher Agenturpreis 2024 — Best Naming</div><div class="detail-award">★ Deutscher Agenturpreis 2024 — Beste B2B Agentur Darstellung</div></div>
+    </div>
+    <div class="case-texts">
+      <div class="case-text-block">
+        <h3>Aufgabe</h3>
+        <p>K16 GmbH, Europas größte Agentur für Präsentationen im B2B-Bereich, wollte unter einer neuen, eigenständigen Marke ein Brand Design und B2B-Kampagnen starten. Ziel war eine Marke, die Kreativität und Professionalität vereint und dabei modern, schlicht und glaubwürdig wirkt.</p>
+      </div>
+      <div class="case-text-block">
+        <h3>Lösung</h3>
+        <p>Die Marke Konkav entstand — benannt nach der konkaven Linse, die Licht bündelt und streut. Das Motto 'Turning B2B bold' steht für fokussierte und kreative Botschaften. Die visuelle Identität kombiniert zeitgemäßen Minimalismus mit Seriosität und klarem B2B-Fokus.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEDIA -->
+  <div class="case-media">
+    <div class="media-item media-full">
+      <img src="/projects/work-01-konkav/KONKAV_01.jpg" alt="" />
+    </div>
+    <div class="media-item media-wide">
+      <img src="/projects/work-01-konkav/KONKAV_02.jpg" alt="" loading="lazy" />
+    </div>
+    <div class="media-item media-half">
+      <img src="/projects/work-01-konkav/KONKAV_03.jpg" alt="" loading="lazy" />
+    </div>
+    <div class="media-item media-half">
+      <img src="/projects/work-01-konkav/KONKAV_04.jpg" alt="" loading="lazy" />
+    </div>
+    <div class="media-item media-wide">
+      <img src="/projects/work-01-konkav/KONKAV_05.jpg" alt="" loading="lazy" />
+    </div>
+    <div class="media-item media-half">
+      <img src="/projects/work-01-konkav/KONKAV_06.jpg" alt="" loading="lazy" />
+    </div>
+    <div class="media-item media-half">
+      <img src="/projects/work-01-konkav/KONKAV_07.jpg" alt="" loading="lazy" />
+    </div>
+  </div>
+
+  <!-- NEXT -->
+  <a class="case-next" href="/work/collana-it/">
+    <div>
+      <div class="case-next-label">Next project</div>
+      <div class="case-next-title">collana IT</div>
+    </div>
+    <div class="case-next-arrow">→</div>
+  </a>
+
+  <div class="bottom-bar">
+    <div class="bottom-links">
+      <a class="bottom-link" href="/impressum/">Impressum</a>
+      <a class="bottom-link" href="https://linkedin.com" target="_blank">LinkedIn</a>
+      <a class="bottom-link" href="https://instagram.com" target="_blank">Instagram</a>
+    </div>
+  </div>
+</body>
+</html>
