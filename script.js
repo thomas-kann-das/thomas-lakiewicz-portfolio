@@ -571,12 +571,7 @@ function showPage(id) {
 
     if (id === 'work') {
       clearTimeout(autoTimer);
-      const workItems = document.querySelectorAll('.work-item');
-      workItems.forEach((item, i) => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateY(20px)';
-        gsap.to(item, { opacity: 1, y: 0, duration: 0.6, delay: animConfig.delay + i * 0.1, ease: 'power3.out' });
-      });
+      animateWork();
     }
 
     if (id === 'cv') {
@@ -687,6 +682,71 @@ function showPage(id) {
     }
   });
 })();
+
+
+
+/* ══════════════════════════════════════════════════
+   WORK — PROJEKT-SLIDER
+══════════════════════════════════════════════════ */
+
+function initProjSliders() {
+  document.querySelectorAll('.proj-slider').forEach(slider => {
+    const id      = slider.dataset.proj;
+    const slides  = slider.querySelectorAll('.proj-slide');
+    const counter = slider.closest('.proj-slider-wrap').querySelector('.proj-counter');
+    const current = counter ? counter.querySelector('.proj-current') : null;
+    let   idx     = 0;
+    const total   = slides.length;
+
+    function goTo(n) {
+      idx = ((n % total) + total) % total;
+      slider.style.transform = `translateX(-${idx * 100}%)`;
+      if (current) current.textContent = String(idx + 1).padStart(2, '0');
+      // Autoplay video on active slide
+      slides.forEach((s, i) => {
+        const v = s.querySelector('video');
+        if (v) { if (i === idx) v.play().catch(()=>{}); else v.pause(); }
+      });
+    }
+
+    const wrap = slider.closest('.proj-slider-wrap');
+    const prev = wrap.querySelector('.proj-nav-prev');
+    const next = wrap.querySelector('.proj-nav-next');
+
+    if (prev) prev.addEventListener('click', () => goTo(idx - 1));
+    if (next) next.addEventListener('click', () => goTo(idx + 1));
+
+    // Touch swipe
+    let tx = 0;
+    slider.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+    slider.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - tx;
+      if (Math.abs(dx) > 40) dx < 0 ? goTo(idx + 1) : goTo(idx - 1);
+    }, { passive: true });
+
+    // Cursor arrow on hover
+    wrap.addEventListener('mousemove', e => {
+      const rect  = wrap.getBoundingClientRect();
+      const isRight = (e.clientX - rect.left) > rect.width / 2;
+      sliderCursor.style.left = e.clientX + 'px';
+      sliderCursor.style.top  = e.clientY + 'px';
+      sliderCursor.classList.add('visible');
+      cursorArrow.setAttribute('d', isRight ? 'M20 16l8 8-8 8' : 'M28 16l-8 8 8 8');
+    });
+    wrap.addEventListener('mouseleave', () => sliderCursor.classList.remove('visible'));
+
+    // Init
+    goTo(0);
+  });
+}
+
+function animateWork() {
+  const projects = document.querySelectorAll('.work-project');
+  projects.forEach((p, i) => {
+    gsap.to(p, { opacity: 1, y: 0, duration: 0.6, delay: animConfig.delay + i * 0.08, ease: 'power3.out' });
+  });
+  initProjSliders();
+}
 
 
 /* ══════════════════════════════════════════════════
