@@ -509,17 +509,12 @@ function animateLeistungen() {
 }
 
 /* ── Seitenübergang ── */
-let scrollDir = 0; // 0 = Nav-Click, 1 = runter, -1 = rauf
-
 function animatePageIn(id) {
   const page = document.getElementById('page-' + id);
   if (!page) return;
 
-  const yFrom = scrollDir !== 0 ? scrollDir * 56 : 20;
-  scrollDir   = 0; // reset nach Verwendung
-
   gsap.fromTo(page,
-    { opacity: 0, y: yFrom },
+    { opacity: 0, y: 20 },
     { opacity: 1, y: 0, duration: getDuration() * 0.8, ease: 'power3.out' }
   );
 }
@@ -529,15 +524,6 @@ function animatePageIn(id) {
    SEITENNAVIGATION
 ══════════════════════════════════════════════════ */
 
-const pageTitles = {
-  home:      'thomas lakiewicz',
-  profile:   'Profile — thomas lakiewicz',
-  work:      'Selected Work — thomas lakiewicz',
-  services:  'Services — thomas lakiewicz',
-  cv:        'Experience — thomas lakiewicz',
-  impressum: 'Impressum — thomas lakiewicz',
-};
-
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => {
     p.classList.remove('active', 'entering');
@@ -546,12 +532,10 @@ function showPage(id) {
 
   const target = document.getElementById('page-' + id);
   target.style.display = 'flex';
-  target.scrollTop = 0;
   requestAnimationFrame(() => {
     target.classList.add('active');
   });
 
-  document.title = pageTitles[id] || 'thomas lakiewicz';
   document.body.className = 'page-' + id;
 
   document.querySelectorAll('.nav-link').forEach(link => {
@@ -585,43 +569,6 @@ function showPage(id) {
       clearTimeout(autoTimer);
     }
 
-    if (id === 'work') {
-      clearTimeout(autoTimer);
-      const items = document.querySelectorAll('.work-item');
-      items.forEach((item, i) => {
-        setTimeout(() => {
-          item.classList.add('visible');
-          const title = item.querySelector('.work-title');
-          const desc  = item.querySelector('.work-desc');
-          if (title) maskReveal(title, { delay: 0.05, stagger: 0.06 });
-          if (desc)  maskReveal(desc,  { delay: 0.12, stagger: 0.03 });
-        }, i * 60);
-      });
-    }
-
-    if (id === 'cv') {
-      clearTimeout(autoTimer);
-      const entries = document.querySelectorAll('.cv-entry');
-      entries.forEach((entry, i) => {
-        setTimeout(() => {
-          entry.classList.add('visible');
-          const role    = entry.querySelector('.cv-role');
-          const company = entry.querySelector('.cv-company');
-          if (role)    maskReveal(role,    { delay: 0.05, stagger: 0 });
-          if (company) maskReveal(company, { delay: 0.1,  stagger: 0 });
-        }, i * 70);
-      });
-      // Skills + awards fade in
-      const skillsBlock  = document.getElementById('cv-skills');
-      const awardsBlock  = document.getElementById('cv-awards');
-      if (skillsBlock) {
-        gsap.fromTo(skillsBlock, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, delay: animConfig.delay, ease: 'power3.out' });
-      }
-      if (awardsBlock) {
-        gsap.fromTo(awardsBlock, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, delay: animConfig.delay + 0.15, ease: 'power3.out' });
-      }
-    }
-
     if (id === 'impressum') {
       const title = document.getElementById('impressum-title');
       if (title) maskReveal(title, { delay: 0.1 });
@@ -643,76 +590,83 @@ function showPage(id) {
 }
 
 
+
 /* ══════════════════════════════════════════════════
-   SCROLL-NAVIGATION — seitenweise navigieren
+   CLICK EFFECT — RINGS
+   Konzentrische Ringe beim Klick, GSAP-animiert
 ══════════════════════════════════════════════════ */
 
-const scrollPageOrder = ['home', 'profile', 'work', 'services', 'cv'];
-let   scrollBlocked   = false;
+(function initClickRings() {
+  const RING_COUNT   = 3;      // Anzahl Ringe pro Klick
+  const COLOR        = 'rgba(236,236,229,'; // At Hauss warm white
+  const SIZE_START   = 0;      // px Startgröße
+  const SIZE_END     = 80;     // px Endgröße
+  const DURATION     = 0.7;    // Sekunden
+  const STAGGER      = 0.12;   // Verzögerung zwischen Ringen
+  const STROKE       = 1.5;    // Linienstärke
 
-function navigateByScroll(dir) {
-  if (scrollBlocked) return;
-  const currentId = (document.body.className || '').replace('page-', '');
-  const idx       = scrollPageOrder.indexOf(currentId);
-  if (idx === -1) return;
-
-  let next = idx + dir;
-  if (next >= scrollPageOrder.length) next = 0;          // wraps: CV → Home
-  if (next < 0) next = scrollPageOrder.length - 1;       // wraps: Home → CV
-
-  scrollDir     = dir;
-  scrollBlocked = true;
-  showPage(scrollPageOrder[next]);
-  setTimeout(() => { scrollBlocked = false; }, 1400);
-}
-
-// Wheel / Trackpad
-document.addEventListener('wheel', (e) => {
-  if (scrollBlocked) return;
-  const id = (document.body.className || '').replace('page-', '');
-  if (!scrollPageOrder.includes(id)) return;
-
-  const page = document.getElementById('page-' + id);
-  if (!page) return;
-
-  const isHome   = id === 'home';
-  const atBottom = page.scrollTop + page.clientHeight >= page.scrollHeight - 4;
-  const atTop    = page.scrollTop <= 4;
-
-  if (e.deltaY > 0 && (atBottom || isHome)) {
-    e.preventDefault();
-    navigateByScroll(1);
-  } else if (e.deltaY < 0 && (atTop || isHome)) {
-    e.preventDefault();
-    navigateByScroll(-1);
+  // Ringe-Pool für Performance
+  const pool = [];
+  for (let i = 0; i < RING_COUNT * 4; i++) {
+    const ring = document.createElement('div');
+    ring.style.cssText = `
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      border: ${STROKE}px solid ${COLOR}0.6);
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      will-change: transform, opacity;
+    `;
+    document.body.appendChild(ring);
+    pool.push({ el: ring, inUse: false });
   }
-}, { passive: false });
 
-// Touch (Mobile)
-let _touchStartY   = 0;
+  function getFromPool() {
+    return pool.find(r => !r.inUse) || pool[0];
+  }
 
-document.addEventListener('touchstart', (e) => {
-  _touchStartY = e.touches[0].clientY;
-}, { passive: true });
+  document.addEventListener('click', e => {
+    // Nicht auf interaktiven Elementen auslösen
+    const tag = e.target.tagName;
+    if (tag === 'A' || tag === 'BUTTON') return;
 
-document.addEventListener('touchend', (e) => {
-  if (scrollBlocked) return;
-  const id = (document.body.className || '').replace('page-', '');
-  if (!scrollPageOrder.includes(id)) return;
+    const x = e.clientX;
+    const y = e.clientY;
 
-  const page  = document.getElementById('page-' + id);
-  if (!page) return;
+    for (let i = 0; i < RING_COUNT; i++) {
+      const item = getFromPool();
+      item.inUse = true;
 
-  const delta    = _touchStartY - e.changedTouches[0].clientY;
-  if (Math.abs(delta) < 60) return;   // Mindest-Swipe-Distanz
+      const el = item.el;
+      const endSize = SIZE_END + i * 20;
+      const alpha   = 0.5 - i * 0.1;
 
-  const isHome   = id === 'home';
-  const atBottom = page.scrollTop + page.clientHeight >= page.scrollHeight - 4;
-  const atTop    = page.scrollTop <= 4;
+      gsap.killTweensOf(el);
 
-  if (delta > 0 && (atBottom || isHome)) navigateByScroll(1);
-  else if (delta < 0 && (atTop || isHome)) navigateByScroll(-1);
-}, { passive: true });
+      gsap.set(el, {
+        left: x,
+        top:  y,
+        width:  SIZE_START,
+        height: SIZE_START,
+        opacity: alpha,
+        scale: 1,
+        borderColor: `${COLOR}${alpha})`,
+      });
+
+      gsap.to(el, {
+        width:   endSize,
+        height:  endSize,
+        opacity: 0,
+        duration: DURATION,
+        delay:    i * STAGGER,
+        ease:    'power2.out',
+        onComplete: () => { item.inUse = false; }
+      });
+    }
+  });
+})();
 
 
 /* ══════════════════════════════════════════════════
