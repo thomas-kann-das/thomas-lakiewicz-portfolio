@@ -1,0 +1,21 @@
+# fingentia
+
+## Inhalt dieses Ordners
+
+Lege hier folgende Dateien ab:
+
+### Bilder & Videos
+- Projektbilder als JPG oder PNG (z.B. `01.jpg`, `02.jpg` ...)
+- Videos als MP4 (z.B. `video-01.mp4`)
+- Empfehlung: Querformat, mindestens 1800px breit
+
+### Kundenlogo
+- `logo.svg` (bevorzugt) oder `logo.png`
+- Freigestellt, auf dunklem Hintergrund lesbar
+
+### Textdokument
+- `inhalt.txt` oder `inhalt.md`
+- Enthält: Projektbeschreibung, Tags, Awards (falls vorhanden)
+
+---
+Sobald alle Materialien bereit sind, sag Thomas Bescheid — dann bringen wir alles auf die Seite.
