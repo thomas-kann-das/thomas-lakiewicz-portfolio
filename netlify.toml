@@ -4,4 +4,14 @@
 [[headers]]
   for = "/admin/*"
   [headers.values]
-    Cache-Control = "no-cache"
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[redirects]]
+  from = "/work"
+  to = "/work/"
+  status = 301
+
+[[redirects]]
+  from = "/impressum"
+  to = "/impressum/"
+  status = 301
