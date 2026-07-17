@@ -569,6 +569,26 @@ function showPage(id) {
       clearTimeout(autoTimer);
     }
 
+    if (id === 'work') {
+      clearTimeout(autoTimer);
+      const workItems = document.querySelectorAll('.work-item');
+      workItems.forEach((item, i) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        gsap.to(item, { opacity: 1, y: 0, duration: 0.6, delay: animConfig.delay + i * 0.1, ease: 'power3.out' });
+      });
+    }
+
+    if (id === 'cv') {
+      clearTimeout(autoTimer);
+      const cvEntries = document.querySelectorAll('.cv-entry, .cv-skills-block, .cv-awards-block');
+      cvEntries.forEach((item, i) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(16px)';
+        gsap.to(item, { opacity: 1, y: 0, duration: 0.6, delay: animConfig.delay + i * 0.08, ease: 'power3.out' });
+      });
+    }
+
     if (id === 'impressum') {
       const title = document.getElementById('impressum-title');
       if (title) maskReveal(title, { delay: 0.1 });
