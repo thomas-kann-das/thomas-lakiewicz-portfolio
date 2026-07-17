@@ -220,7 +220,19 @@ nav::before {
 #page-profile,
 #page-services,
 #page-impressum {
-  padding-top: var(--nav-h);
+  padding-top: calc(var(--nav-h) + 48px);
+  padding-bottom: 80px;
+  min-height: 100vh;
+}
+
+#page-cv {
+  padding-top: calc(var(--nav-h) + 48px);
+  padding-bottom: 80px;
+  min-height: 100vh;
+}
+
+#page-work {
+  padding-top: calc(var(--nav-h) + 48px);
   padding-bottom: 80px;
   min-height: 100vh;
 }
