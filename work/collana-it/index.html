@@ -18,21 +18,17 @@
   font-weight: 350; font-style: normal; font-display: swap;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
 body {
   background: #242121; color: #ECECE5;
   font-family: 'At Hauss', sans-serif;
   font-weight: 300; overflow-x: hidden;
 }
-:root {
-  --black: #242121; --warm: #ECECE5;
-  --pad-x: 42px; --nav-h: 80px;
-}
+:root { --black: #242121; --warm: #ECECE5; --pad-x: 42px; --nav-h: 80px; }
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-track { background: #242121; }
 ::-webkit-scrollbar-thumb { background: rgba(236,236,229,0.2); border-radius: 2px; }
 
-/* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; width: 100%;
   height: var(--nav-h); display: flex; align-items: center;
@@ -41,10 +37,7 @@ nav {
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(236,236,229,0.06);
 }
-.nav-logo {
-  display: flex; align-items: center; gap: 14px;
-  text-decoration: none; color: var(--warm);
-}
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; color: #ECECE5; }
 .nav-logo-name { font-size: 20px; font-weight: 350; letter-spacing: 0.02em; }
 .nav-links { display: flex; align-items: center; gap: 6px; }
 .nav-link {
@@ -52,137 +45,181 @@ nav {
   letter-spacing: 0.04em; color: rgba(236,236,229,0.6);
   text-decoration: none; transition: color 0.2s;
 }
-.nav-link:hover, .nav-link.active { color: var(--warm); }
-
-/* ── BOTTOM BAR ── */
+.nav-link:hover, .nav-link.active { color: #ECECE5; }
 .bottom-bar {
   position: fixed; bottom: 0; left: 0; right: 0; height: 64px;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 var(--pad-x); z-index: 100;
   background: rgba(36,33,33,0.92);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(236,236,229,0.06);
+  backdrop-filter: blur(12px); border-top: 1px solid rgba(236,236,229,0.06);
 }
 .bottom-links { display: flex; gap: 28px; }
 .bottom-link {
   font-size: 13px; font-weight: 300; letter-spacing: 0.04em;
   color: rgba(236,236,229,0.5); text-decoration: none; transition: color 0.2s;
 }
-.bottom-link:hover { color: var(--warm); }
-
+.bottom-link:hover { color: #ECECE5; }
 @media (max-width: 768px) {
   :root { --pad-x: 24px; --nav-h: 64px; }
   .nav-links { display: none; }
 }
 
 
-/* ── DETAIL PAGE ── */
-.case-hero {
-  width: 100%; height: 100vh;
-  overflow: hidden; position: relative;
-  background: #1a1a1a;
+/* ── CASE DETAIL ── */
+body { overflow-x: hidden; }
+
+/* INTRO — sticky links panel */
+.case-intro {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
 }
-.case-hero img, .case-hero video {
+.case-intro-media {
+  position: absolute; inset: 0;
+}
+.case-intro-media img,
+.case-intro-media video {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
 }
-.case-hero-overlay {
+.case-intro-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(36,33,33,0.8) 0%, rgba(36,33,33,0.1) 50%, transparent 100%);
+  background: linear-gradient(to top, rgba(36,33,33,0.85) 0%, rgba(36,33,33,0.15) 60%, transparent 100%);
 }
-.case-hero-title {
-  position: absolute; bottom: 80px; left: var(--pad-x); right: var(--pad-x);
+.case-intro-content {
+  position: absolute; bottom: 80px;
+  left: var(--pad-x); right: var(--pad-x);
 }
-.case-hero-title h1 {
-  font-size: clamp(48px, 7vw, 96px);
+.case-intro-content h1 {
+  font-size: clamp(44px, 6vw, 88px);
   font-weight: 350; letter-spacing: -0.03em;
-  text-transform: lowercase; color: var(--warm);
-  line-height: 1;
+  text-transform: lowercase; color: #ECECE5;
+  line-height: 1; margin-bottom: 10px;
 }
-.case-hero-title p {
-  font-size: 18px; font-weight: 300;
-  color: rgba(236,236,229,0.6); letter-spacing: 0.04em;
-  margin-top: 8px;
+.case-intro-content p {
+  font-size: 17px; font-weight: 300;
+  color: rgba(236,236,229,0.55); letter-spacing: 0.04em;
 }
 
-/* ── INFO PANEL ── */
+/* INFO ROW */
 .case-info {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 80px;
-  padding: 80px var(--pad-x);
-  border-bottom: 1px solid rgba(236,236,229,0.1);
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  padding: 0;
+  border-top: 1px solid rgba(236,236,229,0.1);
 }
-.case-meta { display: flex; flex-direction: column; gap: 28px; }
-.case-meta-label {
+.case-info-col {
+  padding: 56px var(--pad-x);
+}
+.case-info-col:first-child {
+  border-right: 1px solid rgba(236,236,229,0.1);
+}
+.case-label {
   font-size: 10px; font-weight: 300;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: rgba(236,236,229,0.35); margin-bottom: 8px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(236,236,229,0.3); margin-bottom: 20px;
 }
-.detail-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.detail-tag {
+.case-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.case-tag {
   font-size: 11px; font-weight: 300; letter-spacing: 0.08em;
   color: rgba(236,236,229,0.5);
   border: 1px solid rgba(236,236,229,0.2);
   padding: 3px 10px; border-radius: 20px; text-transform: uppercase;
 }
-.detail-award {
+.case-awards { display: flex; flex-direction: column; gap: 6px; }
+.case-award {
   font-size: 12px; font-weight: 300;
-  color: rgba(236,236,229,0.45); line-height: 1.7;
+  color: rgba(236,236,229,0.4); line-height: 1.6;
 }
-.case-texts { display: flex; flex-direction: column; gap: 40px; }
+.case-text-blocks { display: flex; flex-direction: column; gap: 36px; }
 .case-text-block h3 {
-  font-size: 11px; font-weight: 300;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: rgba(236,236,229,0.35); margin-bottom: 16px;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(236,236,229,0.3); margin-bottom: 12px;
 }
 .case-text-block p {
-  font-size: 17px; font-weight: 300;
+  font-size: 16px; font-weight: 300;
   line-height: 1.8; letter-spacing: 0.03em;
-  color: rgba(236,236,229,0.8);
+  color: rgba(236,236,229,0.75);
 }
 
-/* ── MEDIA FLOW ── */
-.case-media {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
+/* HORIZONTAL SCROLL GALLERY */
+.gallery-section {
+  position: relative;
+}
+.gallery-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.gallery-track {
+  display: flex;
   gap: 2px;
-  padding: 2px 0 120px;
+  height: 85vh;
+  will-change: transform;
 }
-.media-item { overflow: hidden; background: #1a1a1a; }
-.media-item img, .media-item video {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
+.gallery-item {
+  flex-shrink: 0;
+  height: 100%;
+  /* width set by JS based on aspect ratio */
+  overflow: hidden;
+  background: #1a1a1a;
 }
-.media-full  { grid-column: span 12; aspect-ratio: 16/9; }
-.media-wide  { grid-column: span 8;  aspect-ratio: 4/3; }
-.media-half  { grid-column: span 4;  aspect-ratio: 3/4; }
+.gallery-item img,
+.gallery-item video {
+  height: 100%;
+  width: auto;
+  max-width: none;
+  display: block;
+  object-fit: cover;
+}
+/* Scroll progress bar */
+.gallery-progress {
+  position: fixed;
+  bottom: 64px; left: 0; right: 0;
+  height: 1px;
+  background: rgba(236,236,229,0.1);
+  z-index: 50;
+  pointer-events: none;
+}
+.gallery-progress-fill {
+  height: 100%;
+  background: rgba(236,236,229,0.5);
+  width: 0%;
+  transition: width 0.1s linear;
+}
 
-/* ── NEXT PROJECT ── */
+/* NEXT PROJECT */
 .case-next {
-  display: block; text-decoration: none; color: var(--warm);
-  padding: 60px var(--pad-x); border-top: 1px solid rgba(236,236,229,0.1);
   display: flex; justify-content: space-between; align-items: center;
+  padding: 60px var(--pad-x);
+  border-top: 1px solid rgba(236,236,229,0.1);
+  text-decoration: none; color: #ECECE5;
   transition: opacity 0.3s;
 }
-.case-next:hover { opacity: 0.7; }
+.case-next:hover { opacity: 0.6; }
 .case-next-label {
-  font-size: 11px; font-weight: 300;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(236,236,229,0.35); margin-bottom: 8px;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(236,236,229,0.3); margin-bottom: 10px;
 }
 .case-next-title {
-  font-size: clamp(28px, 4vw, 52px);
+  font-size: clamp(28px, 4vw, 56px);
   font-weight: 350; letter-spacing: -0.02em;
   text-transform: lowercase;
 }
-.case-next-arrow { font-size: 32px; opacity: 0.4; }
+.case-next-arrow { font-size: 28px; opacity: 0.35; }
 
 @media (max-width: 900px) {
-  .case-info { grid-template-columns: 1fr; gap: 40px; }
-  .media-wide { grid-column: span 12; aspect-ratio: 4/3; }
-  .media-half { grid-column: span 12; aspect-ratio: 4/3; }
+  .case-info { grid-template-columns: 1fr; }
+  .case-info-col:first-child { border-right: none; border-bottom: 1px solid rgba(236,236,229,0.1); }
+  .gallery-track { height: 60vw; }
 }
+
   </style>
 </head>
 <body>
@@ -202,11 +239,13 @@ nav {
     </div>
   </nav>
 
-  <!-- HERO -->
-  <div class="case-hero">
-    <img src="/projects/work-02-collana-it/collana_16_9_01.jpg" alt="" />
-    <div class="case-hero-overlay"></div>
-    <div class="case-hero-title">
+  <!-- INTRO -->
+  <div class="case-intro">
+    <div class="case-intro-media">
+      <img src="/projects/work-02-collana-it/collana_16_9_01.jpg" alt="" />
+    </div>
+    <div class="case-intro-overlay"></div>
+    <div class="case-intro-content">
       <h1>collana IT</h1>
       <p>One Brand. Eleven Companies.</p>
     </div>
@@ -214,48 +253,43 @@ nav {
 
   <!-- INFO -->
   <div class="case-info">
-    <div class="case-meta">
-      <div>
-        <div class="case-meta-label">Services</div>
-        <div class="detail-tags"><span class="detail-tag">Brand Strategy</span><span class="detail-tag">Brand Architecture</span><span class="detail-tag">Brand Design</span></div>
-      </div>
+    <div class="case-info-col">
+      <div class="case-label">Services</div>
+      <div class="case-tags"><span class="case-tag">Brand Strategy</span><span class="case-tag">Brand Architecture</span><span class="case-tag">Brand Design</span></div>
       
     </div>
-    <div class="case-texts">
-      <div class="case-text-block">
-        <h3>Aufgabe</h3>
-        <p>Durch Buy-and-Build wurden 11 IT-Unternehmen unter einem Dach vereint. Das bisherige, stark markengetrennte Auftreten war nicht konsequent auf Endkunden ausgerichtet und erschwerte Employer Branding sowie ein konsistentes Portfolio-Storytelling.</p>
-      </div>
-      <div class="case-text-block">
-        <h3>Lösung</h3>
-        <p>Eine klare One-Brand-Strategie mit definierter Markenhierarchie schafft einen einheitlichen, vertrauensstiftenden Auftritt über alle Touchpoints. Ein flexibles Markenmuster, eine lebendige Bildwelt und ein umfassendes Launch-Toolkit verankern die Marke nachhaltig im Markt.</p>
+    <div class="case-info-col">
+      <div class="case-text-blocks">
+        <div class="case-text-block">
+          <h3>Aufgabe</h3>
+          <p>Durch Buy-and-Build wurden 11 IT-Unternehmen unter einem Dach vereint. Das bisherige, stark markengetrennte Auftreten erschwerte Employer Branding sowie ein konsistentes Portfolio-Storytelling.</p>
+        </div>
+        <div class="case-text-block">
+          <h3>Lösung</h3>
+          <p>Eine klare One-Brand-Strategie mit definierter Markenhierarchie schafft einen einheitlichen, vertrauensstiftenden Auftritt über alle Touchpoints. Ein flexibles Markenmuster, eine lebendige Bildwelt und ein umfassendes Launch-Toolkit verankern die Marke nachhaltig im Markt.</p>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- MEDIA -->
-  <div class="case-media">
-    <div class="media-item media-full">
-      <img src="/projects/work-02-collana-it/collana_16_9_01.jpg" alt="" />
+  <!-- HORIZONTAL SCROLL GALLERY -->
+  <div class="gallery-section">
+    <div class="gallery-sticky">
+      <div class="gallery-track">
+      <div class="gallery-item"><img src="/projects/work-02-collana-it/collana_16_9_01.jpg" alt="" /></div>
+      <div class="gallery-item"><img src="/projects/work-02-collana-it/collana_16_9_02.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="/projects/work-02-collana-it/collana_16_9_03.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="/projects/work-02-collana-it/collana_16_9_04.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="/projects/work-02-collana-it/collana_16_9_05.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="/projects/work-02-collana-it/collana_16_9_06.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item"><img src="/projects/work-02-collana-it/collana_16_9_07.jpg" alt="" loading="lazy" /></div>
+      </div>
     </div>
-    <div class="media-item media-wide">
-      <img src="/projects/work-02-collana-it/collana_16_9_02.jpg" alt="" loading="lazy" />
-    </div>
-    <div class="media-item media-half">
-      <img src="/projects/work-02-collana-it/collana_16_9_03.jpg" alt="" loading="lazy" />
-    </div>
-    <div class="media-item media-half">
-      <img src="/projects/work-02-collana-it/collana_16_9_04.jpg" alt="" loading="lazy" />
-    </div>
-    <div class="media-item media-wide">
-      <img src="/projects/work-02-collana-it/collana_16_9_05.jpg" alt="" loading="lazy" />
-    </div>
-    <div class="media-item media-half">
-      <img src="/projects/work-02-collana-it/collana_16_9_06.jpg" alt="" loading="lazy" />
-    </div>
-    <div class="media-item media-half">
-      <img src="/projects/work-02-collana-it/collana_16_9_07.jpg" alt="" loading="lazy" />
-    </div>
+  </div>
+
+  <!-- PROGRESS BAR -->
+  <div class="gallery-progress">
+    <div class="gallery-progress-fill"></div>
   </div>
 
   <!-- NEXT -->
@@ -274,5 +308,63 @@ nav {
       <a class="bottom-link" href="https://instagram.com" target="_blank">Instagram</a>
     </div>
   </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+(function() {
+  const track    = document.querySelector('.gallery-track');
+  const section  = document.querySelector('.gallery-section');
+  const fill     = document.querySelector('.gallery-progress-fill');
+  if (!track || !section) return;
+
+  // Autoplay first video
+  const firstVideo = track.querySelector('video');
+  if (firstVideo) firstVideo.play().catch(()=>{});
+
+  // Wait for images to load to get natural widths
+  function initScroll() {
+    const totalWidth = track.scrollWidth;
+    const viewW     = window.innerWidth;
+    const dist      = totalWidth - viewW;
+
+    // Set section height = scroll distance + 100vh so sticky works
+    section.style.height = (dist + window.innerHeight) + 'px';
+
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end:   'bottom bottom',
+      scrub: 1,
+      onUpdate: self => {
+        const x = self.progress * -dist;
+        gsap.set(track, { x });
+        if (fill) fill.style.width = (self.progress * 100) + '%';
+
+        // Autoplay video in viewport
+        track.querySelectorAll('video').forEach(v => {
+          const rect = v.getBoundingClientRect();
+          if (rect.left < viewW && rect.right > 0) {
+            v.play().catch(()=>{});
+          } else {
+            v.pause();
+          }
+        });
+      }
+    });
+  }
+
+  // Init after a short delay to allow layout
+  setTimeout(initScroll, 100);
+  window.addEventListener('resize', () => {
+    ScrollTrigger.getAll().forEach(t => t.kill());
+    initScroll();
+  });
+})();
+</script>
+
 </body>
 </html>
