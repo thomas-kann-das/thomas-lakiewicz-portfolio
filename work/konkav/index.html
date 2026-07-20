@@ -325,71 +325,59 @@ gsap.registerPlugin(ScrollTrigger);
   let st = null;
 
   function initScroll() {
-    // Kill existing ScrollTrigger
+    // Kill existing ScrollTrigger instance
     if (st) { st.kill(); st = null; }
     ScrollTrigger.clearScrollMemory();
 
-    // Reset transform so we can measure correctly
+    // Reset transform before measuring
     gsap.set(track, { x: 0 });
 
-    // Let browser reflow
-    requestAnimationFrame(() => {
-      const viewW    = window.innerWidth;
-      const viewH    = window.innerHeight;
-      const trackW   = track.scrollWidth;
-      const dist     = Math.max(0, trackW - viewW);
+    const viewW  = window.innerWidth;
+    const viewH  = window.innerHeight;
+    const trackW = track.scrollWidth;
+    const dist   = Math.max(0, trackW - viewW);
 
-      // Section height = scroll distance + 1 viewport
-      section.style.height = (dist + viewH) + 'px';
+    // Set section height so page is scrollable enough
+    section.style.height = (dist + viewH) + 'px';
 
-      // Autoplay first video
-      const firstVideo = track.querySelector('video');
-      if (firstVideo) firstVideo.play().catch(() => {});
-
-      st = ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: () => `+=${dist}`,
-        pin: sticky,
-        pinSpacing: false,
-        scrub: 1.2,
-        invalidateOnRefresh: true,
-        onUpdate: self => {
-          const x = self.progress * -dist;
-          gsap.set(track, { x, force3D: true });
-          if (fill) fill.style.width = (self.progress * 100) + '%';
-
-          // Manage video autoplay per viewport visibility
-          track.querySelectorAll('video').forEach(v => {
-            const rect = v.getBoundingClientRect();
-            if (rect.left < viewW && rect.right > 0) {
-              v.play().catch(() => {});
-            } else {
-              v.pause();
-            }
-          });
-        }
-      });
-
-      ScrollTrigger.refresh();
+    st = ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: () => '+=' + dist,
+      pin: sticky,
+      pinSpacing: false,
+      scrub: 1.2,
+      invalidateOnRefresh: true,
+      onUpdate: self => {
+        gsap.set(track, { x: self.progress * -dist, force3D: true });
+        if (fill) fill.style.width = (self.progress * 100) + '%';
+        track.querySelectorAll('video').forEach(v => {
+          const r = v.getBoundingClientRect();
+          if (r.left < viewW && r.right > 0) v.play().catch(()=>{});
+          else v.pause();
+        });
+      }
     });
+
+    ScrollTrigger.refresh();
   }
 
-  // Debounced resize handler
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      initScroll();
-    }, 150);
+  // ResizeObserver watches the track itself —
+  // fires both on pageload (when images finish loading & track gets its real width)
+  // and on every window resize
+  let roTimer;
+  const ro = new ResizeObserver(() => {
+    clearTimeout(roTimer);
+    roTimer = setTimeout(initScroll, 100);
   });
+  ro.observe(track);
 
-  // Init on load — wait for images/videos to have dimensions
-  window.addEventListener('load', initScroll);
-  // Fallback if load already fired
-  if (document.readyState === 'complete') {
-    setTimeout(initScroll, 200);
-  }
+  // Also watch window resize via ScrollTrigger's built-in handler
+  ScrollTrigger.addEventListener('refreshInit', initScroll);
+
+  // Autoplay first video immediately
+  const firstVideo = track.querySelector('video');
+  if (firstVideo) firstVideo.play().catch(() => {});
 })();
 </script>
 
