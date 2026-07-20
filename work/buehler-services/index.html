@@ -322,53 +322,80 @@ body { overflow-x: hidden; }
 gsap.registerPlugin(ScrollTrigger);
 
 (function() {
-  const track    = document.querySelector('.gallery-track');
-  const section  = document.querySelector('.gallery-section');
-  const fill     = document.querySelector('.gallery-progress-fill');
-  if (!track || !section) return;
+  const track   = document.querySelector('.gallery-track');
+  const section = document.querySelector('.gallery-section');
+  const sticky  = document.querySelector('.gallery-sticky');
+  const fill    = document.querySelector('.gallery-progress-fill');
+  if (!track || !section || !sticky) return;
 
-  // Autoplay first video
-  const firstVideo = track.querySelector('video');
-  if (firstVideo) firstVideo.play().catch(()=>{});
+  let st = null;
 
-  // Wait for images to load to get natural widths
   function initScroll() {
-    const totalWidth = track.scrollWidth;
-    const viewW     = window.innerWidth;
-    const dist      = totalWidth - viewW;
+    // Kill existing ScrollTrigger
+    if (st) { st.kill(); st = null; }
+    ScrollTrigger.clearScrollMemory();
 
-    // Set section height = scroll distance + 100vh so sticky works
-    section.style.height = (dist + window.innerHeight) + 'px';
+    // Reset transform so we can measure correctly
+    gsap.set(track, { x: 0 });
 
-    ScrollTrigger.create({
-      trigger: section,
-      start: 'top top',
-      end:   'bottom bottom',
-      scrub: 1,
-      onUpdate: self => {
-        const x = self.progress * -dist;
-        gsap.set(track, { x });
-        if (fill) fill.style.width = (self.progress * 100) + '%';
+    // Let browser reflow
+    requestAnimationFrame(() => {
+      const viewW    = window.innerWidth;
+      const viewH    = window.innerHeight;
+      const trackW   = track.scrollWidth;
+      const dist     = Math.max(0, trackW - viewW);
 
-        // Autoplay video in viewport
-        track.querySelectorAll('video').forEach(v => {
-          const rect = v.getBoundingClientRect();
-          if (rect.left < viewW && rect.right > 0) {
-            v.play().catch(()=>{});
-          } else {
-            v.pause();
-          }
-        });
-      }
+      // Section height = scroll distance + 1 viewport
+      section.style.height = (dist + viewH) + 'px';
+
+      // Autoplay first video
+      const firstVideo = track.querySelector('video');
+      if (firstVideo) firstVideo.play().catch(() => {});
+
+      st = ScrollTrigger.create({
+        trigger: section,
+        start: 'top top',
+        end: () => `+=${dist}`,
+        pin: sticky,
+        pinSpacing: false,
+        scrub: 1.2,
+        invalidateOnRefresh: true,
+        onUpdate: self => {
+          const x = self.progress * -dist;
+          gsap.set(track, { x, force3D: true });
+          if (fill) fill.style.width = (self.progress * 100) + '%';
+
+          // Manage video autoplay per viewport visibility
+          track.querySelectorAll('video').forEach(v => {
+            const rect = v.getBoundingClientRect();
+            if (rect.left < viewW && rect.right > 0) {
+              v.play().catch(() => {});
+            } else {
+              v.pause();
+            }
+          });
+        }
+      });
+
+      ScrollTrigger.refresh();
     });
   }
 
-  // Init after a short delay to allow layout
-  setTimeout(initScroll, 100);
+  // Debounced resize handler
+  let resizeTimer;
   window.addEventListener('resize', () => {
-    ScrollTrigger.getAll().forEach(t => t.kill());
-    initScroll();
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      initScroll();
+    }, 150);
   });
+
+  // Init on load — wait for images/videos to have dimensions
+  window.addEventListener('load', initScroll);
+  // Fallback if load already fired
+  if (document.readyState === 'complete') {
+    setTimeout(initScroll, 200);
+  }
 })();
 </script>
 
