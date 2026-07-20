@@ -325,11 +325,8 @@ gsap.registerPlugin(ScrollTrigger);
   let st = null;
 
   function initScroll() {
-    // Kill existing ScrollTrigger instance
     if (st) { st.kill(); st = null; }
-    ScrollTrigger.clearScrollMemory();
 
-    // Reset transform before measuring
     gsap.set(track, { x: 0 });
 
     const viewW  = window.innerWidth;
@@ -337,8 +334,13 @@ gsap.registerPlugin(ScrollTrigger);
     const trackW = track.scrollWidth;
     const dist   = Math.max(0, trackW - viewW);
 
-    // Set section height so page is scrollable enough
     section.style.height = (dist + viewH) + 'px';
+
+    if (dist === 0) {
+      // Track not ready yet — retry
+      setTimeout(initScroll, 200);
+      return;
+    }
 
     st = ScrollTrigger.create({
       trigger: section,
@@ -362,20 +364,29 @@ gsap.registerPlugin(ScrollTrigger);
     ScrollTrigger.refresh();
   }
 
-  // ResizeObserver watches the track itself —
-  // fires both on pageload (when images finish loading & track gets its real width)
-  // and on every window resize
-  let roTimer;
-  const ro = new ResizeObserver(() => {
-    clearTimeout(roTimer);
-    roTimer = setTimeout(initScroll, 100);
+  // Debounced resize
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(initScroll, 150);
   });
-  ro.observe(track);
 
-  // Also watch window resize via ScrollTrigger's built-in handler
-  ScrollTrigger.addEventListener('refreshInit', initScroll);
+  // Init immediately on DOM ready — don't wait for images
+  // Images load lazily, so track width grows as they load
+  // We init early and re-init as images arrive
+  initScroll();
 
-  // Autoplay first video immediately
+  // Re-init when each lazy image loads (track gets wider)
+  track.querySelectorAll('img').forEach(img => {
+    if (!img.complete) {
+      img.addEventListener('load', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(initScroll, 100);
+      });
+    }
+  });
+
+  // Autoplay first video
   const firstVideo = track.querySelector('video');
   if (firstVideo) firstVideo.play().catch(() => {});
 })();
