@@ -24,7 +24,7 @@
       <a class="nav-link" href="/work/">Work</a>
       <a class="nav-link" href="#" onclick="showPage('services'); return false;" data-page="services">Services</a>
       <a class="nav-link" href="#" onclick="showPage('cv'); return false;" data-page="cv">CV</a>
-      <a class="nav-link" href="mailto:hello@thomaslakiewicz.de" data-page="">E-Mail</a>
+      <a class="nav-link" href="mailto:hello@thomaslakiewicz.de" data-page="">Contact</a>
     </div>
     <button class="hamburger-btn" id="hamburger-btn" aria-label="Menü öffnen" onclick="toggleMobileNav()">
       <span></span>
@@ -39,7 +39,7 @@
       <a class="mobile-nav-link" href="/work/" onclick="toggleMobileNav()">Work</a>
       <a class="mobile-nav-link" href="#" onclick="showPage('services'); toggleMobileNav(); return false;">Services</a>
       <a class="mobile-nav-link" href="#" onclick="showPage('cv'); toggleMobileNav(); return false;">CV</a>
-      <a class="mobile-nav-link" href="mailto:hello@thomaslakiewicz.de" onclick="toggleMobileNav()">E-Mail</a>
+      <a class="mobile-nav-link" href="mailto:hello@thomaslakiewicz.de" onclick="toggleMobileNav()">Contact</a>
     </div>
     <div class="mobile-nav-sub">
       <a href="#" onclick="showPage('impressum'); toggleMobileNav(); return false;">Impressum</a>
@@ -113,8 +113,9 @@
 
   <!-- PROFIL -->
   <div class="page" id="page-profile">
-    <h1 class="page-title">profile.</h1>
-    <div class="profile-inner">
+    <div class="page-content">
+      <h1 class="page-title">profile.</h1>
+      <div class="profile-inner split">
       <div class="profile-text" id="profile-text">
         <p>hi — thank you for visiting my page.</p>
         <p>If you like to know, here is a little bit about me: i am a communication designer based near Hamburg.</p>
@@ -137,21 +138,23 @@
           <div class="stat-label">different industries i worked for</div>
         </div>
       </div>
+      </div>
     </div>
   </div>
 
   <!-- LEISTUNGEN -->
   <div class="page" id="page-services">
-    <h1 class="page-title">services.</h1>
-    <p class="page-subtitle">From the first question to the final pixel — I cover the full distance.</p>
-    <div class="services-inner">
+    <div class="page-content">
+      <h1 class="page-title">services.</h1>
+      <p class="page-subtitle">From the first question to the final pixel — I cover the full distance.</p>
+      <div class="services-inner split">
       <div class="services-intro" id="services-intro">
         <p>Hier steht etwas zu meiner Arbeitsweise. Ich arbeite eng mit meinen Kunden zusammen, um Ideen in etwas Bedeutungsvolles zu verwandeln.</p>
         <p>Jedes Projekt beginnt mit einem tiefen Verständnis der Marke und ihrer Ziele.</p>
         <p>Gemeinsam finden wir die richtige Sprache — visuell und inhaltlich.</p>
       </div>
       <div class="services-list" id="services-list">
-        <div class="service-row">
+        <div class="service-row split">
           <div class="service-name">strategy</div>
           <ul class="service-items">
             <li>branding analysis</li>
@@ -161,7 +164,7 @@
             <li>general design enablement trainings</li>
           </ul>
         </div>
-        <div class="service-row">
+        <div class="service-row split">
           <div class="service-name">creation</div>
           <ul class="service-items">
             <li>interface design, UI Design</li>
@@ -171,7 +174,7 @@
             <li>creative support</li>
           </ul>
         </div>
-        <div class="service-row">
+        <div class="service-row split">
           <div class="service-name">execution</div>
           <ul class="service-items">
             <li>production ready prototypes</li>
@@ -186,11 +189,12 @@
 
   <!-- WORK -->
   <div class="page" id="page-work">
-    <h1 class="page-title">selected work.</h1>
-    <p class="page-subtitle">Brand identities that needed a clear idea before they needed a logo.</p>
+    <div class="page-content">
+      <h1 class="page-title">selected work.</h1>
+      <p class="page-subtitle">Brand identities that needed a clear idea before they needed a logo.</p>
     <div class="work-inner">
 
-  <div class="work-project" id="proj-01">
+  <div class="work-project split" id="proj-01">
     <div class="proj-slider-wrap">
       <div class="proj-slider" data-proj="01">
         <div class="proj-slide"><img src="/projects/work-01-konkav/KONKAV_01.jpg" alt="" loading="lazy" /></div>
@@ -213,7 +217,7 @@
       <p class="proj-desc">K16 GmbH, Europas größte Agentur für Praesentationen im B2B-Bereich, wollte unter einer neuen, eigenständigen Marke ein Brand Design und B2B-Kampagnen starten. Die Marke Konkav entstand - benannt nach der konkaven Linse, die Licht bündelt und streut. Das Motto Turning B2B bold steht für fokussierte und kreative Botschaften.</p>
     </div>
   </div>
-  <div class="work-project" id="proj-02">
+  <div class="work-project split" id="proj-02">
     <div class="proj-slider-wrap">
       <div class="proj-slider" data-proj="02">
         <div class="proj-slide"><img src="/projects/work-02-collana-it/collana_16_9_01.jpg" alt="" loading="lazy" /></div>
@@ -236,7 +240,7 @@
       <p class="proj-desc">Durch Buy-and-Build wurden 11 IT-Unternehmen unter einem Dach vereint. Eine klare One-Brand-Strategie mit definierter Markenhierarchie schafft einen einheitlichen, vertrauensstiftenden Auftritt über alle Touchpoints. Ein flexibles Markenmuster, eine lebendige Bildwelt und ein umfassendes Launch-Toolkit verankern die Marke nachhaltig im Markt.</p>
     </div>
   </div>
-  <div class="work-project" id="proj-03">
+  <div class="work-project split" id="proj-03">
     <div class="proj-slider-wrap">
       <div class="proj-slider" data-proj="03">
         <div class="proj-slide"><img src="/projects/work-03-buehler-services/bühler_services_shoot1-knkv.jpg" alt="" loading="lazy" /></div>
@@ -265,7 +269,7 @@
       <p class="proj-desc">Das Service-Portfolio von Bühler wurde strategisch und visuell neu positioniert. Ich entwickelte ein visuelles System, das Services klar vom Hardware-Geschaeft abgrenzt. Auf Basis von Zielgruppeninterviews entstand eine digitale Marken-Kampagne mit drei 3D-Reels, die reibungslose Produktionsprozesse zeigten.</p>
     </div>
   </div>
-  <div class="work-project" id="proj-04">
+  <div class="work-project split" id="proj-04">
     <div class="proj-slider-wrap">
       <div class="proj-slider" data-proj="04">
         <div class="proj-slide"><video src="/projects/work-04-three-moon/three_moon_web_001.mp4" poster="/projects/work-04-three-moon/three_moon_title_01.jpg" muted loop playsinline></video></div>
@@ -293,7 +297,7 @@
       <p class="proj-desc">Three Moon Investments benötigte eine Markenidentität, die Vertrauen, Klarheit und Innovation vermittelt. Ich entwickelte eine visuelle Identitaet, die auf den Markenwerten Mut, Klarheit, Innovation und Bodenständigkeit basiert - eine Balance zwischen Professionalität und modernem Anspruch.</p>
     </div>
   </div>
-  <div class="work-project" id="proj-05">
+  <div class="work-project split" id="proj-05">
     <div class="proj-slider-wrap">
       <div class="proj-slider" data-proj="05">
         <div class="proj-slide"><video src="/projects/work-05-fingentia/knkv_fingentia_logo_animation.mp4" poster="/projects/work-05-fingentia/knkv_fingentia_logo_animation_poster.jpg" muted loop playsinline></video></div>
@@ -318,7 +322,7 @@
       <p class="proj-desc">Fingentia, ein Fintech-Start-up, benötigte eine starke Markenidentität für den Markteintritt. In einem Strategie-Workshop entstand das Konzept des digitalen Gipfelstürmers. Das Design verbindet Klarheit, Kreativität und Technologie.</p>
     </div>
   </div>
-  <div class="work-project" id="proj-06">
+  <div class="work-project split" id="proj-06">
     <div class="proj-slider-wrap">
       <div class="proj-slider" data-proj="06">
         <div class="proj-slide"><img src="/projects/work-06-sedlmayr/sedlmayr_01.jpg" alt="" loading="lazy" /></div>
@@ -342,7 +346,7 @@
       <p class="proj-desc">Die Marke der Sedlmayr Grund und Immobilien AG sollte modernisiert werden. Gemeinsam mit der Geschäftsführung entwickelte ich ein Markencredo und einen Markenkreis. Das Ergebnis: eine starke, zeitgemäße Markenpräsenz mit Tradition.</p>
     </div>
   </div>
-  <div class="work-project" id="proj-07">
+  <div class="work-project split" id="proj-07">
     <div class="proj-slider-wrap">
       <div class="proj-slider" data-proj="07">
         <div class="proj-slide"><img src="/projects/work-07-kobaltblau/knkv_photo_1_kobaltblau_1280x780.jpg" alt="" loading="lazy" /></div>
@@ -374,8 +378,9 @@
 
   <!-- CV -->
   <div class="page" id="page-cv">
-    <h1 class="page-title">experience.</h1>
-    <div class="cv-inner">
+    <div class="page-content">
+      <h1 class="page-title">experience.</h1>
+      <div class="cv-inner split">
 
       <!-- Timeline -->
       <div class="cv-timeline">
