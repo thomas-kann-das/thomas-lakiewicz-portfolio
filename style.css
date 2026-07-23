@@ -45,13 +45,13 @@
      s   → Fließtext, Listen
      xs  → Meta, Labels, Tags, Daten
      2xs → Caps-Labels, Zähler                        */
-  --type-xl:  96px;
+  --type-xl:  96px;   /* H1 — Haupt-Headlines */
   --type-l:   80px;
   --type-m:   48px;
   --type-s:   32px;
 
   /* Unterhalb der Scale — Body & UI */
-  --type-body:  17px;   /* Fließtext */
+  --type-body:  24px;   /* Fließtext = global p */
   --type-ui:    15px;   /* Nav, Buttons */
   --type-meta:  13px;   /* Tags, Daten, Labels */
   --type-micro: 11px;   /* Caps-Labels, Zähler */
@@ -82,6 +82,26 @@ body {
 ::-webkit-scrollbar-track { background: var(--black); }
 ::-webkit-scrollbar-thumb { background: rgba(236,236,229,0.2); border-radius: 2px; }
 
+
+
+/* ── Globale Typografie-Regeln ───────────────────── */
+
+h1 {
+  font-size: var(--type-xl);
+  font-weight: var(--font-retina);
+  letter-spacing: var(--tracking-tight);
+  text-transform: lowercase;
+  color: var(--warm);
+  line-height: 1.0;
+}
+
+p {
+  font-size: 24px;
+  font-weight: var(--font-light);
+  line-height: 1.8;
+  color: #ECECE5;
+  letter-spacing: 0em;
+}
 
 /* ══════════════════════════════════════════════════
    NAVIGATION
@@ -292,11 +312,6 @@ body.page-impressum .global-bottom-bar {
 .profile-text.visible { opacity: 1; }
 
 .profile-text p {
-  font-size: var(--type-body);
-  font-weight: var(--font-light);
-  line-height: 1.85;
-  letter-spacing: 0em;
-  color: rgba(236,236,229,0.88);
   margin-bottom: 28px;
   max-width: var(--text-max);
 }
@@ -351,10 +366,8 @@ body.page-impressum .global-bottom-bar {
 .services-intro { opacity: 0; }
 .services-intro.visible { opacity: 1; }
 .services-intro p {
-  font-size: var(--type-body);
-  font-weight: var(--font-light);
-  line-height: 1.8; letter-spacing: var(--tracking-wide);
-  color: rgba(236,236,229,0.7); margin-bottom: 28px;
+  color: rgba(236,236,229,0.7);
+  margin-bottom: 28px;
 }
 
 .services-list { display: flex; flex-direction: column; gap: 0; opacity: 0; }
@@ -386,9 +399,9 @@ body.page-impressum .global-bottom-bar {
   padding-top: 8px;
 }
 .service-items li {
-  font-size: var(--type-body);
+  font-size: 24px;
   font-weight: var(--font-light);
-  line-height: 1.7; letter-spacing: 0.01em;
+  line-height: 1.7;
 }
 
 
@@ -475,8 +488,6 @@ body.page-impressum .global-bottom-bar {
   color: rgba(236,236,229,0.45); letter-spacing: 0.03em; line-height: 1.6;
 }
 .proj-desc {
-  font-size: var(--type-body); font-weight: var(--font-light);
-  line-height: 1.8; letter-spacing: 0.02em;
   color: rgba(236,236,229,0.65);
   max-width: var(--text-max); margin: 0;
 }
@@ -522,7 +533,7 @@ body.page-impressum .global-bottom-bar {
   color: rgba(236,236,229,0.65); margin-bottom: 16px;
 }
 .cv-clients {
-  font-size: var(--type-meta); font-weight: var(--font-light);
+  font-size: var(--type-meta);
   line-height: 1.7; color: rgba(236,236,229,0.45);
   max-width: var(--text-max);
 }
@@ -596,8 +607,7 @@ body.page-impressum .global-bottom-bar {
   color: rgba(236,236,229,0.45); margin-bottom: 16px;
 }
 .impressum-section p, .impressum-section address {
-  font-size: var(--type-body); font-weight: var(--font-light);
-  line-height: 1.8; color: var(--warm); font-style: normal;
+  font-style: normal;
 }
 .impressum-section a {
   color: var(--warm); text-decoration: underline;
