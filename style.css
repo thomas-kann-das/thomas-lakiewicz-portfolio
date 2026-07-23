@@ -414,6 +414,14 @@ body.page-impressum .global-bottom-bar,
    WORK — index grid (thumbnail overview /work/)
 ══════════════════════════════════════════════════ */
 
+/* The /work/ overview is a standalone page using a raw <main>
+   instead of .page — it needs its own top/bottom offset so
+   content never sits under the fixed nav or bottom bar. */
+main {
+  padding-top: calc(var(--nav-h) + var(--space-16));
+  padding-bottom: var(--space-32);
+}
+
 .work-header { padding: 0 var(--pad-x); margin-bottom: var(--space-16); }
 .work-header .page-subtitle { padding: 0; margin-top: 12px; }
 
