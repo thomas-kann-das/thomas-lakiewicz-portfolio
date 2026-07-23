@@ -468,7 +468,7 @@ main {
 .work-award { color: rgba(236,236,229,0.45); line-height: 1.6; }
 .proj-desc { color: rgba(236,236,229,0.65); max-width: var(--text-max); }
 .work-project:nth-child(even) .proj-slider-wrap { order: 2; }
-.work-project:nth-child(even) .proj-info { order: 1; padding: var(--space-14) var(--space-20) var(--space-14) var(--pad-x); }
+.work-project:nth-child(even) .proj-info { order: 1; }
 
 
 /* ══════════════════════════════════════════════════
