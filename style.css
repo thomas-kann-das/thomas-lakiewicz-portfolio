@@ -240,6 +240,11 @@ nav::before {
 
 /* ── Page headline (used by profile / services / work / cv) ── */
 
+.page-title,
+.work-header {
+  max-width: var(--max-w);
+  margin-left: auto; margin-right: auto;
+}
 .page-title { margin-bottom: var(--space-16); padding: 0 var(--pad-x); }
 .page-subtitle {
   color: rgba(236,236,229,0.45);
