@@ -56,7 +56,7 @@
   --pad-x:     var(--space-16);   /* outer page margin   */
   --max-w:     1440px;            /* container max-width */
   --gutter:    var(--space-8);    /* grid column gutter  */
-  --col-gap:   var(--space-20);   /* two-column layouts  */
+  --col-gap:   var(--space-10);   /* two-column layouts  */
   --text-max:  560px;             /* body copy line length */
 
   --font-light:  300;
@@ -247,19 +247,20 @@ nav::before {
 }
 
 
-/* ── Page headline (used by profile / services / work / cv) ── */
+/* ── Page headline (used by profile / services / work / cv) ──
+   No padding, no centering here — .page-content (the parent) is the
+   single source of horizontal padding. Doubling it here was pushing
+   every page title out of alignment with the content below it. */
 
-.page-title,
-.work-header {
-  max-width: var(--max-w);
-  margin-left: auto; margin-right: auto;
+.page-title {
+  margin-bottom: var(--space-16);
+  text-align: left;
 }
-.page-title { margin-bottom: var(--space-16); padding: 0 var(--pad-x); }
 .page-subtitle {
   color: rgba(236,236,229,0.45);
-  padding: 0 var(--pad-x);
   margin-top: calc(-1 * var(--space-10)); margin-bottom: var(--space-14);
   max-width: var(--text-max);
+  text-align: left;
 }
 
 
@@ -349,7 +350,9 @@ body.page-impressum .global-bottom-bar,
    PROFIL
 ══════════════════════════════════════════════════ */
 
-.profile-inner { flex: 1; }
+.profile-inner {}
+.profile-text  { flex: 3 1 0; }
+.profile-stats { flex: 2 1 0; }
 .profile-text { opacity: 0; }
 .profile-text.visible { opacity: 1; }
 .profile-text p { margin-bottom: var(--space-6); max-width: var(--text-max); color: rgba(236,236,229,0.9); }
@@ -390,8 +393,8 @@ body.page-impressum .global-bottom-bar,
   align-items: flex-start; padding-top: var(--space-12);
   border-top: 1px solid rgba(236,236,229,0.3); margin-bottom: var(--space-20);
 }
-.service-row .service-name,
-.service-row .service-items { flex: 1 1 0; min-width: 0; }
+.service-row .service-name  { flex: 2 1 0; min-width: 0; }
+.service-row .service-items { flex: 3 1 0; min-width: 0; }
 .service-row:last-child { margin-bottom: 0; }
 .service-name {
   font-size: var(--fs-2); font-weight: var(--font-retina);
@@ -415,8 +418,8 @@ main {
   padding-bottom: var(--space-32);
 }
 
-.work-header { padding: 0 var(--pad-x); margin-bottom: var(--space-16); }
-.work-header .page-subtitle { padding: 0; margin-top: 12px; }
+.work-header { margin-bottom: var(--space-16); }
+.work-header .page-subtitle { margin-top: var(--space-3); }
 
 .work-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 2px;
@@ -527,7 +530,9 @@ main {
    CV
 ══════════════════════════════════════════════════ */
 
-.cv-inner { flex: 1; }
+.cv-inner {}
+.cv-timeline { flex: 3 1 0; }
+.cv-right    { flex: 2 1 0; }
 .cv-timeline { display: flex; flex-direction: column; }
 .cv-entry { padding-top: var(--space-12); border-top: 1px solid rgba(236,236,229,0.3); margin-bottom: var(--space-16); opacity: 0; }
 .cv-entry.visible { opacity: 1; }
