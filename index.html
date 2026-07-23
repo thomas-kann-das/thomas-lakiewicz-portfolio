@@ -8,6 +8,26 @@
   <title>thomas lakiewicz</title>
   <link rel="icon" type="image/svg+xml" href="symbol-tl.svg" />
   <link rel="stylesheet" href="style.css" />
+  <script>
+    /* Netzwerkunabhaengiger Sofort-Fallback fuer showPage().
+       Nav-Klicks muessen funktionieren, auch wenn die externen
+       GSAP-CDN-Skripte (script.js haengt davon ab) noch laden.
+       Sobald script.js fertig ist, ueberschreibt die volle,
+       animierte Version diese einfache Variante automatisch. */
+    window.showPage = function(id) {
+      document.querySelectorAll('.page').forEach(function(p) {
+        p.classList.remove('active', 'entering');
+        p.style.display = 'none';
+      });
+      var target = document.getElementById('page-' + id);
+      if (target) target.style.display = 'flex';
+      document.body.className = 'page-' + id;
+      document.querySelectorAll('.nav-link').forEach(function(link) {
+        link.classList.toggle('active', link.dataset.page === id);
+      });
+      window.scrollTo(0, 0);
+    };
+  </script>
 </head>
 <body role="application">
 
