@@ -662,7 +662,19 @@ h1 .split-line { padding-bottom: 0.2em; margin-bottom: -0.2em; }
     padding-bottom: 96px;
   }
 
-  .profile-inner, .services-inner, .cv-inner { grid-template-columns: 1fr; gap: 56px; }
+  /* Reset all 12-col grid children to full-width single column —
+     without this, "grid-column: span 6" would generate implicit
+     extra tracks and break the mobile stack. */
+  .profile-text, .profile-stats,
+  .services-intro, .services-list,
+  .service-row .service-name, .service-row .service-items,
+  .cv-timeline, .cv-right,
+  .case-info-col,
+  .work-project .proj-slider-wrap, .work-project .proj-info {
+    grid-column: 1 / -1;
+  }
+
+  .profile-inner, .services-inner, .cv-inner { grid-template-columns: 1fr; gap: var(--space-14); }
   .services-inner { gap: 40px; }
   .stat { grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 56px; }
   .service-row { grid-template-columns: 1fr; gap: 16px; margin-bottom: 56px; }
