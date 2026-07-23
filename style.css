@@ -87,20 +87,22 @@
   padding-right: var(--pad-x);
 }
 
-/* 12-column grid — used by every two-column section
-   (profile, services, cv, case-info, work-project) */
-.grid-12 {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: var(--gutter);
+/* Single reusable two-column primitive — every split section on the
+   site (profile, services, cv, case-info, work-project) is built from
+   this ONE component instead of a bespoke grid per page. */
+.split {
+  display: flex;
+  gap: var(--col-gap);
+  align-items: flex-start;
 }
-.col-3  { grid-column: span 3; }
-.col-4  { grid-column: span 4; }
-.col-5  { grid-column: span 5; }
-.col-6  { grid-column: span 6; }
-.col-7  { grid-column: span 7; }
-.col-8  { grid-column: span 8; }
-.col-9  { grid-column: span 9; }
+.split > * { flex: 1 1 0; min-width: 0; }
+
+/* One horizontal padding rule for page content — always matches the
+   nav's own padding, so content edges and nav edges align exactly. */
+.page-content {
+  width: 100%;
+  padding: 0 var(--pad-x);
+}
 
 
 /* ── Reset ───────────────────────────────────────── */
@@ -126,6 +128,7 @@ h1 {
   font-weight: var(--font-retina);
   letter-spacing: var(--tracking-tight);
   text-transform: lowercase;
+  text-align: left;
   color: var(--warm);
   line-height: 1.0;
 }
@@ -142,13 +145,13 @@ h2 {
 p {
   font-size: var(--fs-3);
   font-weight: var(--font-light);
-  line-height: 1.75;
+  line-height: 28px;
+  letter-spacing: 0.04em;
   color: var(--warm);
 }
 
-/* Labels: nav, tags, dates, captions, buttons — all share --fs-4 */
+/* Labels: tags, dates, captions, buttons — all share --fs-4 */
 .label,
-nav, .nav-link, .nav-logo-name,
 .bottom-link,
 .work-tag, .case-tag,
 .proj-num, .proj-counter,
@@ -158,6 +161,12 @@ nav, .nav-link, .nav-logo-name,
 .impressum-section h2 {
   font-size: var(--fs-4);
   letter-spacing: var(--tracking-wide);
+}
+
+/* Nav + page name sit one step up from labels — matches body size */
+.nav-link, .nav-logo-name {
+  font-size: 24px;
+  letter-spacing: 0.04em;
 }
 
 
@@ -340,16 +349,7 @@ body.page-impressum .global-bottom-bar,
    PROFIL
 ══════════════════════════════════════════════════ */
 
-.profile-inner {
-  flex: 1; display: grid;
-  grid-template-columns: repeat(12, minmax(0,1fr));
-  column-gap: var(--col-gap);
-  padding: 0 var(--pad-x);
-  max-width: var(--max-w); width: 100%;
-  margin: 0 auto;
-}
-.profile-text  { grid-column: span 6; }
-.profile-stats { grid-column: span 6; }
+.profile-inner { flex: 1; }
 .profile-text { opacity: 0; }
 .profile-text.visible { opacity: 1; }
 .profile-text p { margin-bottom: var(--space-6); max-width: var(--text-max); color: rgba(236,236,229,0.9); }
@@ -376,16 +376,9 @@ body.page-impressum .global-bottom-bar,
    LEISTUNGEN
 ══════════════════════════════════════════════════ */
 
-.services-inner {
-  flex: 1; display: grid;
-  grid-template-columns: repeat(12, minmax(0,1fr));
-  column-gap: var(--col-gap);
-  padding: 0 var(--pad-x);
-  max-width: var(--max-w); width: 100%;
-  margin: 0 auto;
-}
-.services-intro { grid-column: span 3; }
-.services-list  { grid-column: span 9; }
+.services-inner { flex: 1; }
+.services-intro { flex: 0 0 300px; }
+.services-list  { flex: 1 1 0; min-width: 0; }
 .services-intro { opacity: 0; }
 .services-intro.visible { opacity: 1; }
 .services-intro p { color: rgba(236,236,229,0.65); margin-bottom: 24px; }
@@ -393,12 +386,12 @@ body.page-impressum .global-bottom-bar,
 .services-list { display: flex; flex-direction: column; opacity: 0; }
 .services-list.visible { opacity: 1; }
 .service-row {
-  display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); column-gap: var(--col-gap);
-  align-items: start; padding-top: var(--space-12);
+  display: flex; gap: var(--col-gap);
+  align-items: flex-start; padding-top: var(--space-12);
   border-top: 1px solid rgba(236,236,229,0.3); margin-bottom: var(--space-20);
 }
-.service-row .service-name  { grid-column: span 6; }
-.service-row .service-items { grid-column: span 6; }
+.service-row .service-name,
+.service-row .service-items { flex: 1 1 0; min-width: 0; }
 .service-row:last-child { margin-bottom: 0; }
 .service-name {
   font-size: var(--fs-2); font-weight: var(--font-retina);
@@ -451,12 +444,11 @@ main {
 
 .work-inner { display: flex; flex-direction: column; }
 .work-project {
-  display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); gap: 0;
-  max-width: var(--max-w); margin: 0 auto;
+  display: flex;
   border-top: 1px solid rgba(236,236,229,0.15); opacity: 0; transform: translateY(20px);
 }
-.work-project .proj-slider-wrap { grid-column: span 6; }
-.work-project .proj-info        { grid-column: span 6; }
+.work-project .proj-slider-wrap,
+.work-project .proj-info { flex: 1 1 0; min-width: 0; }
 .work-project:last-child { border-bottom: 1px solid rgba(236,236,229,0.15); }
 .proj-slider-wrap { position: relative; overflow: hidden; aspect-ratio: 4/3; background: #1a1a1a; cursor: none; }
 .proj-slider { display: flex; height: 100%; transition: transform 0.5s cubic-bezier(0.77,0,0.175,1); }
@@ -465,7 +457,7 @@ main {
 .proj-nav-prev, .proj-nav-next { position: absolute; top: 0; bottom: 0; width: 50%; z-index: 5; cursor: none; }
 .proj-nav-prev { left: 0; } .proj-nav-next { right: 0; }
 .proj-counter { position: absolute; bottom: 16px; right: 16px; color: rgba(236,236,229,0.5); z-index: 6; pointer-events: none; }
-.proj-info { padding: var(--space-14) var(--pad-x) var(--space-14) var(--space-20); display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+.proj-info { padding: var(--space-14) var(--pad-x); display: flex; flex-direction: column; justify-content: center; gap: var(--space-5); }
 .proj-num { color: rgba(236,236,229,0.3); }
 .proj-title { font-size: var(--fs-2); font-weight: var(--font-retina); letter-spacing: var(--tracking-tight); text-transform: lowercase; line-height: 1.1; }
 .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -495,12 +487,12 @@ main {
 .case-intro-content p { color: rgba(236,236,229,0.55); max-width: var(--text-max); }
 
 .case-info {
-  display: grid; grid-template-columns: repeat(12, minmax(0,1fr));
-  max-width: var(--max-w); margin: 0 auto;
+  display: flex; gap: var(--col-gap);
+  padding: var(--space-14) var(--pad-x);
   border-top: 1px solid rgba(236,236,229,0.1);
 }
-.case-info-col { grid-column: span 6; padding: var(--space-14) var(--pad-x); }
-.case-info-col:first-child { border-right: 1px solid rgba(236,236,229,0.1); }
+.case-info-col { flex: 1 1 0; min-width: 0; }
+.case-info-col:first-child { border-right: 1px solid rgba(236,236,229,0.1); padding-right: var(--col-gap); }
 .case-label { color: rgba(236,236,229,0.3); text-transform: uppercase; margin-bottom: 20px; display: block; }
 .case-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
 .case-tag { color: rgba(236,236,229,0.5); border: 1px solid rgba(236,236,229,0.2); padding: 3px 10px; border-radius: 20px; text-transform: uppercase; }
@@ -520,7 +512,9 @@ main {
 
 .case-next {
   display: flex; justify-content: space-between; align-items: center;
-  padding: var(--space-16) var(--pad-x); border-top: 1px solid rgba(236,236,229,0.1);
+  padding: var(--space-24) var(--pad-x);
+  margin-top: var(--space-24);
+  border-top: 1px solid rgba(236,236,229,0.1);
   text-decoration: none; color: var(--warm); transition: opacity 0.3s;
 }
 .case-next:hover { opacity: 0.6; }
@@ -533,16 +527,7 @@ main {
    CV
 ══════════════════════════════════════════════════ */
 
-.cv-inner {
-  flex: 1; display: grid;
-  grid-template-columns: repeat(12, minmax(0,1fr));
-  column-gap: var(--col-gap);
-  padding: 0 var(--pad-x);
-  max-width: var(--max-w); width: 100%;
-  margin: 0 auto;
-}
-.cv-timeline { grid-column: span 6; }
-.cv-right    { grid-column: span 6; }
+.cv-inner { flex: 1; }
 .cv-timeline { display: flex; flex-direction: column; }
 .cv-entry { padding-top: var(--space-12); border-top: 1px solid rgba(236,236,229,0.3); margin-bottom: var(--space-16); opacity: 0; }
 .cv-entry.visible { opacity: 1; }
@@ -675,31 +660,24 @@ h1 .split-line { padding-bottom: 0.2em; margin-bottom: -0.2em; }
     padding-bottom: 96px;
   }
 
-  /* Reset all 12-col grid children to full-width single column —
-     without this, "grid-column: span 6" would generate implicit
-     extra tracks and break the mobile stack. */
-  .profile-text, .profile-stats,
-  .services-intro, .services-list,
-  .service-row .service-name, .service-row .service-items,
-  .cv-timeline, .cv-right,
-  .case-info-col,
-  .work-project .proj-slider-wrap, .work-project .proj-info {
-    grid-column: 1 / -1;
+  /* Flexbox splits simply stack — no implicit-track bugs to guard
+     against, unlike the grid approach this replaced. */
+  .profile-inner, .services-inner, .cv-inner,
+  .service-row, .case-info, .work-project {
+    flex-direction: column;
+    gap: var(--space-14);
   }
-
-  .profile-inner, .services-inner, .cv-inner { grid-template-columns: 1fr; gap: var(--space-14); }
-  .services-inner { gap: 40px; }
+  .services-intro { flex-basis: auto; }
   .stat { grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 56px; }
   .service-row { grid-template-columns: 1fr; gap: 16px; margin-bottom: 56px; }
   .service-name { text-align: left; }
 
   .work-grid { grid-template-columns: 1fr; }
-  .work-project { grid-template-columns: 1fr; }
-  .proj-info { padding: 32px var(--pad-x) !important; order: 2 !important; }
+  .proj-info { padding: var(--space-8) var(--pad-x) !important; order: 2 !important; }
   .proj-slider-wrap { order: 1 !important; }
 
-  .case-info { grid-template-columns: 1fr; }
-  .case-info-col:first-child { border-right: none; border-bottom: 1px solid rgba(236,236,229,0.1); }
+
+  .case-info-col:first-child { border-right: none; padding-right: 0; border-bottom: 1px solid rgba(236,236,229,0.1); }
   .gallery-track { height: 60vw; }
 
   .global-bottom-bar {
