@@ -42,8 +42,36 @@
       window.showPage(id);
     };
 
+    /* Removes the pre-paint override below, handing control back to
+       the normal .page.active CSS rules. */
+    window.__clearDeepLinkStyle = function() {
+      var s = document.getElementById('__deeplink-style');
+      if (s) s.parentNode.removeChild(s);
+    };
+
+    /* ── No-flash deep linking ─────────────────────────────────
+       #page-home carries class="active" in the markup, so the
+       browser paints Home the moment it parses <body> — long
+       before script.js (which waits on CMS fetches) can switch
+       pages. That caused Home to flash when arriving at /#profile.
+       Running here in <head>, this style is applied BEFORE the
+       first paint, so the correct page shows immediately. */
+    (function() {
+      var id = (window.location.hash || '').replace('#', '');
+      if (window.__PAGES.indexOf(id) === -1 || id === 'home') return;
+      var st = document.createElement('style');
+      st.id = '__deeplink-style';
+      st.textContent =
+        '#page-home{display:none!important}' +
+        '#page-' + id + '{display:flex!important}';
+      document.head.appendChild(st);
+    })();
+
     /* Fires for every in-page nav click and for browser back/forward */
-    window.addEventListener('hashchange', window.__routeFromHash);
+    window.addEventListener('hashchange', function() {
+      window.__clearDeepLinkStyle();
+      window.__routeFromHash();
+    });
   </script>
 </head>
 <body role="application">
