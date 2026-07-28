@@ -755,7 +755,17 @@ function animateWork() {
 
 window.addEventListener('DOMContentLoaded', async () => {
   await loadCMSData();
-  // Pager initial anzeigen (Startseite)
+
+  // Respect a deep link like /#profile (e.g. coming back from /work/).
+  // Falls back to the home page when there is no valid hash.
+  const hashId = (window.location.hash || '').replace('#', '');
+  const isDeepLink = window.__PAGES && window.__PAGES.indexOf(hashId) !== -1 && hashId !== 'home';
+
+  if (isDeepLink) {
+    showPage(hashId);
+    return;
+  }
+
   const pager = document.getElementById('home-pager');
   if (pager) pager.classList.add('visible');
   setTimeout(() => {
