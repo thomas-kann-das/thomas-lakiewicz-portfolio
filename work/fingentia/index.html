@@ -22,7 +22,40 @@
       <a class="nav-link" href="/#cv">CV</a>
       <a class="nav-link" href="mailto:hello@thomaslakiewicz.de">Contact</a>
     </div>
+    <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu" onclick="toggleMobileNav()">
+      <span></span>
+      <span></span>
+    </button>
   </nav>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <div class="mobile-nav-main">
+      <a class="mobile-nav-link" href="/#profile" onclick="toggleMobileNav()">Profile</a>
+      <a class="mobile-nav-link" href="/work/" onclick="toggleMobileNav()">Work</a>
+      <a class="mobile-nav-link" href="/#services" onclick="toggleMobileNav()">Services</a>
+      <a class="mobile-nav-link" href="/#cv" onclick="toggleMobileNav()">CV</a>
+      <a class="mobile-nav-link" href="mailto:hello@thomaslakiewicz.de" onclick="toggleMobileNav()">Contact</a>
+    </div>
+    <div class="mobile-nav-sub">
+      <a href="/impressum/">Impressum</a>
+      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+    </div>
+  </div>
+
+  <script>
+    /* Inline: these standalone pages don't load script.js */
+    function toggleMobileNav() {
+      var nav = document.getElementById('mobile-nav');
+      var btn = document.getElementById('hamburger-btn');
+      var open = nav.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && document.getElementById('mobile-nav').classList.contains('open')) toggleMobileNav();
+    });
+  </script>
 
   <!-- INTRO -->
   <div class="case-intro">
@@ -46,12 +79,12 @@
     <div class="case-info-col">
       <div class="case-text-blocks">
         <div class="case-text-block">
-          <h2>Aufgabe</h2>
-          <p>Fingentia, ein Fintech-Start-up, benötigte eine starke Markenidentität für den Markteintritt. Der Auftrag umfasste Mission und Vision, Naming, Corporate Design, Website und Pitch Deck.</p>
+          <h2>Challenge</h2>
+          <p>Fingentia, a fintech start-up, needed a strong brand identity for its market entry. The brief covered mission and vision, naming, corporate design, website and pitch deck.</p>
         </div>
         <div class="case-text-block">
-          <h2>Lösung</h2>
-          <p>In einem Strategie-Workshop entstand das Konzept des digitalen Gipfelstürmers. Das Logo symbolisiert Fortschritt. Das Design verbindet Klarheit, Kreativität und Technologie — eine flexible CI als Grundlage für nachhaltiges Markenwachstum.</p>
+          <h2>Solution</h2>
+          <p>A strategy workshop produced the concept of the digital summit climber. The logo symbolises progress. The design connects clarity, creativity and technology — a flexible CI as the foundation for sustainable brand growth.</p>
         </div>
       </div>
     </div>
