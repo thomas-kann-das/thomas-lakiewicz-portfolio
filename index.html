@@ -27,23 +27,40 @@
       });
       window.scrollTo(0, 0);
     };
+
+    /* ── Hash router ───────────────────────────────────────────
+       The standalone pages (/work/, /work/<case>/) link back here
+       with /#profile, /#services, /#cv. Without this router the
+       hash was ignored on load, so you always landed on Home and
+       had to click a second time. Now the hash IS the source of
+       truth for which page is shown. */
+    window.__PAGES = ['home','profile','services','work','cv','impressum'];
+
+    window.__routeFromHash = function() {
+      var id = (window.location.hash || '').replace('#', '');
+      if (window.__PAGES.indexOf(id) === -1) id = 'home';
+      window.showPage(id);
+    };
+
+    /* Fires for every in-page nav click and for browser back/forward */
+    window.addEventListener('hashchange', window.__routeFromHash);
   </script>
 </head>
 <body role="application">
 
   <!-- NAVIGATION -->
   <nav>
-    <a class="nav-logo" href="#" onclick="showPage('home'); return false;">
+    <a class="nav-logo" href="#home">
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
         <path d="M0 0V32H32V0H0ZM15.406 26.2735H12.1889V9.58717L12.9111 8.98396C13.006 8.90473 12.9501 8.7502 12.8265 8.74986L5.59795 8.7372L5.58717 5.52009H11.9745L15.4062 8.95179V26.2734L15.406 26.2735ZM21.0081 26.2735L17.5764 22.8418V5.52009H20.7935V22.2065L20.0714 22.8097C19.9764 22.8889 20.0323 23.0434 20.1559 23.0438L27.3845 23.0564L27.3953 26.2735H21.0079H21.0081Z" fill="#ECECE5"/>
       </svg>
       <span class="nav-logo-name">thomas lakiewicz</span>
     </a>
     <div class="nav-links">
-      <a class="nav-link" href="#" onclick="showPage('profile'); return false;" data-page="profile">Profile</a>
+      <a class="nav-link" href="#profile" data-page="profile">Profile</a>
       <a class="nav-link" href="/work/">Work</a>
-      <a class="nav-link" href="#" onclick="showPage('services'); return false;" data-page="services">Services</a>
-      <a class="nav-link" href="#" onclick="showPage('cv'); return false;" data-page="cv">CV</a>
+      <a class="nav-link" href="#services" data-page="services">Services</a>
+      <a class="nav-link" href="#cv" data-page="cv">CV</a>
       <a class="nav-link" href="mailto:hello@thomaslakiewicz.de" data-page="">Contact</a>
     </div>
     <button class="hamburger-btn" id="hamburger-btn" aria-label="Menü öffnen" onclick="toggleMobileNav()">
@@ -55,14 +72,14 @@
   <!-- MOBILE NAV OVERLAY -->
   <div class="mobile-nav" id="mobile-nav">
     <div class="mobile-nav-main">
-      <a class="mobile-nav-link" href="#" onclick="showPage('profile'); toggleMobileNav(); return false;">Profile</a>
+      <a class="mobile-nav-link" href="#profile" onclick="toggleMobileNav()">Profile</a>
       <a class="mobile-nav-link" href="/work/" onclick="toggleMobileNav()">Work</a>
-      <a class="mobile-nav-link" href="#" onclick="showPage('services'); toggleMobileNav(); return false;">Services</a>
-      <a class="mobile-nav-link" href="#" onclick="showPage('cv'); toggleMobileNav(); return false;">CV</a>
+      <a class="mobile-nav-link" href="#services" onclick="toggleMobileNav()">Services</a>
+      <a class="mobile-nav-link" href="#cv" onclick="toggleMobileNav()">CV</a>
       <a class="mobile-nav-link" href="mailto:hello@thomaslakiewicz.de" onclick="toggleMobileNav()">Contact</a>
     </div>
     <div class="mobile-nav-sub">
-      <a href="#" onclick="showPage('impressum'); toggleMobileNav(); return false;">Impressum</a>
+      <a href="#impressum" onclick="toggleMobileNav()">Impressum</a>
       <a href="https://linkedin.com" target="_blank">LinkedIn</a>
       <a href="https://instagram.com" target="_blank">Instagram</a>
     </div>
@@ -577,7 +594,7 @@
   <!-- GLOBALE BOTTOM BAR — fixiert, immer sichtbar -->
   <div class="global-bottom-bar" id="global-bottom-bar">
     <div class="bottom-links">
-      <a class="bottom-link" href="#" onclick="showPage('impressum'); return false;">Impressum</a>
+      <a class="bottom-link" href="#impressum">Impressum</a>
       <a class="bottom-link" id="bottom-linkedin" href="https://linkedin.com" target="_blank">LinkedIn</a>
       <a class="bottom-link" id="bottom-instagram" href="https://instagram.com" target="_blank">Instagram</a>
     </div>
