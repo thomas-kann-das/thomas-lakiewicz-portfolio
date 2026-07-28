@@ -22,7 +22,40 @@
       <a class="nav-link" href="/#cv">CV</a>
       <a class="nav-link" href="mailto:hello@thomaslakiewicz.de">Contact</a>
     </div>
+    <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu" onclick="toggleMobileNav()">
+      <span></span>
+      <span></span>
+    </button>
   </nav>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <div class="mobile-nav-main">
+      <a class="mobile-nav-link" href="/#profile" onclick="toggleMobileNav()">Profile</a>
+      <a class="mobile-nav-link" href="/work/" onclick="toggleMobileNav()">Work</a>
+      <a class="mobile-nav-link" href="/#services" onclick="toggleMobileNav()">Services</a>
+      <a class="mobile-nav-link" href="/#cv" onclick="toggleMobileNav()">CV</a>
+      <a class="mobile-nav-link" href="mailto:hello@thomaslakiewicz.de" onclick="toggleMobileNav()">Contact</a>
+    </div>
+    <div class="mobile-nav-sub">
+      <a href="/impressum/">Impressum</a>
+      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+    </div>
+  </div>
+
+  <script>
+    /* Inline: these standalone pages don't load script.js */
+    function toggleMobileNav() {
+      var nav = document.getElementById('mobile-nav');
+      var btn = document.getElementById('hamburger-btn');
+      var open = nav.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && document.getElementById('mobile-nav').classList.contains('open')) toggleMobileNav();
+    });
+  </script>
 
   <!-- INTRO -->
   <div class="case-intro">
@@ -46,12 +79,12 @@
     <div class="case-info-col">
       <div class="case-text-blocks">
         <div class="case-text-block">
-          <h2>Aufgabe</h2>
-          <p>kobaltblau Management Consultants wollte sein Corporate Design modernisieren. Ziel war ein Rebranding, das die technologische Expertise und das Motto 'Wir gestalten Veränderung' klar vermittelt.</p>
+          <h2>Challenge</h2>
+          <p>kobaltblau Management Consultants wanted to modernise its corporate design. The goal was a rebrand that clearly communicates the firm's technological expertise and its motto 'We shape change'.</p>
         </div>
         <div class="case-text-block">
-          <h2>Lösung</h2>
-          <p>In einem Markenworkshop definierte ich mithilfe des Brand-Key-Modells eine klare Markenbotschaft. Auf dieser Basis entstand ein modernes Logo, eine neue Typografie und Farbpalette, festgehalten in einem Markenhandbuch.</p>
+          <h2>Solution</h2>
+          <p>In a brand workshop I defined a clear brand message using the Brand Key model. On that basis came a modern logo, a new typography and colour palette, documented in a brand manual.</p>
         </div>
       </div>
     </div>
