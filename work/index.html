@@ -22,7 +22,40 @@
       <a class="nav-link" href="/#cv">CV</a>
       <a class="nav-link" href="mailto:hello@thomaslakiewicz.de">Contact</a>
     </div>
+    <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu" onclick="toggleMobileNav()">
+      <span></span>
+      <span></span>
+    </button>
   </nav>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <div class="mobile-nav-main">
+      <a class="mobile-nav-link" href="/#profile" onclick="toggleMobileNav()">Profile</a>
+      <a class="mobile-nav-link" href="/work/" onclick="toggleMobileNav()">Work</a>
+      <a class="mobile-nav-link" href="/#services" onclick="toggleMobileNav()">Services</a>
+      <a class="mobile-nav-link" href="/#cv" onclick="toggleMobileNav()">CV</a>
+      <a class="mobile-nav-link" href="mailto:hello@thomaslakiewicz.de" onclick="toggleMobileNav()">Contact</a>
+    </div>
+    <div class="mobile-nav-sub">
+      <a href="/impressum/">Impressum</a>
+      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+    </div>
+  </div>
+
+  <script>
+    /* Inline: these standalone pages don't load script.js */
+    function toggleMobileNav() {
+      var nav = document.getElementById('mobile-nav');
+      var btn = document.getElementById('hamburger-btn');
+      var open = nav.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && document.getElementById('mobile-nav').classList.contains('open')) toggleMobileNav();
+    });
+  </script>
   <main>
     <div class="page-content">
     <div class="work-header">
