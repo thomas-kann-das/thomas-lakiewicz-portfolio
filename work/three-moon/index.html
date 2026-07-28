@@ -22,7 +22,40 @@
       <a class="nav-link" href="/#cv">CV</a>
       <a class="nav-link" href="mailto:hello@thomaslakiewicz.de">Contact</a>
     </div>
+    <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu" onclick="toggleMobileNav()">
+      <span></span>
+      <span></span>
+    </button>
   </nav>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <div class="mobile-nav-main">
+      <a class="mobile-nav-link" href="/#profile" onclick="toggleMobileNav()">Profile</a>
+      <a class="mobile-nav-link" href="/work/" onclick="toggleMobileNav()">Work</a>
+      <a class="mobile-nav-link" href="/#services" onclick="toggleMobileNav()">Services</a>
+      <a class="mobile-nav-link" href="/#cv" onclick="toggleMobileNav()">CV</a>
+      <a class="mobile-nav-link" href="mailto:hello@thomaslakiewicz.de" onclick="toggleMobileNav()">Contact</a>
+    </div>
+    <div class="mobile-nav-sub">
+      <a href="/impressum/">Impressum</a>
+      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+    </div>
+  </div>
+
+  <script>
+    /* Inline: these standalone pages don't load script.js */
+    function toggleMobileNav() {
+      var nav = document.getElementById('mobile-nav');
+      var btn = document.getElementById('hamburger-btn');
+      var open = nav.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && document.getElementById('mobile-nav').classList.contains('open')) toggleMobileNav();
+    });
+  </script>
 
   <!-- INTRO -->
   <div class="case-intro">
@@ -46,12 +79,12 @@
     <div class="case-info-col">
       <div class="case-text-blocks">
         <div class="case-text-block">
-          <h2>Aufgabe</h2>
-          <p>Three Moon Investments benötigte eine Markenidentität, die Vertrauen, Klarheit und Innovation vermittelt. Die Zielgruppe — Geschäftsführende, PE-Fonds und Co-Investoren — sollte die Mission auf den ersten Blick verstehen.</p>
+          <h2>Challenge</h2>
+          <p>Three Moon Investments needed a brand identity that conveys trust, clarity and innovation. The audience — managing directors, PE funds and co-investors — had to grasp the mission at first glance.</p>
         </div>
         <div class="case-text-block">
-          <h2>Lösung</h2>
-          <p>Ich entwickelte eine visuelle Identität auf Basis der Markenwerte Mut, Klarheit, Innovation und Bodenständigkeit. Das Design zeichnet sich durch klare Typografie, warme Bildsprache und ein minimalistisches Layout aus.</p>
+          <h2>Solution</h2>
+          <p>I developed a visual identity built on the brand values of courage, clarity, innovation and groundedness. The design is defined by clear typography, a warm visual language and a minimalist layout.</p>
         </div>
       </div>
     </div>
