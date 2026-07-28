@@ -763,8 +763,13 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   if (isDeepLink) {
     showPage(hashId);
+    // Hand control back to the normal CSS rules
+    if (window.__clearDeepLinkStyle) window.__clearDeepLinkStyle();
     return;
   }
+
+  // No deep link: make sure a stale override can never linger
+  if (window.__clearDeepLinkStyle) window.__clearDeepLinkStyle();
 
   const pager = document.getElementById('home-pager');
   if (pager) pager.classList.add('visible');
